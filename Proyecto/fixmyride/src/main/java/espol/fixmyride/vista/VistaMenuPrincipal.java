@@ -6,47 +6,39 @@ public class VistaMenuPrincipal {
     private Scanner scanner;
     // Constructor
     public VistaMenuPrincipal() { this.scanner = new Scanner(System.in); }
-    // Método para obtener un entero del usuario
-    public int obtenerInt(String mensaje) {
-        System.out.print(mensaje);
-        int valor = scanner.nextInt();
-        scanner.nextLine(); // Limpiar buffer
-        return valor;
-    }
     // Método para mostrar el menú principal
     public int mostrarMenuPrincipal() {
-        MensajeUsuario.separador();
-        MensajeUsuario.caja("TECNICENTRO RP S.A.");
-        MensajeUsuario.abrirCaja("OPCIONES");
-        MensajeUsuario.lateralCaja("1. Administrar clientes");
-        MensajeUsuario.lateralCaja("2. Administrar proveedores");
-        MensajeUsuario.lateralCaja("3. Administrar técnicos");
-        MensajeUsuario.lateralCaja("4. Administrar servicios");
-        MensajeUsuario.lateralCaja("5. Generar orden de servicios");
-        MensajeUsuario.lateralCaja("6. Registrar falta de insumos");
-        MensajeUsuario.lateralCaja("7. Generar facturas a empresas");
-        MensajeUsuario.lateralCaja("8. Reporte de ingresos por servicios");
-        MensajeUsuario.lateralCaja("9. Reporte de atenciones por técnico");
-        MensajeUsuario.lateralCaja("10. Salir");
-        MensajeUsuario.cerrarCaja();
-        System.out.print("Seleccione una opción: ");
-        return obtenerInt("");
+        Vista.separador();
+        Vista.caja("TECNICENTRO RP S.A.");
+        Vista.abrirCaja("OPCIONES");
+        Vista.lateralCaja("1. Administrar clientes");
+        Vista.lateralCaja("2. Administrar proveedores");
+        Vista.lateralCaja("3. Administrar técnicos");
+        Vista.lateralCaja("4. Administrar servicios");
+        Vista.lateralCaja("5. Generar orden de servicios");
+        Vista.lateralCaja("6. Registrar falta de insumos");
+        Vista.lateralCaja("7. Generar facturas a empresas");
+        Vista.lateralCaja("8. Reporte de ingresos por servicios");
+        Vista.lateralCaja("9. Reporte de atenciones por técnico");
+        Vista.lateralCaja("10. Salir");
+        Vista.cerrarCaja();
+        return Vista.obtenerInt(scanner,"Seleccione una opción: ");
     }
+    // Métodos para manejar opciones
     public void manejarSubmenuPersonas(VistaPersona vista, Scanner scanner, String clase) {
         int opcion = 0;
         do {
             VistaPersona.mostrarSubmenu(vista.getControlador().getLista(), clase);
-            opcion = scanner.nextInt();
-            scanner.nextLine(); // Limpiar buffer
+            opcion = Vista.obtenerInt(scanner);
             switch (opcion) {
                 case 1:
                     vista.agregarPersona(scanner);
                     break;
                 case 2:
-                    MensajeUsuario.regresandoMenuPrincipal();
+                    Vista.regresandoMenuPrincipal();
                     break;
                 default:
-                    MensajeUsuario.opcionNoValida();
+                    Vista.opcionNoValida();
             }
         } while (opcion != 2);
     }
@@ -54,8 +46,7 @@ public class VistaMenuPrincipal {
         int opcion = 0;
         do {
             vista.mostrarSubmenu();
-            opcion = scanner.nextInt();
-            scanner.nextLine(); // Limpiar buffer
+            opcion = Vista.obtenerInt(scanner);
             switch (opcion) {
                 case 1:
                     vista.agregarServicio(scanner);
@@ -64,10 +55,10 @@ public class VistaMenuPrincipal {
                     vista.editarServicio(scanner);
                     break;
                 case 3:
-                    MensajeUsuario.regresandoMenuPrincipal();
+                    Vista.regresandoMenuPrincipal();
                     break;
                 default:
-                    MensajeUsuario.opcionNoValida();
+                    Vista.opcionNoValida();
             }
         } while (opcion != 3);
     }

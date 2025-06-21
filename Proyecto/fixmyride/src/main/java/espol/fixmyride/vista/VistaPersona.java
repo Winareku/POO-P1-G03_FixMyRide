@@ -14,14 +14,14 @@ public class VistaPersona {
     public void setControlador(ControladorPersona controlador) { this.controlador = controlador; }
     // Método para mostrar el submenu de personas
     public static void mostrarSubmenu(ArrayList<Persona> listaPersonas, String clase) {
-        MensajeUsuario.caja(clase.toUpperCase());
+        Vista.caja(clase.toUpperCase());
         for (Persona persona : listaPersonas) {
             System.out.println(persona);
         }
-        MensajeUsuario.abrirCaja("ADMINISTRAR " + clase.toUpperCase());
-        MensajeUsuario.lateralCaja("1. Agregar " + clase);
-        MensajeUsuario.lateralCaja("2. Regresar al menú principal");
-        MensajeUsuario.cerrarCaja();
+        Vista.abrirCaja("ADMINISTRAR " + clase.toUpperCase());
+        Vista.lateralCaja("1. Agregar " + clase);
+        Vista.lateralCaja("2. Regresar al menú principal");
+        Vista.cerrarCaja();
         System.out.print("Seleccione una opción: ");
     }
     public void agregarPersona(Scanner scanner) {}

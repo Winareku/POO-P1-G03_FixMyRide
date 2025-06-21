@@ -8,24 +8,18 @@ public class VistaCliente extends VistaPersona {
     public VistaCliente(ControladorPersona controlador) { super(controlador); }
     // Método para agregar un nuevo cliente
     public void agregarPersona(Scanner scanner) {
-        MensajeUsuario.caja("INGRESAR DATOS");
-        System.out.print("Cédula o RUC del cliente: ");
-        String id = scanner.nextLine();
-        System.out.print("Nombre del cliente: ");
-        String nombre = scanner.nextLine();
-        System.out.print("Teléfono del cliente: ");
-        String telefono = scanner.nextLine();
-        System.out.print("Dirección del cliente: ");
-        String direccion = scanner.nextLine();
+        Vista.caja("INGRESAR DATOS");
+        String id = Vista.obtenerString(scanner, "Cédula o RUC del cliente: ");
+        String nombre = Vista.obtenerString(scanner, "Nombre del cliente: ");
+        String telefono = Vista.obtenerString(scanner, "Teléfono del cliente: ");
+        String direccion = Vista.obtenerString(scanner, "Dirección del cliente: ");
         // Validación del tipo de cliente
         TipoCliente tipoCliente = null;
         while (true) {
             System.out.println("Seleccione el tipo de cliente");
             System.out.println("  1. Personal");
             System.out.println("  2. Empresarial");
-            System.out.print("Ingrese su opción: ");
-            int entrada = scanner.nextInt();
-            scanner.nextLine(); // Limpiar buffer
+            int entrada = Vista.obtenerInt(scanner,"Ingrese su opción: ");
             switch (entrada) {
                 case 1:
                     tipoCliente = TipoCliente.PERSONAL;

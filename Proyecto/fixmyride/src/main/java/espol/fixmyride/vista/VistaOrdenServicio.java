@@ -15,7 +15,7 @@ public class VistaOrdenServicio {
     }
     // Método para mostrar el submenu de órdenes
     public void generarOrden(Scanner scanner) {
-        MensajeUsuario.caja("GENERAR ÓRDEN DE SERVICIOS");
+        Vista.caja("GENERAR ORDEN DE SERVICIOS");
         System.out.println("Ingrese el ID del cliente: ");
         String idCliente = scanner.nextLine();
         System.out.println("Fecha del servicio (YYYY-MM-DD): ");

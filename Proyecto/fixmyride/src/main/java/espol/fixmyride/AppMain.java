@@ -47,7 +47,7 @@ public class AppMain {
                     System.out.println("Saliendo de la aplicación...");
                     break;
                 default:
-                    MensajeUsuario.opcionNoValida();
+                    Vista.opcionNoValida();
             }
         } while (opcion != 10);
         scanner.close();

@@ -7,15 +7,11 @@ public class VistaTecnico extends VistaPersona {
     public VistaTecnico(ControladorPersona controlador) { super(controlador); }
     // Método para agregar un nuevo técnico
     public void agregarTecnico(Scanner scanner) {
-        MensajeUsuario.caja("INGRESAR DATOS");
-        System.out.print("Cédula o RUC del técnico: ");
-        String id = scanner.nextLine();
-        System.out.print("Nombre del técnico: ");
-        String nombre = scanner.nextLine();
-        System.out.print("Teléfono del técnico: ");
-        String telefono = scanner.nextLine();
-        System.out.print("Especialidad del técnico: ");
-        String especialidad = scanner.nextLine();
+        Vista.caja("INGRESAR DATOS");
+        String id = Vista.obtenerString(scanner, "Cédula o RUC del técnico: ");
+        String nombre = Vista.obtenerString(scanner, "Nombre del técnico: ");
+        String telefono = Vista.obtenerString(scanner, "Teléfono del técnico: ");
+        String especialidad = Vista.obtenerString(scanner, "Especialidad del técnico: ");
         ControladorTecnico controladorTecnico = (ControladorTecnico) getControlador();
         System.out.println(controladorTecnico.agregarTecnico(id, nombre, telefono, especialidad));
     }
