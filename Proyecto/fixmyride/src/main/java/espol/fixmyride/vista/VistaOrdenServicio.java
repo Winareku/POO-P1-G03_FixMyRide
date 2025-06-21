@@ -65,7 +65,7 @@ public class VistaOrdenServicio {
         }
         String placaVehiculo = Vista.obtenerString(scanner,"Placa del vehículo: ");
         // Agregar orden de servicios
-        int numeroOrden = controlador.agregarOrdenServicio(idCliente, "", LocalDate.parse(fechaString), tipoVehiculo, placaVehiculo);
+        OrdenServicio orden = controlador.agregarOrdenServicio(idCliente, "", LocalDate.parse(fechaString), tipoVehiculo, placaVehiculo);
         // Se mantiene pidiendo códigos de servicios y cantidad hasta que escriba -1
         String codigoServicio;
         do {
@@ -75,7 +75,9 @@ public class VistaOrdenServicio {
             if (servicio == null){Vista.opcionNoValida();continue;}
             int cantidadServicio = Vista.obtenerInt(scanner,"Ingrese la cantidad del servicio: ");
             DetalleServicio detalleServicio = new DetalleServicio(servicio, cantidadServicio);
-            controlador.agregarDetalleServicio(numeroOrden, detalleServicio);
+            controlador.agregarDetalleServicio(orden, detalleServicio);
+            orden.setTotalOrden(orden.getTotalOrden()+detalleServicio.getTotal());
+            System.out.println("Orden registrada. Total a pagar: $"+orden.getTotalOrden());
         } while (!codigoServicio.equals("-1"));
     }
 }
