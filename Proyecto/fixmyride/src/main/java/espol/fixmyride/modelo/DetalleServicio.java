@@ -1,0 +1,25 @@
+package espol.fixmyride.modelo;
+
+public class DetalleServicio {
+    
+    // Atributos
+    private Servicio servicio;
+    private int cantidad;
+    private double precioUnitario;
+    private double total;
+
+    // Constructor
+    public DetalleServicio(Servicio servicio, int cantidad) {
+        this.servicio = servicio;
+        this.cantidad = cantidad;
+        this.precioUnitario = servicio.getPrecio();
+        this.total = cantidad * precioUnitario;
+    }
+
+    // Getters y Setters
+    public Servicio getServicio() { return servicio; }
+    public void setServicio(Servicio servicio) { this.servicio = servicio; }
+    public int getCantidad() { return cantidad; }
+    public double getPrecioUnitario() { return precioUnitario; }
+    public double getTotal() { return total; }
+}
