@@ -4,10 +4,8 @@ import espol.fixmyride.modelo.*;
 import java.util.Scanner;
 
 public class VistaCliente extends VistaPersona {
-
     // Constructor
     public VistaCliente(ControladorPersona controlador) { super(controlador); }
-    
     // Método para agregar un nuevo cliente
     public void agregarPersona(Scanner scanner) {
         MensajeUsuario.caja("INGRESAR DATOS");
@@ -19,7 +17,6 @@ public class VistaCliente extends VistaPersona {
         String telefono = scanner.nextLine();
         System.out.print("Dirección del cliente: ");
         String direccion = scanner.nextLine();
-        
         // Validación del tipo de cliente
         TipoCliente tipoCliente = null;
         while (true) {

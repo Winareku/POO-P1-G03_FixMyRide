@@ -5,17 +5,13 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class VistaPersona {
-
     // Atributo controlador
     private ControladorPersona controlador;
-
     // Constructor
     public VistaPersona(ControladorPersona controlador) { this.controlador = controlador; }
-
     // Getters y Setters
     public ControladorPersona getControlador() { return controlador; }
     public void setControlador(ControladorPersona controlador) { this.controlador = controlador; }
-
     // Método para mostrar el submenu de personas
     public static void mostrarSubmenu(ArrayList<Persona> listaPersonas, String clase) {
         MensajeUsuario.caja(clase.toUpperCase());
@@ -28,8 +24,5 @@ public class VistaPersona {
         MensajeUsuario.cerrarCaja();
         System.out.print("Seleccione una opción: ");
     }
-
-    public void agregarPersona(Scanner scanner) {
-        // Implementado en las subclases
-    }
+    public void agregarPersona(Scanner scanner) {}
 }

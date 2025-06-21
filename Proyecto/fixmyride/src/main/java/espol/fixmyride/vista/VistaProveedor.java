@@ -3,10 +3,8 @@ import espol.fixmyride.controlador.*;
 import java.util.Scanner;
 
 public class VistaProveedor extends VistaPersona {
-    
     // Constructor
     public VistaProveedor(ControladorPersona controlador) { super(controlador); }
-    
     // Método para agregar un nuevo proveedor
     public void agregarProveedor(Scanner scanner) {
         MensajeUsuario.caja("INGRESAR DATOS");
@@ -18,7 +16,6 @@ public class VistaProveedor extends VistaPersona {
         String telefono = scanner.nextLine();
         System.out.print("Descripción del proveedor: ");
         String descripcion = scanner.nextLine();
-
         ControladorProveedor controladorProveedor = (ControladorProveedor) getControlador();
         System.out.println(controladorProveedor.agregarProveedor(id, nombre, telefono, descripcion));
     }

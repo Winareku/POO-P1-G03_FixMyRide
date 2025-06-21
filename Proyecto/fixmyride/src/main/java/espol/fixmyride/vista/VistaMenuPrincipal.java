@@ -2,13 +2,10 @@ package espol.fixmyride.vista;
 import java.util.Scanner;
 
 public class VistaMenuPrincipal {
-
     // Atributos
     private Scanner scanner;
-
     // Constructor
     public VistaMenuPrincipal() { this.scanner = new Scanner(System.in); }
-
     // Método para obtener un entero del usuario
     public int obtenerInt(String mensaje) {
         System.out.print(mensaje);
@@ -16,7 +13,6 @@ public class VistaMenuPrincipal {
         scanner.nextLine(); // Limpiar buffer
         return valor;
     }
-
     // Método para mostrar el menú principal
     public int mostrarMenuPrincipal() {
         MensajeUsuario.separador();
@@ -36,14 +32,12 @@ public class VistaMenuPrincipal {
         System.out.print("Seleccione una opción: ");
         return obtenerInt("");
     }
-
     public void manejarSubmenuPersonas(VistaPersona vista, Scanner scanner, String clase) {
         int opcion = 0;
         do {
             VistaPersona.mostrarSubmenu(vista.getControlador().getLista(), clase);
             opcion = scanner.nextInt();
             scanner.nextLine(); // Limpiar buffer
-            
             switch (opcion) {
                 case 1:
                     vista.agregarPersona(scanner);
@@ -56,14 +50,12 @@ public class VistaMenuPrincipal {
             }
         } while (opcion != 2);
     }
-
     public void manejarSubmenuServicios(VistaServicio vista, Scanner scanner) {
         int opcion = 0;
         do {
             vista.mostrarSubmenu();
             opcion = scanner.nextInt();
             scanner.nextLine(); // Limpiar buffer
-            
             switch (opcion) {
                 case 1:
                     vista.agregarServicio(scanner);
@@ -79,7 +71,6 @@ public class VistaMenuPrincipal {
             }
         } while (opcion != 3);
     }
-
     public void manejarOrdenes(VistaOrdenServicio vista, Scanner scanner) {
         vista.generarOrden(scanner);
     }

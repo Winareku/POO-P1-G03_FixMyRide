@@ -3,7 +3,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class OrdenServicio {
-    
     //Atributos
     private int numeroOrden;
     private String idCliente;
@@ -12,9 +11,7 @@ public class OrdenServicio {
     private TipoVehiculo tipoVehiculo;
     private String placaVehiculo;
     private double totalOrden;
-
     private ArrayList<DetalleServicio> listaDetalleServicio;
-    
     // Constructor
     public OrdenServicio(String idCliente, String idTecnico,LocalDate fechaServicio,TipoVehiculo tipoVehiculo,String placa){
         this.idCliente = idCliente;
@@ -24,7 +21,6 @@ public class OrdenServicio {
         this.placaVehiculo = placa;
         this.listaDetalleServicio = new ArrayList<>();
     }
-    
     // Getters y Setters
     public int getNumeroOrden() { return numeroOrden; }
     public void setNumeroOrden(int numeroOrden) { this.numeroOrden = numeroOrden; }
@@ -42,8 +38,6 @@ public class OrdenServicio {
     public void setTotalOrden(double totalOrden) { this.totalOrden = totalOrden;}
     public ArrayList<DetalleServicio> getListaDetalleServicio() { return listaDetalleServicio; }
     public void setListaDetalleServicio(ArrayList<DetalleServicio> listaDetalleServicio) { this.listaDetalleServicio = listaDetalleServicio; }
-
-    // Override toString para mostrar la información de la orden de servicio
     @Override
     public String toString() {
         return (numeroOrden + ", " + idCliente + ", " + idTecnico + ", " + fechaServicio + ", " + tipoVehiculo + ", " + placaVehiculo + ", " + totalOrden);
