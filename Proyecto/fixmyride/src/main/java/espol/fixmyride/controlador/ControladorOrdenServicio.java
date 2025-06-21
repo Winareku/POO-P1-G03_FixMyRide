@@ -1,14 +1,15 @@
 package espol.fixmyride.controlador;
 import espol.fixmyride.modelo.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class ControladorOrdenServicio {
     // Atributos
     public static int contadorOrden =0;
     // Lista en memoria para almacenar las órdenes
-    public static java.util.ArrayList<OrdenServicio> listaOrdenes;
+    public static ArrayList<OrdenServicio> listaOrdenes;
     // Constructor
-    public ControladorOrdenServicio() { listaOrdenes = new java.util.ArrayList<>(); }
+    public ControladorOrdenServicio() { listaOrdenes = new ArrayList<>(); }
     // Método para agregar una orden
     public OrdenServicio agregarOrdenServicio(String idCliente, String idTecnico, LocalDate fechaServicio, TipoVehiculo tipoVehiculo, String placaVehiculo) {
         OrdenServicio orden = new OrdenServicio(idCliente, idTecnico, fechaServicio, tipoVehiculo, placaVehiculo);
@@ -22,5 +23,5 @@ public class ControladorOrdenServicio {
         System.out.println("Servicio agregado a la orden #" + orden.getNumeroOrden());
     }
     // Método para obtener la lista de órdenes
-    public java.util.ArrayList<OrdenServicio> getListaOrdenes() { return listaOrdenes; }
+    public ArrayList<OrdenServicio> getListaOrdenes() { return listaOrdenes; }
 }

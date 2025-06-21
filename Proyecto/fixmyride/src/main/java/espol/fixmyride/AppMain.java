@@ -15,6 +15,7 @@ public class AppMain {
         ControladorTecnico controladorTecnico = new ControladorTecnico();
         ControladorServicio controladorServicio = new ControladorServicio();
         ControladorOrdenServicio controladorOrdenServicio = new ControladorOrdenServicio();
+        ControladorRegistroFaltaInsumo controladorRFI = new ControladorRegistroFaltaInsumo();
         // Inicializar vistas
         VistaMenuPrincipal vistaMenuPrincipal = new VistaMenuPrincipal();
         VistaCliente vistaCliente = new VistaCliente(controladorCliente);
@@ -22,6 +23,7 @@ public class AppMain {
         VistaTecnico vistaTecnico = new VistaTecnico(controladorTecnico);
         VistaServicio vistaServicio = new VistaServicio(controladorServicio);
         VistaOrdenServicio vistaOrdenServicio = new VistaOrdenServicio(controladorOrdenServicio, controladorServicio, controladorCliente);
+        VistaRegistroFaltaInsumo vistaRFI = new VistaRegistroFaltaInsumo(controladorRFI);
         // Inicializar la aplicación
         inicializarApp(controladorCliente, controladorProveedor, controladorTecnico, controladorServicio);
         do {
@@ -42,6 +44,18 @@ public class AppMain {
                     break;
                 case 5:
                     vistaMenuPrincipal.manejarOrdenes(vistaOrdenServicio, scanner);
+                    break;
+                case 6:
+                    vistaMenuPrincipal.manejarRFI(vistaRFI, scanner);
+                    break;
+                case 7:
+                    //
+                    break;
+                case 8:
+                    //
+                    break;
+                case 9:
+                    //
                     break;
                 case 10:
                     System.out.println("Saliendo de la aplicación...");
