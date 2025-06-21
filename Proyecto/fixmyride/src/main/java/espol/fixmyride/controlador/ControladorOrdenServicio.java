@@ -8,6 +8,8 @@ public class ControladorOrdenServicio {
     public static int contadorOrden =0;
     // Lista en memoria para almacenar las órdenes
     public static ArrayList<OrdenServicio> listaOrdenes;
+    // Método para obtener la lista de órdenes
+    public ArrayList<OrdenServicio> getListaOrdenes() { return listaOrdenes; }
     // Constructor
     public ControladorOrdenServicio() { listaOrdenes = new ArrayList<>(); }
     // Método para agregar una orden
@@ -22,6 +24,4 @@ public class ControladorOrdenServicio {
         orden.getListaDetalleServicio().add(detalle);
         System.out.println("Servicio agregado a la orden #" + orden.getNumeroOrden());
     }
-    // Método para obtener la lista de órdenes
-    public ArrayList<OrdenServicio> getListaOrdenes() { return listaOrdenes; }
 }

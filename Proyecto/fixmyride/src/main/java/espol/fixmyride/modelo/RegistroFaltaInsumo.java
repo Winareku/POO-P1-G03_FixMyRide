@@ -2,6 +2,7 @@ package espol.fixmyride.modelo;
 import java.time.LocalDate;
 
 public class RegistroFaltaInsumo {
+    // Atributos
     private String descripcion;
     private String idProveedor;
     private LocalDate fechaRegistro;
