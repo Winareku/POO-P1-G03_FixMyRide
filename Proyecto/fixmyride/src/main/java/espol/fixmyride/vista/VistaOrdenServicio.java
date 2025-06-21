@@ -2,24 +2,42 @@ package espol.fixmyride.vista;
 import espol.fixmyride.controlador.*;
 import espol.fixmyride.modelo.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class VistaOrdenServicio {
     // Atributo controlador
     private ControladorOrdenServicio controlador;
     private ControladorServicio controladorServicio;
+    private ControladorCliente controladorCliente;
     // Constructor
-    public VistaOrdenServicio(ControladorOrdenServicio controlador, ControladorServicio controladorServicio) {
+    public VistaOrdenServicio(ControladorOrdenServicio controlador, ControladorServicio controladorServicio, ControladorCliente controladorCliente) {
         this.controlador = controlador;
         this.controladorServicio = controladorServicio;
+        this.controladorCliente = controladorCliente;
     }
     // Método para mostrar el submenu de órdenes
     public void generarOrden(Scanner scanner) {
+        // Mostrar órdenes actuales
+        Vista.caja("ORDENES DE SERVICIOS");
+        ArrayList<OrdenServicio>listaOrdenes = controlador.getListaOrdenes();
+        for (OrdenServicio orden: listaOrdenes) { System.out.println(orden); }
+        // Menu de generar órdenes
         Vista.caja("GENERAR ORDEN DE SERVICIOS");
-        System.out.println("Ingrese el ID del cliente: ");
-        String idCliente = scanner.nextLine();
-        System.out.println("Fecha del servicio (YYYY-MM-DD): ");
-        String fechaString = scanner.nextLine();
+        String idCliente;
+        String fechaString = null;
+        Persona clienteExistente = null;
+        // Validación de Cliente
+        do {
+            idCliente = Vista.obtenerString(scanner,"Ingrese el ID del cliente: ");
+            clienteExistente = ControladorPersona.buscarPersonaPorId(idCliente, controladorCliente.getLista());
+            if (clienteExistente==null) {Vista.opcionNoValida();}
+        } while (clienteExistente==null);
+        // Validación de Fecha
+        do {
+            fechaString = Vista.obtenerString(scanner,"Fecha del servicio (YYYY-MM-DD): ");
+            if (!Vista.esFechaValida(fechaString)) {Vista.opcionNoValida();}
+        } while (!Vista.esFechaValida(fechaString));
         // Validación del tipo de vehículo
         TipoVehiculo tipoVehiculo;
         while (true) {
@@ -28,8 +46,7 @@ public class VistaOrdenServicio {
             System.out.println("  2. Motocicleta");
             System.out.println("  3. Bus");
             System.out.print("Ingrese su opción: ");
-            int entrada = scanner.nextInt();
-            scanner.nextLine(); // Limpiar buffer
+            int entrada = Vista.obtenerInt(scanner);
             switch (entrada) {
                 case 1:
                     tipoVehiculo = TipoVehiculo.AUTOMOVIL;
@@ -41,29 +58,24 @@ public class VistaOrdenServicio {
                     tipoVehiculo = TipoVehiculo.BUS;
                     break;
                 default:
+                    Vista.opcionNoValida();
                     continue;
             }
             break;
         }
-        System.out.println("Placa del vehículo: ");
-        String placaVehiculo = scanner.nextLine();
+        String placaVehiculo = Vista.obtenerString(scanner,"Placa del vehículo: ");
         // Agregar orden de servicios
         int numeroOrden = controlador.agregarOrdenServicio(idCliente, "", LocalDate.parse(fechaString), tipoVehiculo, placaVehiculo);
         // Se mantiene pidiendo códigos de servicios y cantidad hasta que escriba -1
         String codigoServicio;
         do {
-            System.out.println("Ingrese el código del servicio (-1 para terminar): ");
-            codigoServicio = scanner.nextLine();
-            if (!codigoServicio.equals("-1")) {
-                System.out.println("Ingrese la cantidad del servicio: ");
-                int cantidadServicio = scanner.nextInt();
-                scanner.nextLine(); // Limpiar buffer
-
-                Servicio servicio = controladorServicio.obtenerServicioPorCodigo(codigoServicio);
-                DetalleServicio detalleServicio = new DetalleServicio(servicio, cantidadServicio);
-                controlador.agregarDetalleServicio(numeroOrden, detalleServicio);
-            }
+            codigoServicio = Vista.obtenerString(scanner,"Ingrese el código del servicio: ");
+            if (codigoServicio.equals("-1")){break;}
+            Servicio servicio = controladorServicio.obtenerServicioPorCodigo(codigoServicio);
+            if (servicio == null){Vista.opcionNoValida();continue;}
+            int cantidadServicio = Vista.obtenerInt(scanner,"Ingrese la cantidad del servicio: ");
+            DetalleServicio detalleServicio = new DetalleServicio(servicio, cantidadServicio);
+            controlador.agregarDetalleServicio(numeroOrden, detalleServicio);
         } while (!codigoServicio.equals("-1"));
-        System.out.println();
     }
 }

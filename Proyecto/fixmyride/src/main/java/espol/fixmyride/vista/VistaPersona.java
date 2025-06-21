@@ -15,9 +15,7 @@ public class VistaPersona {
     // Método para mostrar el submenu de personas
     public static void mostrarSubmenu(ArrayList<Persona> listaPersonas, String clase) {
         Vista.caja(clase.toUpperCase());
-        for (Persona persona : listaPersonas) {
-            System.out.println(persona);
-        }
+        for (Persona persona : listaPersonas) { System.out.println(persona); }
         Vista.abrirCaja("ADMINISTRAR " + clase.toUpperCase());
         Vista.lateralCaja("1. Agregar " + clase);
         Vista.lateralCaja("2. Regresar al menú principal");

@@ -21,7 +21,7 @@ public class AppMain {
         VistaProveedor vistaProveedor = new VistaProveedor(controladorProveedor);
         VistaTecnico vistaTecnico = new VistaTecnico(controladorTecnico);
         VistaServicio vistaServicio = new VistaServicio(controladorServicio);
-        VistaOrdenServicio vistaOrdenServicio = new VistaOrdenServicio(controladorOrdenServicio, controladorServicio);
+        VistaOrdenServicio vistaOrdenServicio = new VistaOrdenServicio(controladorOrdenServicio, controladorServicio, controladorCliente);
         // Inicializar la aplicación
         inicializarApp(controladorCliente, controladorProveedor, controladorTecnico, controladorServicio);
         do {

@@ -28,6 +28,7 @@ public class VistaCliente extends VistaPersona {
                     tipoCliente = TipoCliente.EMPRESARIAL;
                     break;
                 default:
+                    Vista.opcionNoValida();
                     continue;
             }
             break;

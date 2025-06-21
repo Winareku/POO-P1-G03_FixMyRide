@@ -7,16 +7,16 @@ public class OrdenServicio {
     private int numeroOrden;
     private String idCliente;
     private String idTecnico;
-    private LocalDate fechaServicio;
+    private LocalDate fechaOrden;
     private TipoVehiculo tipoVehiculo;
     private String placaVehiculo;
     private double totalOrden;
     private ArrayList<DetalleServicio> listaDetalleServicio;
     // Constructor
-    public OrdenServicio(String idCliente, String idTecnico,LocalDate fechaServicio,TipoVehiculo tipoVehiculo,String placa){
+    public OrdenServicio(String idCliente, String idTecnico,LocalDate fechaOrden,TipoVehiculo tipoVehiculo,String placa){
         this.idCliente = idCliente;
         this.idTecnico = idTecnico;
-        this.fechaServicio = fechaServicio;
+        this.fechaOrden = fechaOrden;
         this.tipoVehiculo = tipoVehiculo;
         this.placaVehiculo = placa;
         this.listaDetalleServicio = new ArrayList<>();
@@ -28,8 +28,8 @@ public class OrdenServicio {
     public void setIdCliente(String idCliente) { this.idCliente = idCliente; }
     public String getIdTecnico() { return idTecnico; }
     public void setIdTecnico(String idTecnico) { this.idTecnico = idTecnico; }
-    public LocalDate getFechaServicio() { return fechaServicio; }
-    public void setFechaServicio(LocalDate fechaServicio) { this.fechaServicio = fechaServicio; }
+    public LocalDate getFechaOrden() { return fechaOrden; }
+    public void setFechaOrden(LocalDate fechaServicio) { this.fechaOrden = fechaServicio; }
     public TipoVehiculo getTipoVehiculo() { return tipoVehiculo; }
     public void setTipoVehiculo(TipoVehiculo tipoVehiculo) { this.tipoVehiculo = tipoVehiculo; }
     public String getPlacaVehiculo() { return placaVehiculo; }
@@ -40,6 +40,6 @@ public class OrdenServicio {
     public void setListaDetalleServicio(ArrayList<DetalleServicio> listaDetalleServicio) { this.listaDetalleServicio = listaDetalleServicio; }
     @Override
     public String toString() {
-        return (numeroOrden + ", " + idCliente + ", " + idTecnico + ", " + fechaServicio + ", " + tipoVehiculo + ", " + placaVehiculo + ", " + totalOrden);
+        return (numeroOrden + ", " + idCliente + ", " + idTecnico + ", " + fechaOrden + ", " + tipoVehiculo + ", " + placaVehiculo + ", " + totalOrden);
     }
 }

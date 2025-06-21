@@ -1,4 +1,5 @@
 package espol.fixmyride.vista;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Vista {
@@ -64,5 +65,11 @@ public class Vista {
         int espaciosDerecha = espaciosTotales;
         String lineaContenido = "║" + texto + " ".repeat(espaciosDerecha) + "║";
         System.out.println(lineaContenido);
+    }
+    public static boolean esFechaValida(String texto) {
+        try {
+            LocalDate.parse(texto);
+            return true;
+        } catch (Exception e) { return false; }
     }
 }
