@@ -1,6 +1,6 @@
-package controlador;
+package espol.fixmyride.controlador;
 import java.util.ArrayList;
-import modelo.Servicio;
+import espol.fixmyride.modelo.Servicio;
 
 
 public class ControladorServicio {

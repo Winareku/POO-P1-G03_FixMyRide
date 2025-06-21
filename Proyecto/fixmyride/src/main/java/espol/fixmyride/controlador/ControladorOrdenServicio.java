@@ -1,5 +1,5 @@
-package controlador;
-import modelo.OrdenServicio;
+package espol.fixmyride.controlador;
+import espol.fixmyride.modelo.OrdenServicio;
 import java.time.LocalDate;
 
 public class ControladorOrdenServicio {
@@ -14,7 +14,7 @@ public class ControladorOrdenServicio {
     public ControladorOrdenServicio() { listaOrdenes = new java.util.ArrayList<>(); }
 
     // Método para agregar una orden de servicio
-    public String agregarOrdenServicio(String idCliente, String idTecnico, LocalDate fechaServicio, modelo.TipoVehiculo tipoVehiculo, String placaVehiculo) {
+    public String agregarOrdenServicio(String idCliente, String idTecnico, LocalDate fechaServicio, espol.fixmyride.modelo.TipoVehiculo tipoVehiculo, String placaVehiculo) {
         OrdenServicio orden = new OrdenServicio(idCliente, fechaServicio, tipoVehiculo, placaVehiculo);
         orden.setNumeroOrden(++contadorOrden);
         listaOrdenes.add(orden);

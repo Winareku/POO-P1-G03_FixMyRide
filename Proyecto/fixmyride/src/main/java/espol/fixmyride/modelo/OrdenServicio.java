@@ -1,4 +1,4 @@
-package modelo;
+package espol.fixmyride.modelo;
 import java.time.LocalDate;
 public class OrdenServicio {
     

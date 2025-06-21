@@ -1,11 +1,11 @@
-package vista;
-import controlador.ControladorOrdenServicio;
-import controlador.ControladorServicio;
-import controlador.ControladorDetalleServicio;
-import modelo.DetalleServicio;
-import modelo.Servicio;
-import modelo.OrdenServicio;
-import modelo.TipoVehiculo;
+package espol.fixmyride.vista;
+import espol.fixmyride.controlador.ControladorOrdenServicio;
+import espol.fixmyride.controlador.ControladorServicio;
+import espol.fixmyride.controlador.ControladorDetalleServicio;
+import espol.fixmyride.modelo.DetalleServicio;
+import espol.fixmyride.modelo.Servicio;
+import espol.fixmyride.modelo.OrdenServicio;
+import espol.fixmyride.modelo.TipoVehiculo;
 import java.util.Scanner;
 import java.time.LocalDate;
 
@@ -15,11 +15,11 @@ public class VistaOrdenServicio {
     private ControladorOrdenServicio controlador;
 
     // Constructor
-    public VistaOrdenServicio(controlador.ControladorOrdenServicio controlador) { this.controlador = controlador; }
+    public VistaOrdenServicio(espol.fixmyride.controlador.ControladorOrdenServicio controlador) { this.controlador = controlador; }
 
     // Método para mostrar el submenu de órdenes
     public void generarOrden(Scanner scanner) {
-        MensajeUsuario.caja("GENERAR ÓRDEN DE SERVICIOS");
+        Vista.caja("GENERAR ÓRDEN DE SERVICIOS");
         System.out.println("Ingrese el ID del cliente: ");
         String idCliente = scanner.nextLine();
         System.out.println("Fecha del servicio (YYYY-MM-DD): ");

@@ -1,4 +1,4 @@
-package modelo;
+package espol.fixmyride.modelo;
 
 public class DetalleServicio {
     private Servicio servicio;
