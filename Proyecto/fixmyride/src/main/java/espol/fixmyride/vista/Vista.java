@@ -100,12 +100,12 @@ public class Vista {
     public static String verificarPersonaPorID(Scanner scanner, ArrayList<Persona> listaPersona, String tipoPersona) {
         String idPersona;
         Persona persona;
-        do {
+        while (true) {
             idPersona = Vista.obtenerString(scanner,"Ingrese el ID del " + tipoPersona + ": ");
             persona = ControladorPersona.buscarPersonaPorId(idPersona, listaPersona);
-            if (persona==null) Vista.opcionNoValida();
-        } while (persona==null);
-        return idPersona;
+            if (persona!=null) return idPersona;
+            Vista.opcionNoValida();
+        }
     }
     public static TipoCliente obtenerTipoCliente(Scanner scanner){
         TipoCliente tipoCliente;
