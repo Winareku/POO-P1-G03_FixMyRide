@@ -7,16 +7,30 @@ import java.util.Scanner;
 public class VistaReporteAtencionTecnico {
     // Atributo controlador
     private ControladorReporteAtencionTecnico controlador;
+    private ControladorTecnico controladorTecnico;
+    private ControladorOrdenServicio controladorOrdenServicio;
     // Constructor
-    public VistaReporteAtencionTecnico(ControladorReporteAtencionTecnico controlador) { this.controlador = controlador; }
+    public VistaReporteAtencionTecnico(ControladorReporteAtencionTecnico controlador, ControladorTecnico controladorTecnico, ControladorOrdenServicio controladorOrdenServicio) {
+        this.controlador = controlador;
+        this.controladorTecnico = controladorTecnico;
+        this.controladorOrdenServicio = controladorOrdenServicio;
+    }
     // Método principal
-    public void metodo(Scanner scanner) {
-        // Mostrar lista
-        Vista.caja("");
+    public void generarReporte(Scanner scanner) {
+        // Listas de Controladores
+        Vista.caja("Reporte de atenciones por técnico");
         ArrayList<ReporteAtencionTecnico> lista = controlador.getLista();
-        for (ReporteAtencionTecnico objeto: lista) { System.out.println(objeto); }
+        ArrayList<Persona> listaTecnicos = controladorTecnico.getLista();
+        ArrayList<OrdenServicio> listaOrdenServicios = controladorOrdenServicio.getLista();
+        // Solicitudes
+        String fechaString = Vista.solicitarFecha(scanner);
+        /*
+        for (OrdenServicio orden: listaOrdenServicios) {
+
+        }
+        */
         // Solicitar
-        Vista.caja("");
+        
         // Completar
         
     }

@@ -23,13 +23,7 @@ public class VistaRegistroFaltaInsumo {
         // Menu de registrar
         Vista.caja("GENERAR REGISTRO DE FALTA DE INSUMOS");
         String desc= Vista.obtenerString(scanner, "Ingrese la descripción: ");
-        String idProveedor;
-        Persona proveedorExistente;
-        do {
-            idProveedor = Vista.obtenerString(scanner,"Ingrese el ID del proveedor: ");
-            proveedorExistente = ControladorPersona.buscarPersonaPorId(idProveedor, listaProveedor);
-            if (proveedorExistente==null) {Vista.opcionNoValida();}
-        } while (proveedorExistente==null);
+        String idProveedor = Vista.verificarPersonaPorID(scanner, listaProveedor, "proveedor");
         RegistroFaltaInsumo registro = new RegistroFaltaInsumo(desc,idProveedor);
         listaRFI.add(registro);
         System.out.println("Se registró la falta exitosamente");

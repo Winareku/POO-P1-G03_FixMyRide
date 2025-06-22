@@ -25,6 +25,8 @@ public class OrdenServicio {
     public void setNumeroOrden(int numeroOrden) { this.numeroOrden = numeroOrden; }
     public String getIdCliente() { return idCliente; }
     public void setIdCliente(String idCliente) { this.idCliente = idCliente; }
+    public String getIdTecnico() { return idTecnico; }
+    public void setIdTecnico(String idTecnico) { this.idTecnico = idTecnico; }
     public LocalDate getFechaOrden() { return fechaOrden; }
     public void setFechaOrden(LocalDate fechaServicio) { this.fechaOrden = fechaServicio; }
     public TipoVehiculo getTipoVehiculo() { return tipoVehiculo; }

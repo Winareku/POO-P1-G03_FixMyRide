@@ -62,10 +62,9 @@ public class VistaMenuPrincipal {
             }
         } while (opcion != 3);
     }
-    public void manejarOrdenes(VistaOrdenServicio vista, Scanner scanner) {
-        vista.generarOrden(scanner);
-    }
-    public void manejarRFI(VistaRegistroFaltaInsumo vista, Scanner scanner) {
-        vista.registrarFaltaInsumo(scanner);
-    }
+    public void manejarOrdenes(VistaOrdenServicio vista, Scanner scanner) { vista.generarOrden(scanner); }
+    public void manejarRFI(VistaRegistroFaltaInsumo vista, Scanner scanner) { vista.registrarFaltaInsumo(scanner); }
+    public void manejarFactura(VistaFactura vista, Scanner scanner) {vista.metodo(scanner); }
+    public void manejarRIS(VistaReporteIngresoServicio vista, Scanner scanner) {vista.metodo(scanner); }
+    public void manejarRAT(VistaReporteAtencionTecnico vista, Scanner scanner) { vista.generarReporte(scanner); }
 }

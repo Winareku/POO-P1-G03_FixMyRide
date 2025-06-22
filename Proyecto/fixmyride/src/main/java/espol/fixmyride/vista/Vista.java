@@ -1,6 +1,9 @@
 package espol.fixmyride.vista;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Scanner;
+import espol.fixmyride.controlador.ControladorPersona;
+import espol.fixmyride.modelo.Persona;
 
 public class Vista {
     // Atributos
@@ -72,5 +75,23 @@ public class Vista {
             LocalDate.parse(texto);
             return true;
         } catch (Exception e) { return false; }
+    }
+    public static String solicitarFecha(Scanner scanner) {
+        String fechaString = null;
+        do {
+            fechaString = Vista.obtenerString(scanner,"Fecha del servicio (YYYY-MM-DD): ");
+            if (!Vista.esFechaValida(fechaString)) {Vista.opcionNoValida();}
+        } while (!Vista.esFechaValida(fechaString));
+        return fechaString;
+    }
+    public static String verificarPersonaPorID(Scanner scanner, ArrayList<Persona> listaPersona, String tipoPersona) {
+        String idPersona;
+        Persona persona;
+        do {
+            idPersona = Vista.obtenerString(scanner,"Ingrese el ID del " + tipoPersona + ": ");
+            persona = ControladorPersona.buscarPersonaPorId(idPersona, listaPersona);
+            if (persona==null) {Vista.opcionNoValida();}
+        } while (persona==null);
+        return idPersona;
     }
 }

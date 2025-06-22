@@ -20,24 +20,12 @@ public class VistaOrdenServicio {
     public void generarOrden(Scanner scanner) {
         // Mostrar órdenes actuales
         Vista.caja("ORDENES DE SERVICIOS");
-        ArrayList<OrdenServicio>listaOrdenes = controlador.getListaOrdenes();
+        ArrayList<OrdenServicio>listaOrdenes = controlador.getLista();
         for (OrdenServicio orden: listaOrdenes) { System.out.println(orden); }
         // Menu de generar órdenes
         Vista.caja("GENERAR ORDEN DE SERVICIOS");
-        String idCliente;
-        String fechaString = null;
-        Persona clienteExistente = null;
-        // Validación de Cliente
-        do {
-            idCliente = Vista.obtenerString(scanner,"Ingrese el ID del cliente: ");
-            clienteExistente = ControladorPersona.buscarPersonaPorId(idCliente, controladorCliente.getLista());
-            if (clienteExistente==null) {Vista.opcionNoValida();}
-        } while (clienteExistente==null);
-        // Validación de Fecha
-        do {
-            fechaString = Vista.obtenerString(scanner,"Fecha del servicio (YYYY-MM-DD): ");
-            if (!Vista.esFechaValida(fechaString)) {Vista.opcionNoValida();}
-        } while (!Vista.esFechaValida(fechaString));
+        String idCliente = Vista.verificarPersonaPorID(scanner, controladorCliente.getLista(), "cliente");
+        String fechaString = Vista.solicitarFecha(scanner);
         // Validación del tipo de vehículo
         TipoVehiculo tipoVehiculo;
         while (true) {

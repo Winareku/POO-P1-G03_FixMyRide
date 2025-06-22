@@ -9,7 +9,7 @@ public class ControladorOrdenServicio {
     // Lista en memoria para almacenar las órdenes
     public static ArrayList<OrdenServicio> listaOrdenes;
     // Método para obtener la lista de órdenes
-    public ArrayList<OrdenServicio> getListaOrdenes() { return listaOrdenes; }
+    public ArrayList<OrdenServicio> getLista() { return listaOrdenes; }
     // Constructor
     public ControladorOrdenServicio() { listaOrdenes = new ArrayList<>(); }
     // Método para agregar una orden

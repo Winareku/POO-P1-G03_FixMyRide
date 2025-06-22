@@ -16,6 +16,9 @@ public class AppMain {
         ControladorServicio controladorServicio = new ControladorServicio();
         ControladorOrdenServicio controladorOrdenServicio = new ControladorOrdenServicio();
         ControladorRegistroFaltaInsumo controladorRFI = new ControladorRegistroFaltaInsumo();
+        ControladorFactura controladorFactura = new ControladorFactura();
+        ControladorReporteIngresoServicio controladorReporteIngresoServicio = new ControladorReporteIngresoServicio();
+        ControladorReporteAtencionTecnico controladorReporteAtencionTecnico = new ControladorReporteAtencionTecnico();
         // Inicializar vistas
         VistaMenuPrincipal vistaMenuPrincipal = new VistaMenuPrincipal();
         VistaCliente vistaCliente = new VistaCliente(controladorCliente);
@@ -23,7 +26,10 @@ public class AppMain {
         VistaTecnico vistaTecnico = new VistaTecnico(controladorTecnico);
         VistaServicio vistaServicio = new VistaServicio(controladorServicio);
         VistaOrdenServicio vistaOrdenServicio = new VistaOrdenServicio(controladorOrdenServicio, controladorServicio, controladorCliente);
-        VistaRegistroFaltaInsumo vistaRFI = new VistaRegistroFaltaInsumo(controladorRFI, controladorProveedor);
+        VistaRegistroFaltaInsumo vistaRegistroFaltaInsumo = new VistaRegistroFaltaInsumo(controladorRFI, controladorProveedor);
+        VistaFactura vistaFactura = new VistaFactura(controladorFactura);
+        VistaReporteIngresoServicio vistaReporteIngresoServicio = new VistaReporteIngresoServicio(controladorReporteIngresoServicio);
+        VistaReporteAtencionTecnico vistaReporteAtencionTecnico = new VistaReporteAtencionTecnico(controladorReporteAtencionTecnico, controladorTecnico, controladorOrdenServicio);
         // Inicializar la aplicación
         inicializarApp(controladorCliente, controladorProveedor, controladorTecnico, controladorServicio);
         do {
@@ -46,16 +52,16 @@ public class AppMain {
                     vistaMenuPrincipal.manejarOrdenes(vistaOrdenServicio, scanner);
                     break;
                 case 6:
-                    vistaMenuPrincipal.manejarRFI(vistaRFI, scanner);
+                    vistaMenuPrincipal.manejarRFI(vistaRegistroFaltaInsumo, scanner);
                     break;
                 case 7:
-                    //
+                    vistaMenuPrincipal.manejarFactura(vistaFactura, scanner);
                     break;
                 case 8:
-                    //
+                    vistaMenuPrincipal.manejarRIS(vistaReporteIngresoServicio, scanner);
                     break;
                 case 9:
-                    //
+                    vistaMenuPrincipal.manejarRAT(vistaReporteAtencionTecnico, scanner);
                     break;
                 case 10:
                     System.out.println("Saliendo de la aplicación...");
