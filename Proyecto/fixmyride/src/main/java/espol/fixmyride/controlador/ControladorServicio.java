@@ -29,13 +29,9 @@ public class ControladorServicio {
         return "Servicio no encontrado";
     }
     
-    //Metodo para buscar servicio por código
-    public Servicio buscarServicioPorCodigo(String codigo) {
-        for (Servicio s : listaServicios) {
-            if (s.getCodigo().equals(codigo)) {
-                return s;
-            }
-        }
+    //Metodo para obtener un servicio a través de su código
+    public Servicio obtenerServicioPorCodigo(String codigo) {
+        for (Servicio servicio : listaServicios) { if (servicio.getCodigo().equals(codigo)) { return servicio; } }
         return null;
     }
 

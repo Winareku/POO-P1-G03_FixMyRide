@@ -1,38 +1,25 @@
 package espol.fixmyride.modelo;
 
 public class DetalleServicio {
+    // Atributos
     private Servicio servicio;
     private int cantidad;
-    private double precio;
+    private double precioUnitario;
     private double total;
-
-    public DetalleServicio(Servicio servicio, int cantidad, double precio) {
+    // Constructor
+    public DetalleServicio(Servicio servicio, int cantidad) {
         this.servicio = servicio;
         this.cantidad = cantidad;
-        this.precio= precio;
+        this.precioUnitario = servicio.getPrecio();
+        this.total = cantidad * precioUnitario;
     }
-
-    // getters y setters
-    public Servicio getServicio() { 
-        return servicio; 
-    }
-    public int getCantidad() { 
-        return cantidad;
-    }
-    public double getPrecio(){
-        return precio;
-    }
-    public void setServicio(Servicio s){
-        this.servicio=s;
-    }
-    public void setCantidad(int c){
-        this.cantidad= c;
-    }
-    public void setPrecio(double p){
-        this.precio=p;
-    }
-    public void setTotal(double t){
-        this.total= t;
-    }
-
+    // Getters y Setters
+    public Servicio getServicio() { return servicio; }
+    public int getCantidad() { return cantidad; }
+    public double getPrecioUnitario() { return precioUnitario; }
+    public double getTotal() { return total; }
+    public void setServicio(Servicio servicio) { this.servicio = servicio; }
+    public void setCantidad(int cantidad) { this.cantidad = cantidad; }
+    public void setPrecioUnitario(double precioUnitario) { this.precioUnitario = precioUnitario; }
+    public void setTotal(double total) { this.total = total; }
 }

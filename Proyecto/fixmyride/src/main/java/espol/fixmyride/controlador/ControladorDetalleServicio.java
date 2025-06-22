@@ -14,7 +14,7 @@ public class ControladorDetalleServicio {
     
     //Metodo para calcular el total
      public double calcularSubtotal(DetalleServicio ds) {
-        double total_sum= ds.getPrecio() * ds.getCantidad();
+        double total_sum= ds.getServicio().getPrecio() * ds.getCantidad();
         ds.setTotal(total_sum);
         return total_sum;
      }
