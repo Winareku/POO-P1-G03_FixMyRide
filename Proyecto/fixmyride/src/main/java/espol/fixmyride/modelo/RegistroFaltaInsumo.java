@@ -7,7 +7,7 @@ public class RegistroFaltaInsumo {
     private String idProveedor;
     private LocalDate fechaRegistro;
     // Constructor
-    public void RegistroFaltaInsumo(String descripcion, String idProveedor){
+    public RegistroFaltaInsumo(String descripcion, String idProveedor){
         this.descripcion = descripcion;
         this.idProveedor = idProveedor;
     }
