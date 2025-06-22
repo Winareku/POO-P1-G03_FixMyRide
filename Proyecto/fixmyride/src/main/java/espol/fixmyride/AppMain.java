@@ -23,7 +23,7 @@ public class AppMain {
         VistaTecnico vistaTecnico = new VistaTecnico(controladorTecnico);
         VistaServicio vistaServicio = new VistaServicio(controladorServicio);
         VistaOrdenServicio vistaOrdenServicio = new VistaOrdenServicio(controladorOrdenServicio, controladorServicio, controladorCliente);
-        VistaRegistroFaltaInsumo vistaRFI = new VistaRegistroFaltaInsumo(controladorRFI);
+        VistaRegistroFaltaInsumo vistaRFI = new VistaRegistroFaltaInsumo(controladorRFI, controladorProveedor);
         // Inicializar la aplicación
         inicializarApp(controladorCliente, controladorProveedor, controladorTecnico, controladorServicio);
         do {

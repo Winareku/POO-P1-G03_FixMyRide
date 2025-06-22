@@ -1,6 +1,5 @@
 package espol.fixmyride.controlador;
 import espol.fixmyride.modelo.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ControladorRegistroFaltaInsumo {
