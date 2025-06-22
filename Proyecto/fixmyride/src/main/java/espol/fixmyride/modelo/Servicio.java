@@ -17,7 +17,7 @@ public class Servicio {
         this.nombre = nombre;
         this.precio = precio;
         this.fechaInicio = LocalDate.now();
-        this.fechaFin = this.fechaInicio.plusYears(1); // Un año de duración
+        this.fechaFin = this.fechaInicio.plusMonths(1); // Un año de duración
         this.historialPrecios = new ArrayList<>();
         historialPrecios.add(new RegistroPrecio(this, precio));
         conteo++;
