@@ -65,4 +65,7 @@ public class VistaMenuPrincipal {
     public void manejarOrdenes(VistaOrdenServicio vista, Scanner scanner) {
         vista.generarOrden(scanner);
     }
+    public void manejarRFI(VistaRegistroFaltaInsumo vista, Scanner scanner) {
+        vista.registrarFaltaInsumo(scanner);
+    }
 }

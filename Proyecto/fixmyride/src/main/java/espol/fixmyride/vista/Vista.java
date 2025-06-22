@@ -33,6 +33,7 @@ public class Vista {
     public static void separador() { System.out.println("=".repeat(ANCHO_CAJA)+"\n"); }
     public static void caja(String texto){
         final int anchoInterno = ANCHO_CAJA - 2;
+        texto = texto.toUpperCase();
         int espaciosTotales = anchoInterno - texto.length();
         int espaciosIzquierda = espaciosTotales / 2;
         int espaciosDerecha = espaciosTotales - espaciosIzquierda;
