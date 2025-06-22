@@ -6,19 +6,18 @@ import java.util.Scanner;
 
 public class VistaReporteAtencionTecnico {
     // Atributo controlador
-        // private Controlador controlador;
+    private ControladorReporteAtencionTecnico controlador;
     // Constructor
-        // public Vista(Controlador controlador) { this.controlador = controlador; }
+    public VistaReporteAtencionTecnico(ControladorReporteAtencionTecnico controlador) { this.controlador = controlador; }
     // Método principal
-    /*
     public void metodo(Scanner scanner) {
         // Mostrar lista
-        Vista.caja("REGISTROS DE FALTA DE INSUMOS");
-        ArrayList<Modelo> lista = controlador.getLista();
-        for (Modelo objeto: lista) { System.out.println(objeto); }
+        Vista.caja("");
+        ArrayList<ReporteAtencionTecnico> lista = controlador.getLista();
+        for (ReporteAtencionTecnico objeto: lista) { System.out.println(objeto); }
         // Solicitar
-        Vista.caja("GENERAR REGISTRO DE FALTA DE INSUMOS");
+        Vista.caja("");
         // Completar
+        
     }
-    */
 }
