@@ -10,6 +10,6 @@ public class ControladorReporteAtencionTecnico {
     // Método para obtener la lista
     public ArrayList<ReporteAtencionTecnico> getLista() { return lista; }
     // Constructor
-        // public Controlador() { lista = new ArrayList<>(); }
+    public ControladorReporteAtencionTecnico() { lista = new ArrayList<>(); }
     // Métodos
 }

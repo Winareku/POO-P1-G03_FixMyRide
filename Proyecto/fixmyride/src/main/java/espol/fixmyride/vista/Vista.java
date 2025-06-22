@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import espol.fixmyride.controlador.ControladorPersona;
 import espol.fixmyride.modelo.Persona;
+import espol.fixmyride.modelo.TipoCliente;
+import espol.fixmyride.modelo.TipoVehiculo;
 
 public class Vista {
     // Atributos
@@ -17,6 +19,17 @@ public class Vista {
     public static int obtenerInt(Scanner scanner, String mensaje) {
         System.out.print(mensaje);
         int valor = scanner.nextInt();
+        scanner.nextLine(); // Limpiar buffer
+        return valor;
+    }
+    public static double obtenerDouble(Scanner scanner) {
+        double valor = scanner.nextDouble();
+        scanner.nextLine(); // Limpiar buffer
+        return valor;
+    }
+    public static double obtenerDouble(Scanner scanner, String mensaje) {
+        System.out.print(mensaje);
+        double valor = scanner.nextDouble();
         scanner.nextLine(); // Limpiar buffer
         return valor;
     }
@@ -80,7 +93,7 @@ public class Vista {
         String fechaString = null;
         do {
             fechaString = Vista.obtenerString(scanner,"Fecha del servicio (YYYY-MM-DD): ");
-            if (!Vista.esFechaValida(fechaString)) {Vista.opcionNoValida();}
+            if (!Vista.esFechaValida(fechaString)) Vista.opcionNoValida();
         } while (!Vista.esFechaValida(fechaString));
         return fechaString;
     }
@@ -90,8 +103,57 @@ public class Vista {
         do {
             idPersona = Vista.obtenerString(scanner,"Ingrese el ID del " + tipoPersona + ": ");
             persona = ControladorPersona.buscarPersonaPorId(idPersona, listaPersona);
-            if (persona==null) {Vista.opcionNoValida();}
+            if (persona==null) Vista.opcionNoValida();
         } while (persona==null);
         return idPersona;
+    }
+    public static TipoCliente obtenerTipoCliente(Scanner scanner){
+        TipoCliente tipoCliente;
+        while (true) {
+            System.out.println("Seleccione el tipo de cliente");
+            System.out.println("  1. Personal");
+            System.out.println("  2. Empresarial");
+            int entrada = Vista.obtenerInt(scanner,"Ingrese su opción: ");
+            switch (entrada) {
+                case 1:
+                    tipoCliente = TipoCliente.PERSONAL;
+                    break;
+                case 2:
+                    tipoCliente = TipoCliente.EMPRESARIAL;
+                    break;
+                default:
+                    Vista.opcionNoValida();
+                    continue;
+            }
+            break;
+        }
+        return tipoCliente;
+    }
+    public static TipoVehiculo obtenerTipoVehiculo(Scanner scanner){
+        TipoVehiculo tipoVehiculo;
+        while (true) {
+            System.out.println("Seleccione el tipo de vehículo:");
+            System.out.println("  1. Automóvil");
+            System.out.println("  2. Motocicleta");
+            System.out.println("  3. Bus");
+            System.out.print("Ingrese su opción: ");
+            int entrada = Vista.obtenerInt(scanner);
+            switch (entrada) {
+                case 1:
+                    tipoVehiculo = TipoVehiculo.AUTOMOVIL;
+                    break;
+                case 2:
+                    tipoVehiculo = TipoVehiculo.MOTOCICLETA;
+                    break;
+                case 3:
+                    tipoVehiculo = TipoVehiculo.BUS;
+                    break;
+                default:
+                    Vista.opcionNoValida();
+                    continue;
+            }
+            break;
+        }
+        return tipoVehiculo;
     }
 }

@@ -6,10 +6,10 @@ import java.util.ArrayList;
 public class ControladorFactura {
     // Atributos
     // Lista en memoria para almacenar
-        // public static ArrayList<> lista;
+    public static ArrayList<Factura> lista;
     // Método para obtener la lista
-        // public ArrayList<> getLista() { return lista; }
+    public ArrayList<Factura> getLista() { return lista; }
     // Constructor
-        // public Controlador() { lista = new ArrayList<>(); }
+    public ControladorFactura() { lista = new ArrayList<>(); }
     // Métodos
 }

@@ -11,9 +11,7 @@ public class VistaServicio {
     // Método para mostrar el submenu de servicios
     public void mostrarSubmenu() {
         Vista.caja("SERVICIOS");
-        for (Servicio servicio : controlador.getListaServicios()) {
-            System.out.println(servicio);
-        }
+        for (Servicio servicio : controlador.getListaServicios()) { System.out.println(servicio); }
         Vista.abrirCaja("ADMINISTRAR SERVICIOS");
         Vista.lateralCaja("1. Agregar servicio");
         Vista.lateralCaja("2. Editar servicios");
@@ -24,21 +22,15 @@ public class VistaServicio {
     // Método para agregar un nuevo servicio
     public void agregarServicio(Scanner scanner) {
         Vista.caja("INGRESAR DATOS DEL SERVICIO");
-        System.out.println("Ingrese el nombre del servicio: ");
-        String nombre = scanner.nextLine();
-        System.out.println("Ingrese el precio del servicio: ");
-        double precio = scanner.nextDouble();
-        scanner.nextLine(); // Limpiar buffer
+        String nombre = Vista.obtenerString(scanner,"Ingrese el nombre del servicio: ");
+        double precio = Vista.obtenerDouble(scanner,"Ingrese el precio del servicio: ");
         System.out.println(controlador.agregarServicio(nombre, precio));
     }
     // Método para editar un servicio existente
     public void editarServicio(Scanner scanner) {
         Vista.caja("EDITAR SERVICIO");
-        System.out.println("Ingrese el código del servicio: ");
-        String codigo = scanner.nextLine();
-        System.out.println("Ingrese el nuevo precio del servicio: ");
-        double precio = scanner.nextDouble();
-        scanner.nextLine(); // Limpiar buffer
+        String codigo = Vista.obtenerString(scanner, "Ingrese el código del servicio: ");
+        double precio = Vista.obtenerDouble(scanner,"Ingrese el nuevo precio del servicio: ");
         System.out.println(controlador.editarServicio(codigo, precio));
     }
 }

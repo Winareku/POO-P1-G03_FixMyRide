@@ -10,7 +10,7 @@ public class ControladorPersona {
     public void setLista(ArrayList<Persona> lista) { this.lista = lista; }
     // Método estático para buscar una persona por ID en una lista
     public static Persona buscarPersonaPorId(String id, ArrayList<Persona> lista) {
-        for (Persona persona : lista) { if (persona.getId().equals(id)) { return persona; } }
+        for (Persona persona : lista) { if (persona.getId().equals(id)) return persona; }
         return null;
     }
     // Método para añadir una persona a la lista

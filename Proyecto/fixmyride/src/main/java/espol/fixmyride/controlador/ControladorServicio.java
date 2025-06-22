@@ -25,7 +25,7 @@ public class ControladorServicio {
     }
     //Metodo para obtener un servicio a través de su código
     public Servicio obtenerServicioPorCodigo(String codigo) {
-        for (Servicio servicio : listaServicios) { if (servicio.getCodigo().equals(codigo)) { return servicio; } }
+        for (Servicio servicio : listaServicios) { if (servicio.getCodigo().equals(codigo)) return servicio; }
         return null;
     }
     // Método para obtener la lista de servicios
