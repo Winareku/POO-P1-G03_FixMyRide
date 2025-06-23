@@ -25,7 +25,7 @@ public class AppMain {
         VistaProveedor vistaProveedor = new VistaProveedor(controladorProveedor);
         VistaTecnico vistaTecnico = new VistaTecnico(controladorTecnico);
         VistaServicio vistaServicio = new VistaServicio(controladorServicio);
-        VistaOrdenServicio vistaOrdenServicio = new VistaOrdenServicio(controladorOrdenServicio, controladorServicio, controladorCliente);
+        VistaOrdenServicio vistaOrdenServicio = new VistaOrdenServicio(controladorOrdenServicio, controladorServicio, controladorCliente, controladorTecnico);
         VistaRegistroFaltaInsumo vistaRegistroFaltaInsumo = new VistaRegistroFaltaInsumo(controladorRFI, controladorProveedor);
         VistaFactura vistaFactura = new VistaFactura(controladorFactura);
         VistaReporteIngresoServicio vistaReporteIngresoServicio = new VistaReporteIngresoServicio(controladorReporteIngresoServicio);

@@ -13,8 +13,9 @@ public class OrdenServicio {
     private double totalOrden;
     private ArrayList<DetalleServicio> listaDetalleServicio;
     // Constructor
-    public OrdenServicio(String idCliente,LocalDate fechaOrden,TipoVehiculo tipoVehiculo,String placa){
+    public OrdenServicio(String idCliente, String idTecnico,LocalDate fechaOrden,TipoVehiculo tipoVehiculo,String placa){
         this.idCliente = idCliente;
+        this.idTecnico = idTecnico;
         this.fechaOrden = fechaOrden;
         this.tipoVehiculo = tipoVehiculo;
         this.placaVehiculo = placa;

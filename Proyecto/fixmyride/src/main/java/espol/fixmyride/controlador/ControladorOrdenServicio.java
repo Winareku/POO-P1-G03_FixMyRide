@@ -13,8 +13,8 @@ public class ControladorOrdenServicio {
     // Constructor
     public ControladorOrdenServicio() { listaOrdenes = new ArrayList<>(); }
     // Método para agregar una orden
-    public OrdenServicio agregarOrdenServicio(String idCliente, LocalDate fechaServicio, TipoVehiculo tipoVehiculo, String placaVehiculo) {
-        OrdenServicio orden = new OrdenServicio(idCliente, fechaServicio, tipoVehiculo, placaVehiculo);
+    public OrdenServicio agregarOrdenServicio(String idCliente, String idTecnico, LocalDate fechaServicio, TipoVehiculo tipoVehiculo, String placaVehiculo) {
+        OrdenServicio orden = new OrdenServicio(idCliente, idTecnico, fechaServicio, tipoVehiculo, placaVehiculo);
         orden.setNumeroOrden(++contadorOrden);
         listaOrdenes.add(orden);
         return orden;
