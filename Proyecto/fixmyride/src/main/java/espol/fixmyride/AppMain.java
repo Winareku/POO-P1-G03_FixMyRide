@@ -64,7 +64,7 @@ public class AppMain {
                     vistaMenuPrincipal.manejarRAT(vistaReporteAtencionTecnico, scanner);
                     break;
                 case 10:
-                    System.out.println("Saliendo de la aplicación...");
+                    System.out.println("Saliendo de la aplicación.....");
                     break;
                 default:
                     Vista.opcionNoValida();
