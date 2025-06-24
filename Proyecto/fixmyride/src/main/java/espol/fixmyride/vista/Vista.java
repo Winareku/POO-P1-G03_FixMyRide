@@ -97,6 +97,21 @@ public class Vista {
         } while (!Vista.esFechaValida(fechaString));
         return fechaString;
     }
+    public static boolean esMesValido(int mes) {
+        if (mes>=1 && mes<=12) return true;
+        return false;
+    }
+    public static String numeroToMes(Scanner scanner, int mes) {
+        String[] nombresMeses = {
+            "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+            "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+        };
+        while (true) {
+            int numeroMes = Vista.obtenerInt(scanner,"Ingrese el número del mes: ");
+            if (esMesValido(numeroMes)) return nombresMeses[numeroMes-1];
+            Vista.opcionNoValida();
+        }
+    }
     public static String verificarPersonaPorID(Scanner scanner, ArrayList<Persona> listaPersona, String tipoPersona) {
         String idPersona;
         Persona persona;
