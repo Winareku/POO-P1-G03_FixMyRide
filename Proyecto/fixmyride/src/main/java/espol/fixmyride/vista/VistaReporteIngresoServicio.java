@@ -15,11 +15,11 @@ public class VistaReporteIngresoServicio {
     // Método principal
     public void metodo(Scanner scanner) {
         // Mostrar lista
-        Vista.caja("REGISTROS DE FALTA DE INSUMOS");
+        Vista.caja("REPORTE DE INGRESOS POR SERVICIOS");
         // ArrayList<ReporteIngresoServicio> lista = controlador.getLista();
         // for (ReporteIngresoServicio reporte: lista) { System.out.println(reporte); }
         // Solicitar
-        Vista.caja("GENERAR REGISTRO DE FALTA DE INSUMOS");
+        Vista.caja("GENERAR REPORTE DE INGRESOS POR SERVICIOS");
         // Completar
     }
 }
