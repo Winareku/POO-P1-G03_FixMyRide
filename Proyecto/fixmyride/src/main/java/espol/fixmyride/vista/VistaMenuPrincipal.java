@@ -1,11 +1,16 @@
 package espol.fixmyride.vista;
+
+// Importaciones
 import java.util.Scanner;
 
+// Clase VistaMenuPrincipal
 public class VistaMenuPrincipal {
     // Atributos
     private Scanner scanner;
+
     // Constructor
     public VistaMenuPrincipal() { this.scanner = new Scanner(System.in); }
+
     // Método para mostrar el menú principal
     public int mostrarMenuPrincipal() {
         Vista.separador();
@@ -24,7 +29,8 @@ public class VistaMenuPrincipal {
         Vista.cerrarCaja();
         return Vista.obtenerInt(scanner,"Seleccione una opción: ");
     }
-    // Métodos para manejar opciones
+
+    // Métodos para manejar opciones con submenus de selección
     public void manejarSubmenuPersonas(VistaPersona vista, Scanner scanner, String clase) {
         int opcion = 0;
         do {
@@ -42,6 +48,7 @@ public class VistaMenuPrincipal {
             }
         } while (opcion != 2);
     }
+
     public void manejarSubmenuServicios(VistaServicio vista, Scanner scanner) {
         int opcion = 0;
         do {
@@ -62,6 +69,8 @@ public class VistaMenuPrincipal {
             }
         } while (opcion != 3);
     }
+    
+    // Métodos para manejar opciones sin submenus de selección
     public void manejarOrdenes(VistaOrdenServicio vista, Scanner scanner) { vista.generarOrden(scanner); }
     public void manejarRFI(VistaRegistroFaltaInsumo vista, Scanner scanner) { vista.registrarFaltaInsumo(scanner); }
     public void manejarFactura(VistaFactura vista, Scanner scanner) {vista.metodo(scanner); }

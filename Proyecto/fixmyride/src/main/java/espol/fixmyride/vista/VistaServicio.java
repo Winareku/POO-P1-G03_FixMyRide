@@ -1,13 +1,18 @@
 package espol.fixmyride.vista;
+
+// Importaciones
 import espol.fixmyride.controlador.*;
 import espol.fixmyride.modelo.*;
 import java.util.Scanner;
 
+// Clase VistaServicio
 public class VistaServicio {
     // Atributo controlador
     private ControladorServicio controlador;
+
     // Constructor
     public VistaServicio(ControladorServicio controlador) { this.controlador = controlador; }
+
     // Método para mostrar el submenu de servicios
     public void mostrarSubmenu() {
         Vista.caja("SERVICIOS");
@@ -19,6 +24,7 @@ public class VistaServicio {
         Vista.cerrarCaja();
         System.out.print("Seleccione una opción: ");
     }
+
     // Método para agregar un nuevo servicio
     public void agregarServicio(Scanner scanner) {
         Vista.caja("INGRESAR DATOS DEL SERVICIO");
@@ -26,6 +32,7 @@ public class VistaServicio {
         double precio = Vista.obtenerDouble(scanner,"Ingrese el precio del servicio: ");
         System.out.println(controlador.agregarServicio(nombre, precio));
     }
+    
     // Método para editar un servicio existente
     public void editarServicio(Scanner scanner) {
         Vista.caja("EDITAR SERVICIO");

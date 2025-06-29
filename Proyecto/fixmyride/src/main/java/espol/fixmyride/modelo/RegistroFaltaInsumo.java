@@ -4,11 +4,13 @@ public class RegistroFaltaInsumo {
     // Atributos
     private String descripcion;
     private String idProveedor;
+
     // Constructor
     public RegistroFaltaInsumo(String descripcion, String idProveedor){
         this.descripcion = descripcion;
         this.idProveedor = idProveedor;
     }
+    
     // Getters y Setters
     public String getDescripcion(){ return descripcion; }
     public void setDescripcion(String descripcion){ this.descripcion = descripcion; }

@@ -1,4 +1,6 @@
 package espol.fixmyride.vista;
+
+// Importaciones
 import espol.fixmyride.controlador.*;
 import espol.fixmyride.modelo.*;
 import java.util.ArrayList;
@@ -18,5 +20,5 @@ public class VistaFactura {
             // Solicitar
         Vista.caja("Generar factura");
         // Completar
-    }
+    }    
 }

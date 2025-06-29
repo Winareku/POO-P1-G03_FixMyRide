@@ -1,10 +1,13 @@
 package espol.fixmyride.controlador;
-import espol.fixmyride.modelo.*;
-import java.util.ArrayList;
 
+// Importaciones
+import espol.fixmyride.modelo.*;
+
+// Clase ControladorProveedor
 public class ControladorProveedor extends ControladorPersona {
     // Constructor
-    public ControladorProveedor() { this.setLista(new ArrayList<>());}
+    public ControladorProveedor() { super();}
+    
     // Método para agregar un proveedor
     public String agregarProveedor(String id, String nombre, String telefono, String descripcion) {
         Persona proveedorExistente = ControladorPersona.buscarPersonaPorId(id, getLista());

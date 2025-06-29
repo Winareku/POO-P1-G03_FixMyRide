@@ -1,10 +1,14 @@
 package espol.fixmyride.vista;
+
+// Importaciones
 import espol.fixmyride.controlador.*;
 import java.util.Scanner;
 
+// Clase VistaTecnico
 public class VistaTecnico extends VistaPersona {
     // Constructor
     public VistaTecnico(ControladorPersona controlador) { super(controlador); }
+    
     // Método para agregar un nuevo técnico
     public void agregarTecnico(Scanner scanner) {
         Vista.caja("INGRESAR DATOS");

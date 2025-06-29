@@ -1,17 +1,23 @@
 package espol.fixmyride.vista;
+
+// Importaciones
 import espol.fixmyride.controlador.*;
 import espol.fixmyride.modelo.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+// Clase VistaPersona
 public class VistaPersona {
     // Atributo controlador
     private ControladorPersona controlador;
+    
     // Constructor
     public VistaPersona(ControladorPersona controlador) { this.controlador = controlador; }
+    
     // Getters y Setters
     public ControladorPersona getControlador() { return controlador; }
     public void setControlador(ControladorPersona controlador) { this.controlador = controlador; }
+
     // Método para mostrar el submenu de personas
     public static void mostrarSubmenu(ArrayList<Persona> listaPersonas, String clase) {
         Vista.caja(clase.toUpperCase());
@@ -22,5 +28,7 @@ public class VistaPersona {
         Vista.cerrarCaja();
         System.out.print("Seleccione una opción: ");
     }
+    
+    // Método para agregar una persona
     public void agregarPersona(Scanner scanner) {}
 }

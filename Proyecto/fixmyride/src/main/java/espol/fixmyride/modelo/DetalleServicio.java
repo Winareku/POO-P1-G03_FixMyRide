@@ -6,6 +6,7 @@ public class DetalleServicio {
     private int cantidad;
     private double precioUnitario;
     private double total;
+
     // Constructor
     public DetalleServicio(Servicio servicio, int cantidad) {
         this.servicio = servicio;
@@ -13,6 +14,7 @@ public class DetalleServicio {
         this.precioUnitario = servicio.getPrecio();
         this.total = cantidad * precioUnitario;
     }
+    
     // Getters y Setters
     public Servicio getServicio() { return servicio; }
     public int getCantidad() { return cantidad; }

@@ -1,10 +1,14 @@
 package espol.fixmyride.vista;
+
+// Importaciones
 import espol.fixmyride.controlador.*;
 import java.util.Scanner;
 
+// Clase VistaProveedor
 public class VistaProveedor extends VistaPersona {
     // Constructor
     public VistaProveedor(ControladorPersona controlador) { super(controlador); }
+    
     // Método para agregar un nuevo proveedor
     public void agregarProveedor(Scanner scanner) {
         Vista.caja("INGRESAR DATOS");

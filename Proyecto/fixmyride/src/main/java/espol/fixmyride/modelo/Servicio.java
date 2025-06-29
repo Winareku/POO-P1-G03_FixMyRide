@@ -11,6 +11,7 @@ public class Servicio {
     private LocalDate fechaFin;
     private ArrayList<RegistroPrecio> historialPrecios;
     private static int conteo = 1;
+
     // Constructor
     public Servicio(String nombre, double precio) {
         this.codigo = generarCodigo(conteo);
@@ -22,6 +23,7 @@ public class Servicio {
         historialPrecios.add(new RegistroPrecio(this, precio));
         conteo++;
     }
+
     // Getters y Setters
     public String getCodigo() { return codigo; }
     public String getNombre() { return nombre; }
@@ -35,8 +37,10 @@ public class Servicio {
     public ArrayList<RegistroPrecio> getHistorialPrecios() { return historialPrecios; }
     @Override
     public String toString() { return (codigo + ", " + nombre + ", " + precio); }
+
     // Método para generar un nuevo código único
     public static String generarCodigo(int conteo) { return String.format("%06d",conteo); }
+    
     // Método para editar precio y actualizar el historial
     public void editarPrecio(double nuevoPrecio) {
         setPrecio(nuevoPrecio);;

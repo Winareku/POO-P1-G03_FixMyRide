@@ -12,6 +12,7 @@ public class OrdenServicio {
     private String placaVehiculo;
     private double totalOrden;
     private ArrayList<DetalleServicio> listaDetalleServicio;
+
     // Constructor
     public OrdenServicio(String idCliente, String idTecnico,LocalDate fechaOrden,TipoVehiculo tipoVehiculo,String placa){
         this.idCliente = idCliente;
@@ -21,6 +22,7 @@ public class OrdenServicio {
         this.placaVehiculo = placa;
         this.listaDetalleServicio = new ArrayList<>();
     }
+    
     // Getters y Setters
     public int getNumeroOrden() { return numeroOrden; }
     public void setNumeroOrden(int numeroOrden) { this.numeroOrden = numeroOrden; }

@@ -1,8 +1,11 @@
-package espol.fixmyride.controlador;
+package espol.fixmyride.controlador;    
+
+// Importaciones
 import espol.fixmyride.modelo.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+// Clase ControladorReporteAtencionTecnico
 public class ControladorReporteAtencionTecnico {
     // Métodos
     public ReporteAtencionTecnico crearListaTotalesPorTecnico(int anio, int mes, ArrayList<Persona> listaTecnicos, ArrayList<OrdenServicio> listaOrdenServicios) {
