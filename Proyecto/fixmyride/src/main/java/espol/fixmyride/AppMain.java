@@ -93,10 +93,10 @@ public class AppMain {
     controladorTecnico.agregarTecnico("0902020202", "Paula Lema", "0987654321", "Sistemas eléctricos de vehículos");
 
     // Crear [4] clientes
-    controladorCliente.agregarCliente("0913131313", "Andrés Ruiz", "0999988776", "Av. 10 de Agosto y Rumichaca", TipoCliente.EMPRESARIAL);
-    controladorCliente.agregarCliente("0914141414", "Sofía Benítez", "0988877665", "Calle Guayas 123", TipoCliente.PERSONAL);
-    controladorCliente.agregarCliente("0915151515", "Esteban Vargas", "0977766554", "Av. América N35-110", TipoCliente.EMPRESARIAL);
-    controladorCliente.agregarCliente("0916161616", "Carla Mendoza", "0966655443", "Vía Daule Km 12", TipoCliente.PERSONAL);
+    controladorCliente.agregarClienteEmpresarial("0911111111", "Andrés Ruiz", "0999988776", "Av. 10 de Agosto y Rumichaca", TipoCliente.EMPRESARIAL,"1203");
+        controladorCliente.agregarClientePersonal("0922222222", "Sofía Benítez", "0988877665", "Calle Guayas 123", TipoCliente.PERSONAL);
+        controladorCliente.agregarClienteEmpresarial("0933333333", "Esteban Vargas", "0977766554", "Av. América N35-110", TipoCliente.EMPRESARIAL,"1304");
+        controladorCliente.agregarClientePersonal("0944444444", "Carla Mendoza", "0966655443", "Vía Daule Km 12", TipoCliente.PERSONAL);
 
     // Crear [2] proveedores
     controladorProveedor.agregarProveedor("0927272727", "Ricardo Paredes", "0955544332", "Distribuidor de repuestos automotrices");

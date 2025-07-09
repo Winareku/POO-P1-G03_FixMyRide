@@ -20,6 +20,10 @@ public class VistaCliente extends VistaPersona {
         // Validación del tipo de cliente
         TipoCliente tipoCliente = Vista.obtenerTipoCliente(scanner);
         ControladorCliente controladorCliente = (ControladorCliente) getControlador();
-        System.out.println(controladorCliente.agregarCliente(id, nombre, telefono, direccion, tipoCliente));
+        if (tipoCliente==tipoCliente.EMPRESARIAL){
+            String cod= Vista.obtenerString(scanner, "Código de la empresa: ");
+            System.out.println(controladorCliente.agregarClienteEmpresarial(id, nombre, telefono, direccion, tipoCliente, cod));
+        }
+        System.out.println(controladorCliente.agregarClientePersonal(id, nombre, telefono, direccion, tipoCliente));
     }
 }

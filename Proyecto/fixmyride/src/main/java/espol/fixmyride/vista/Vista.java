@@ -8,6 +8,8 @@ import espol.fixmyride.controlador.ControladorPersona;
 import espol.fixmyride.modelo.Persona;
 import espol.fixmyride.modelo.TipoCliente;
 import espol.fixmyride.modelo.TipoVehiculo;
+import espol.fixmyride.modelo.OrdenServicio;
+import espol.fixmyride.modelo.DetalleServicio;
 
 // Clase Vista
 public class Vista {
@@ -193,5 +195,31 @@ public class Vista {
             break;
         }
         return tipoVehiculo;
+    }
+    //Generar una tabla
+    public String generarTablaFacturas(OrdenServicio Orden) {
+        StringBuilder sb = new StringBuilder();
+        
+        // Titulo
+        sb.append(String.format("#Placa\t%-8s\t%-10s\t%-20s\t%-8s\t%-6s\n", 
+                                "Fecha", "Tipo", "Servicio", "Cantidad", "Total"));
+        
+        // Separador 
+        sb.append("--------------------------------------------------------------------------\n");
+
+        // Cuerpo
+            for (DetalleServicio detalle : Orden.getListaDetalleServicio()) {
+                double total = detalle.getCantidad() * detalle.getPrecioUnitario();
+                sb.append(String.format("%-8s\t%-8s\t%-10s\t%-20s\t%-8d\t%.2f\n",
+                        Orden.getPlacaVehiculo(),
+                        Orden.getFechaOrden(),
+                        Orden.getTipoVehiculo(),
+                        detalle.getServicio().getNombre(),
+                        detalle.getCantidad(),
+                        total));
+            }
+        
+
+        return sb.toString();
     }
 }
