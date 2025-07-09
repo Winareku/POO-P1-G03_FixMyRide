@@ -6,6 +6,9 @@ import java.util.Scanner;
 
 // Clase VistaProveedor
 public class VistaProveedor extends VistaPersona {
+    // Atributos
+    ControladorProveedor controladorProveedor = (ControladorProveedor) getControlador();
+
     // Constructor
     public VistaProveedor(ControladorPersona controlador) { super(controlador); }
     
@@ -16,7 +19,6 @@ public class VistaProveedor extends VistaPersona {
         String nombre = Vista.obtenerString(scanner, "Nombre del proveedor: ");
         String telefono = Vista.obtenerString(scanner, "Teléfono del proveedor: ");
         String descripcion = Vista.obtenerString(scanner, "Descripción del proveedor: ");
-        ControladorProveedor controladorProveedor = (ControladorProveedor) getControlador();
         System.out.println(controladorProveedor.agregarProveedor(id, nombre, telefono, descripcion));
     }
 }

@@ -16,7 +16,8 @@ public class AppMain {
         int opcion;
 
         // Inicializar controladores
-        ControladorCliente controladorCliente = new ControladorCliente();
+        ControladorEmpresa controladorEmpresa = new ControladorEmpresa();
+        ControladorCliente controladorCliente = new ControladorCliente(controladorEmpresa);
         ControladorProveedor controladorProveedor = new ControladorProveedor();
         ControladorTecnico controladorTecnico = new ControladorTecnico();
         ControladorServicio controladorServicio = new ControladorServicio();
@@ -39,7 +40,7 @@ public class AppMain {
         VistaReporteAtencionTecnico vistaReporteAtencionTecnico = new VistaReporteAtencionTecnico(controladorReporteAtencionTecnico, controladorTecnico, controladorOrdenServicio);
         
         // Inicializar la aplicación (Se crean los objetos por defecto)
-        inicializarApp(controladorCliente, controladorProveedor, controladorTecnico, controladorServicio, controladorOrdenServicio);
+        inicializarApp(controladorCliente, controladorProveedor, controladorTecnico, controladorServicio, controladorOrdenServicio, controladorEmpresa);
         
         // Ciclo del menú principal
         do {
@@ -86,17 +87,20 @@ public class AppMain {
     }
 
     // Inicialización de objetos
-    private static void inicializarApp( ControladorCliente controladorCliente, ControladorProveedor controladorProveedor, ControladorTecnico controladorTecnico, ControladorServicio controladorServicio, ControladorOrdenServicio controladorOrdenServicio) {
-    
+    private static void inicializarApp( ControladorCliente controladorCliente, ControladorProveedor controladorProveedor, ControladorTecnico controladorTecnico, ControladorServicio controladorServicio, ControladorOrdenServicio controladorOrdenServicio, ControladorEmpresa controladorEmpresa) {
+    // Creación de Empresas
+    controladorEmpresa.agregarEmpresa("Master Motors","00001");
+    controladorEmpresa.agregarEmpresa("Ruta Segura","00002");
+
     // Crear [2] técnicos
     controladorTecnico.agregarTecnico("0901010101", "Marco Herrera", "0991122334", "Mecánica automotriz general");
     controladorTecnico.agregarTecnico("0902020202", "Paula Lema", "0987654321", "Sistemas eléctricos de vehículos");
 
     // Crear [4] clientes
-    controladorCliente.agregarClienteEmpresarial("0911111111", "Andrés Ruiz", "0999988776", "Av. 10 de Agosto y Rumichaca", TipoCliente.EMPRESARIAL,"1203");
-        controladorCliente.agregarClientePersonal("0922222222", "Sofía Benítez", "0988877665", "Calle Guayas 123", TipoCliente.PERSONAL);
-        controladorCliente.agregarClienteEmpresarial("0933333333", "Esteban Vargas", "0977766554", "Av. América N35-110", TipoCliente.EMPRESARIAL,"1304");
-        controladorCliente.agregarClientePersonal("0944444444", "Carla Mendoza", "0966655443", "Vía Daule Km 12", TipoCliente.PERSONAL);
+    controladorCliente.agregarClienteEmpresarial("0911111111", "Andrés Ruiz", "0999988776", "Av. 10 de Agosto y Rumichaca", TipoCliente.EMPRESARIAL,"00001");
+    controladorCliente.agregarClientePersonal("0922222222", "Sofía Benítez", "0988877665", "Calle Guayas 123", TipoCliente.PERSONAL);
+    controladorCliente.agregarClienteEmpresarial("0933333333", "Esteban Vargas", "0977766554", "Av. América N35-110", TipoCliente.EMPRESARIAL,"00002");
+    controladorCliente.agregarClientePersonal("0944444444", "Carla Mendoza", "0966655443", "Vía Daule Km 12", TipoCliente.PERSONAL);
 
     // Crear [2] proveedores
     controladorProveedor.agregarProveedor("0927272727", "Ricardo Paredes", "0955544332", "Distribuidor de repuestos automotrices");
@@ -115,5 +119,6 @@ public class AppMain {
     controladorOrdenServicio.agregarOrdenServicio("0914141414", "0902020202", LocalDate.of(2025, 4, 18), TipoVehiculo.MOTOCICLETA,"QCD-3456");
     controladorOrdenServicio.agregarOrdenServicio("0915151515", "0901010101", LocalDate.of(2025, 5,  2), TipoVehiculo.AUTOMOVIL,"RDE-4567");
     controladorOrdenServicio.agregarOrdenServicio("0916161616", "0902020202", LocalDate.of(2025, 5, 10), TipoVehiculo.BUS,"SFE-5678");
+    
     }
 }
