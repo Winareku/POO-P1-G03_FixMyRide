@@ -35,7 +35,7 @@ public class AppMain {
         VistaServicio vistaServicio = new VistaServicio(controladorServicio);
         VistaOrdenServicio vistaOrdenServicio = new VistaOrdenServicio(controladorOrdenServicio, controladorServicio, controladorCliente, controladorTecnico);
         VistaRegistroFaltaInsumo vistaRegistroFaltaInsumo = new VistaRegistroFaltaInsumo(controladorRFI, controladorProveedor);
-        VistaFactura vistaFactura = new VistaFactura(controladorFactura);
+        VistaFactura vistaFactura = new VistaFactura(controladorFactura, controladorOrdenServicio);
         VistaReporteIngresoServicio vistaReporteIngresoServicio = new VistaReporteIngresoServicio(controladorReporteIngresoServicio);
         VistaReporteAtencionTecnico vistaReporteAtencionTecnico = new VistaReporteAtencionTecnico(controladorReporteAtencionTecnico, controladorTecnico, controladorOrdenServicio);
         

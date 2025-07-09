@@ -2,13 +2,14 @@ package espol.fixmyride.modelo;
 
 public class Factura {
     // Atributos
-    String nombre;
-    String cedula;
+    Empresa empresa;
+    String periodo;
+
 
     // Constructor
-    public Factura(String nombre, String cedula) {
-        this.nombre = nombre;
-        this.cedula = cedula;
+    public Factura(Empresa empresa, String periodo) {
+        this.empresa = empresa;
+        this.periodo = periodo;
     }
     
     // Getters y Setters

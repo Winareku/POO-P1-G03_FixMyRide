@@ -9,8 +9,13 @@ import java.util.Scanner;
 public class VistaFactura {
     // Atributo controlador
     private ControladorFactura controlador;
+    private ControladorOrdenServicio controladorOrdenServicio;
+    
     // Constructor
-    public VistaFactura(ControladorFactura controlador) { this.controlador = controlador; }
+    public VistaFactura(ControladorFactura controlador, ControladorOrdenServicio controladorOrdenServicio) {
+        this.controlador = controlador;
+        this.controladorOrdenServicio = controladorOrdenServicio;
+    }
     // Método principal
     public void metodo(Scanner scanner) {
         // Mostrar lista
