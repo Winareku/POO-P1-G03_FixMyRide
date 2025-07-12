@@ -39,7 +39,7 @@ public class VistaFactura {
         for (OrdenServicio orden:factura.getListaOrdenServicio()){
             String placa = orden.getPlacaVehiculo();
             String fecha = String.valueOf(orden.getFechaOrden());
-            String tipoVehiculo = Vista.stringTipoVehiculo(orden.getTipoVehiculo());
+            String tipoVehiculo = orden.getTipoVehiculo().name();
             for (DetalleServicio servicio:orden.getListaDetalleServicio()){
                 String nombreServicio = servicio.getServicio().getNombre();
                 String cantidad = ""+servicio.getCantidad();

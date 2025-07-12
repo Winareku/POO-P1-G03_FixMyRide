@@ -13,14 +13,11 @@ public class ControladorFactura {
     ControladorCliente controladorCliente;
 
     // Constructor
-    public ControladorFactura (ControladorCliente controladorCliente){
-        this.controladorCliente = controladorCliente;
-    }
+    public ControladorFactura (ControladorCliente controladorCliente){ this.controladorCliente = controladorCliente; }
 
     // Métodos
     public Factura crearFactura(String codigoEmpresa, int anio, int mes, Empresa empresa, ArrayList<OrdenServicio> listaOrdenServicios){
         String periodo = Vista.convertirNumeroMes(mes)+", "+anio;
-        ArrayList<OrdenServicio> listaOrdenServicioPorEmpresa = new ArrayList<>();
         boolean hayCoincidencias = false;
         for (OrdenServicio orden:listaOrdenServicios){
             // Atributos
@@ -30,10 +27,10 @@ public class ControladorFactura {
             boolean correspondePeriodo = fechaOrden.getYear()==anio && fechaOrden.getMonthValue()==mes;
             // Verificaciones
             if (cliente.getEmpresa() == empresa && correspondePeriodo ){
-                listaOrdenServicioPorEmpresa.add(orden);
+                empresa.getListaOrdenServicio().add(orden);
                 hayCoincidencias = true;
             }
         }
-        return new Factura(periodo, empresa, listaOrdenServicioPorEmpresa,hayCoincidencias);
+        return new Factura(periodo, empresa, empresa.getListaOrdenServicio(),hayCoincidencias);
     }
 }

@@ -210,18 +210,7 @@ public class Vista {
         }
         return tipoVehiculo;
     }
-    public static String stringTipoVehiculo(TipoVehiculo tipo){
-        switch (tipo){
-            case TipoVehiculo.AUTOMOVIL:
-                return "Particular";
-            case TipoVehiculo.MOTOCICLETA:
-                return "Motocicleta";
-            case TipoVehiculo.BUS:
-                return "Bus";
-            default:
-                return null;
-        }
-    }
+
     public static String rellenar(String texto, int ancho) {
         while (texto.length() < ancho) { texto += " "; }
         return texto;

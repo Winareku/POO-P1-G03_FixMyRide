@@ -7,7 +7,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 // Clase VistaPersona
-public class VistaPersona {
+public abstract class VistaPersona {
     // Atributo controlador
     private ControladorPersona controlador;
     
@@ -30,5 +30,5 @@ public class VistaPersona {
     }
     
     // Método para agregar una persona
-    public void agregarPersona(Scanner scanner) {}
+    public abstract void agregarPersona(Scanner scanner);
 }
