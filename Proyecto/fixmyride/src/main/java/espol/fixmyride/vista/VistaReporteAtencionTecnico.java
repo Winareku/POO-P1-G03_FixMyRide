@@ -27,9 +27,19 @@ public class VistaReporteAtencionTecnico {
         ArrayList<Persona> listaTecnicos = controladorTecnico.getLista();
         ArrayList<OrdenServicio> listaOrdenServicios = controladorOrdenServicio.getLista();
 
-        // Solicitudes
-        int anio = Vista.obtenerInt(scanner,"Escriba el año que desea consultar: ");
-        int mes = Vista.obtenerInt(scanner,"Escriba el mes que desea consultar: ");
+        // Solicitudes con validación
+        int anio;
+        do {
+            anio = Vista.obtenerInt(scanner,"Escriba el año que desea consultar: ");
+            if (anio <= 0) System.out.println("Ingrese un año válido");
+        } while (anio <= 0);
+
+        int mes;
+        do {
+            mes = Vista.obtenerInt(scanner,"Escriba el mes que desea consultar: ");
+            if (mes < 1 || mes > 12) System.out.println("Ingrese un mes válido");
+        } while (mes < 1 || mes > 12);
+        
         Vista.cajaIzquierda(Vista.stringTabla(" Técnico", "Total"));
         ReporteAtencionTecnico reporte = controlador.crearReporteAtencionTecnico(anio, mes, listaTecnicos, listaOrdenServicios);
         
