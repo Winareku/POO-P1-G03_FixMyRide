@@ -211,7 +211,7 @@ public class Vista {
     public static String stringTipoVehiculo(TipoVehiculo tipo){
         switch (tipo){
             case TipoVehiculo.AUTOMOVIL:
-                return "Automovil";
+                return "Particular";
             case TipoVehiculo.MOTOCICLETA:
                 return "Motocicleta";
             case TipoVehiculo.BUS:
@@ -224,7 +224,11 @@ public class Vista {
         while (texto.length() < ancho) { texto += " "; }
         return texto;
     }
-    public static String printLineaFactura(String s1, String s2, String s3, String s4, String s5, String s6){
+    public static String stringTabla(String s1, String s2){
+        String linea =  rellenar(s1, 30) + rellenar(s2, 20);
+        return linea;
+    }
+    public static String stringTabla(String s1, String s2, String s3, String s4, String s5, String s6){
         String linea =  rellenar(s1, 15) +
                         rellenar(s2, 15) +
                         rellenar(s3, 15) +

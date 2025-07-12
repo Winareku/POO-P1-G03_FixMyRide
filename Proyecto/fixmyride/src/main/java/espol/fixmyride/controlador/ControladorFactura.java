@@ -19,7 +19,7 @@ public class ControladorFactura {
 
     // Métodos
     public Factura crearFactura(String codigoEmpresa, int anio, int mes, Empresa empresa, ArrayList<OrdenServicio> listaOrdenServicios){
-        String periodo = Vista.convertirNumeroMes(mes) + anio;
+        String periodo = Vista.convertirNumeroMes(mes)+", "+anio;
         ArrayList<OrdenServicio> listaOrdenServicioPorEmpresa = new ArrayList<>();
         boolean hayCoincidencias = false;
         for (OrdenServicio orden:listaOrdenServicios){

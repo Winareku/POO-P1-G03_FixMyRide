@@ -30,7 +30,7 @@ public class VistaReporteAtencionTecnico {
         // Solicitudes
         int anio = Vista.obtenerInt(scanner,"Escriba el año que desea consultar: ");
         int mes = Vista.obtenerInt(scanner,"Escriba el mes que desea consultar: ");
-        Vista.cajaIzquierda(" Técnico               Total");
+        Vista.cajaIzquierda(Vista.stringTabla(" Técnico", "Total"));
         ReporteAtencionTecnico reporte = controlador.crearReporteAtencionTecnico(anio, mes, listaTecnicos, listaOrdenServicios);
         
         // Lista de Nombres y Totales por Técnico
@@ -39,7 +39,7 @@ public class VistaReporteAtencionTecnico {
         boolean hayCoincidencias = reporte.getHayCoincidencias();
         
         // Iteración de ambas listas para imprimir los resultados
-        for (int i=0;i<listaNombreTecnicos.size();i++) { System.out.println("  "+listaNombreTecnicos.get(i)+"\t\t"+listaTotales.get(i)); }
+        for (int i=0;i<listaNombreTecnicos.size();i++) { System.out.println("  "+Vista.stringTabla(listaNombreTecnicos.get(i), "$"+listaTotales.get(i))); }
         if(!hayCoincidencias) System.out.println("No se encontraron coincidencias.");
     }
 }

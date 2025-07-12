@@ -37,7 +37,7 @@ public class AppMain {
         VistaOrdenServicio vistaOrdenServicio = new VistaOrdenServicio(controladorOrdenServicio, controladorServicio, controladorCliente, controladorTecnico);
         VistaRegistroFaltaInsumo vistaRegistroFaltaInsumo = new VistaRegistroFaltaInsumo(controladorRFI, controladorProveedor);
         VistaFactura vistaFactura = new VistaFactura(controladorFactura, controladorOrdenServicio, controladorEmpresa);
-        VistaReporteIngresoServicio vistaReporteIngresoServicio = new VistaReporteIngresoServicio(controladorReporteIngresoServicio);
+        VistaReporteIngresoServicio vistaReporteIngresoServicio = new VistaReporteIngresoServicio(controladorReporteIngresoServicio, controladorOrdenServicio);
         VistaReporteAtencionTecnico vistaReporteAtencionTecnico = new VistaReporteAtencionTecnico(controladorReporteAtencionTecnico, controladorTecnico, controladorOrdenServicio);
         
         // Inicializar la aplicación (Se crean los objetos por defecto)
@@ -127,20 +127,20 @@ public class AppMain {
     ArrayList<DetalleServicio> listaServicio_Orden2 = new ArrayList<DetalleServicio>();
     listaServicio_Orden2.add(new DetalleServicio(controladorServicio.getListaServicios().get(2), 4));
     listaServicio_Orden2.add(new DetalleServicio(controladorServicio.getListaServicios().get(3), 5));
-    orden1.setListaDetalleServicio(listaServicio_Orden2);
+    orden2.setListaDetalleServicio(listaServicio_Orden2);
 
     OrdenServicio orden3 = controladorOrdenServicio.agregarOrdenServicio("0933333333", "0901010101", LocalDate.of(2025, 5,  2), TipoVehiculo.AUTOMOVIL,"RDE-4567");
     orden3.setListaDetalleServicio(new ArrayList<DetalleServicio>());
     ArrayList<DetalleServicio> listaServicio_Orden3 = new ArrayList<DetalleServicio>();
     listaServicio_Orden3.add(new DetalleServicio(controladorServicio.getListaServicios().get(4), 2));
     listaServicio_Orden3.add(new DetalleServicio(controladorServicio.getListaServicios().get(5), 4));
-    orden1.setListaDetalleServicio(listaServicio_Orden3);
+    orden3.setListaDetalleServicio(listaServicio_Orden3);
 
     OrdenServicio orden4 = controladorOrdenServicio.agregarOrdenServicio("0944444444", "0902020202", LocalDate.of(2025, 5, 10), TipoVehiculo.BUS,"SFE-5678");
     orden4.setListaDetalleServicio(new ArrayList<DetalleServicio>());
     ArrayList<DetalleServicio> listaServicio_Orden4 = new ArrayList<DetalleServicio>();
     listaServicio_Orden4.add(new DetalleServicio(controladorServicio.getListaServicios().get(1), 2));
     listaServicio_Orden4.add(new DetalleServicio(controladorServicio.getListaServicios().get(2), 3));
-    orden1.setListaDetalleServicio(listaServicio_Orden4);
+    orden4.setListaDetalleServicio(listaServicio_Orden4);
     }
 }

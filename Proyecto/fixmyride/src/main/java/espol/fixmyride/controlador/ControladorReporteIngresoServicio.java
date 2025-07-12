@@ -19,4 +19,19 @@ public class ControladorReporteIngresoServicio {
     public ControladorReporteIngresoServicio() { lista = new ArrayList<>(); }
     
     // Métodos
+    public ReporteIngresoServicio crearReporteIngresoServicio(int anio, int mes, ArrayList<OrdenServicio> listaOrdenServicios){
+        ArrayList<DetalleServicio> listaServicio = new ArrayList<>();
+        boolean hayCoincidencias = false;
+        for (OrdenServicio orden:listaOrdenServicios){
+            LocalDate fechaOrden = orden.getFechaOrden();
+            boolean correspondePeriodo = fechaOrden.getYear()==anio && fechaOrden.getMonthValue()==mes;
+            if (correspondePeriodo){
+                for (DetalleServicio servicio:orden.getListaDetalleServicio()){
+                    listaServicio.add(servicio);
+                    hayCoincidencias = true;
+                }
+            }
+        }
+        return new ReporteIngresoServicio(listaServicio, hayCoincidencias);
+    }
 }

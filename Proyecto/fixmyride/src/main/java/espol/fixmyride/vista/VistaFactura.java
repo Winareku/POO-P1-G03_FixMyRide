@@ -32,8 +32,9 @@ public class VistaFactura {
         int anio = Vista.obtenerInt(scanner, "Escriba el año que desea consultar: ");
         int mes = Vista.obtenerInt(scanner, "Escriba el mes que desea consultar: ");
         Factura factura = controlador.crearFactura(codigoEmpresa, anio, mes, empresa, listaOrdenServicios);
+        Vista.separador();
         System.out.println("Empresa: "+empresa.getNombre()+"\nPeriodo de Facturación: "+factura.getPeriodo()+"\nDetalle de servicios: ");
-        Vista.cajaIzquierda(Vista.printLineaFactura(" Placa","Fecha","Tipo","Servicio","Cantidad","Total"));
+        Vista.cajaIzquierda(Vista.stringTabla(" Placa","Fecha","Tipo","Servicio","Cantidad","Total"));
         int totalEmpresa = 0;
         for (OrdenServicio orden:factura.getListaOrdenServicio()){
             String placa = orden.getPlacaVehiculo();
@@ -43,9 +44,11 @@ public class VistaFactura {
                 String nombreServicio = servicio.getServicio().getNombre();
                 String cantidad = ""+servicio.getCantidad();
                 String total = ""+servicio.getTotal();
-                System.out.println("  "+Vista.printLineaFactura(placa, fecha, tipoVehiculo, nombreServicio, cantidad, total));;
+                System.out.println("  "+Vista.stringTabla(placa, fecha, tipoVehiculo, nombreServicio, ""+cantidad, "$"+total));;
+                totalEmpresa += servicio.getTotal();
             }
         }
+        if(factura.getHayCoincidencias()) System.out.println("\nTotal a pagar: $"+totalEmpresa);
         if(!factura.getHayCoincidencias()) System.out.println("No se encontraron coincidencias.");
     }    
 }
