@@ -8,7 +8,7 @@ import java.util.ArrayList;
 // Clase ControladorReporteAtencionTecnico
 public class ControladorReporteAtencionTecnico {
     // Métodos
-    public ReporteAtencionTecnico crearListaTotalesPorTecnico(int anio, int mes, ArrayList<Persona> listaTecnicos, ArrayList<OrdenServicio> listaOrdenServicios) {
+    public ReporteAtencionTecnico crearReporteAtencionTecnico(int anio, int mes, ArrayList<Persona> listaTecnicos, ArrayList<OrdenServicio> listaOrdenServicios) {
         ArrayList<String> listaNombreTecnicos = new ArrayList<>();
         ArrayList<Double> listaTotales = new ArrayList<>();
         boolean hayCoincidencias = false;

@@ -73,7 +73,7 @@ public class VistaMenuPrincipal {
     // Métodos para manejar opciones sin submenus de selección
     public void manejarOrdenes(VistaOrdenServicio vista, Scanner scanner) { vista.generarOrden(scanner); }
     public void manejarRFI(VistaRegistroFaltaInsumo vista, Scanner scanner) { vista.registrarFaltaInsumo(scanner); }
-    public void manejarFactura(VistaFactura vista, Scanner scanner) {vista.metodo(scanner); }
+    public void manejarFactura(VistaFactura vista, Scanner scanner) {vista.generarFactura(scanner); }
     public void manejarRIS(VistaReporteIngresoServicio vista, Scanner scanner) {vista.metodo(scanner); }
     public void manejarRAT(VistaReporteAtencionTecnico vista, Scanner scanner) { vista.generarReporte(scanner); }
 }

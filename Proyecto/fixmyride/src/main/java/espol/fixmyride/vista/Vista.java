@@ -8,13 +8,11 @@ import espol.fixmyride.controlador.ControladorPersona;
 import espol.fixmyride.modelo.Persona;
 import espol.fixmyride.modelo.TipoCliente;
 import espol.fixmyride.modelo.TipoVehiculo;
-import espol.fixmyride.modelo.OrdenServicio;
-import espol.fixmyride.modelo.DetalleServicio;
 
 // Clase Vista
 public class Vista {
     // Atributos
-    private static final int ANCHO_CAJA = 45;
+    private static final int ANCHO_CAJA = 110;
 
     // Métodos para obtener Int o String
     public static int obtenerInt(Scanner scanner) {
@@ -75,6 +73,20 @@ public class Vista {
         System.out.println(lineaContenido);
         System.out.println(lineaInferior);
     }
+
+    public static void cajaIzquierda(String texto) {
+        final int anchoInterno = ANCHO_CAJA - 2;
+        texto = texto.toUpperCase();
+        int espaciosDerecha = anchoInterno - texto.length();
+        String lineaSuperior = "╔" + "═".repeat(anchoInterno) + "╗";
+        String lineaContenido = "║" + texto + " ".repeat(espaciosDerecha) + "║";
+        String lineaInferior = "╚" + "═".repeat(anchoInterno) + "╝";
+        System.out.println();
+        System.out.println(lineaSuperior);
+        System.out.println(lineaContenido);
+        System.out.println(lineaInferior);
+    }
+
 
     public static void abrirCaja(String texto){
         final int anchoInterno = ANCHO_CAJA - 2;
@@ -196,30 +208,59 @@ public class Vista {
         }
         return tipoVehiculo;
     }
-    //Generar una tabla
-    public String generarTablaFacturas(OrdenServicio Orden) {
-        StringBuilder sb = new StringBuilder();
-        
-        // Titulo
-        sb.append(String.format("#Placa\t%-8s\t%-10s\t%-20s\t%-8s\t%-6s\n", 
-                                "Fecha", "Tipo", "Servicio", "Cantidad", "Total"));
-        
-        // Separador 
-        sb.append("--------------------------------------------------------------------------\n");
-
-        // Cuerpo
-            for (DetalleServicio detalle : Orden.getListaDetalleServicio()) {
-                double total = detalle.getCantidad() * detalle.getPrecioUnitario();
-                sb.append(String.format("%-8s\t%-8s\t%-10s\t%-20s\t%-8d\t%.2f\n",
-                        Orden.getPlacaVehiculo(),
-                        Orden.getFechaOrden(),
-                        Orden.getTipoVehiculo(),
-                        detalle.getServicio().getNombre(),
-                        detalle.getCantidad(),
-                        total));
-            }
-        
-
-        return sb.toString();
+    public static String stringTipoVehiculo(TipoVehiculo tipo){
+        switch (tipo){
+            case TipoVehiculo.AUTOMOVIL:
+                return "Automovil";
+            case TipoVehiculo.MOTOCICLETA:
+                return "Motocicleta";
+            case TipoVehiculo.BUS:
+                return "Bus";
+            default:
+                return null;
+        }
+    }
+    public static String rellenar(String texto, int ancho) {
+        while (texto.length() < ancho) { texto += " "; }
+        return texto;
+    }
+    public static String printLineaFactura(String s1, String s2, String s3, String s4, String s5, String s6){
+        String linea =  rellenar(s1, 15) +
+                        rellenar(s2, 15) +
+                        rellenar(s3, 15) +
+                        rellenar(s4, 30) +
+                        rellenar(s5, 15) +
+                        rellenar(s6, 10);
+        return linea;
+    }
+    public static String convertirNumeroMes(int numeroMes){
+        switch(numeroMes){
+            case 1:
+                return "Enero";
+            case 2:
+                return "Febrero";
+            case 3:
+                return "Marzo";
+            case 4:
+                return "Abril";
+            case 5:
+                return "Mayo";
+            case 6:
+                return "Junio";
+            case 7:
+                return "Julio";
+            case 8:
+                return "Agosto";
+            case 9:
+                return "Septiembre";
+            case 10:
+                return "Octubre";
+            case 11:
+                return "Noviembre";
+            case 12:
+                return "Diciembre";
+            default:
+                return null;
+        }
     }
 }

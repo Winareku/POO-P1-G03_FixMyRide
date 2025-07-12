@@ -5,6 +5,7 @@ import espol.fixmyride.controlador.*;
 import espol.fixmyride.modelo.*;
 import espol.fixmyride.vista.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 // Clase principal
@@ -23,10 +24,10 @@ public class AppMain {
         ControladorServicio controladorServicio = new ControladorServicio();
         ControladorOrdenServicio controladorOrdenServicio = new ControladorOrdenServicio();
         ControladorRegistroFaltaInsumo controladorRFI = new ControladorRegistroFaltaInsumo();
-        ControladorFactura controladorFactura = new ControladorFactura();
+        ControladorFactura controladorFactura = new ControladorFactura(controladorCliente);
         ControladorReporteIngresoServicio controladorReporteIngresoServicio = new ControladorReporteIngresoServicio();
         ControladorReporteAtencionTecnico controladorReporteAtencionTecnico = new ControladorReporteAtencionTecnico();
-        
+
         // Inicializar vistas
         VistaMenuPrincipal vistaMenuPrincipal = new VistaMenuPrincipal();
         VistaCliente vistaCliente = new VistaCliente(controladorCliente);
@@ -35,13 +36,13 @@ public class AppMain {
         VistaServicio vistaServicio = new VistaServicio(controladorServicio);
         VistaOrdenServicio vistaOrdenServicio = new VistaOrdenServicio(controladorOrdenServicio, controladorServicio, controladorCliente, controladorTecnico);
         VistaRegistroFaltaInsumo vistaRegistroFaltaInsumo = new VistaRegistroFaltaInsumo(controladorRFI, controladorProveedor);
-        VistaFactura vistaFactura = new VistaFactura(controladorFactura);
+        VistaFactura vistaFactura = new VistaFactura(controladorFactura, controladorOrdenServicio, controladorEmpresa);
         VistaReporteIngresoServicio vistaReporteIngresoServicio = new VistaReporteIngresoServicio(controladorReporteIngresoServicio);
         VistaReporteAtencionTecnico vistaReporteAtencionTecnico = new VistaReporteAtencionTecnico(controladorReporteAtencionTecnico, controladorTecnico, controladorOrdenServicio);
         
         // Inicializar la aplicación (Se crean los objetos por defecto)
         inicializarApp(controladorCliente, controladorProveedor, controladorTecnico, controladorServicio, controladorOrdenServicio, controladorEmpresa);
-        
+
         // Ciclo del menú principal
         do {
             // Llamada a un método que devuelve la opción seleccionada por el usuario
@@ -115,10 +116,31 @@ public class AppMain {
     controladorServicio.agregarServicio("Lavado y detallado",25.0);
 
     // Crear [4] órdenes de servicios
-    controladorOrdenServicio.agregarOrdenServicio("0913131313", "0901010101", LocalDate.of(2025, 4, 15), TipoVehiculo.AUTOMOVIL,"PBC-2345");
-    controladorOrdenServicio.agregarOrdenServicio("0914141414", "0902020202", LocalDate.of(2025, 4, 18), TipoVehiculo.MOTOCICLETA,"QCD-3456");
-    controladorOrdenServicio.agregarOrdenServicio("0915151515", "0901010101", LocalDate.of(2025, 5,  2), TipoVehiculo.AUTOMOVIL,"RDE-4567");
-    controladorOrdenServicio.agregarOrdenServicio("0916161616", "0902020202", LocalDate.of(2025, 5, 10), TipoVehiculo.BUS,"SFE-5678");
-    
+    OrdenServicio orden1 = controladorOrdenServicio.agregarOrdenServicio("0911111111", "0901010101", LocalDate.of(2025, 4, 15), TipoVehiculo.AUTOMOVIL,"PBC-2345");
+    ArrayList<DetalleServicio> listaServicio_Orden1 = new ArrayList<DetalleServicio>();
+    listaServicio_Orden1.add(new DetalleServicio(controladorServicio.getListaServicios().get(0), 2));
+    listaServicio_Orden1.add(new DetalleServicio(controladorServicio.getListaServicios().get(1), 2));
+    orden1.setListaDetalleServicio(listaServicio_Orden1);
+
+    OrdenServicio orden2 = controladorOrdenServicio.agregarOrdenServicio("0911111111", "0902020202", LocalDate.of(2025, 4, 18), TipoVehiculo.MOTOCICLETA,"QCD-3456");
+    orden2.setListaDetalleServicio(new ArrayList<DetalleServicio>());
+    ArrayList<DetalleServicio> listaServicio_Orden2 = new ArrayList<DetalleServicio>();
+    listaServicio_Orden2.add(new DetalleServicio(controladorServicio.getListaServicios().get(2), 4));
+    listaServicio_Orden2.add(new DetalleServicio(controladorServicio.getListaServicios().get(3), 5));
+    orden1.setListaDetalleServicio(listaServicio_Orden2);
+
+    OrdenServicio orden3 = controladorOrdenServicio.agregarOrdenServicio("0933333333", "0901010101", LocalDate.of(2025, 5,  2), TipoVehiculo.AUTOMOVIL,"RDE-4567");
+    orden3.setListaDetalleServicio(new ArrayList<DetalleServicio>());
+    ArrayList<DetalleServicio> listaServicio_Orden3 = new ArrayList<DetalleServicio>();
+    listaServicio_Orden3.add(new DetalleServicio(controladorServicio.getListaServicios().get(4), 2));
+    listaServicio_Orden3.add(new DetalleServicio(controladorServicio.getListaServicios().get(5), 4));
+    orden1.setListaDetalleServicio(listaServicio_Orden3);
+
+    OrdenServicio orden4 = controladorOrdenServicio.agregarOrdenServicio("0944444444", "0902020202", LocalDate.of(2025, 5, 10), TipoVehiculo.BUS,"SFE-5678");
+    orden4.setListaDetalleServicio(new ArrayList<DetalleServicio>());
+    ArrayList<DetalleServicio> listaServicio_Orden4 = new ArrayList<DetalleServicio>();
+    listaServicio_Orden4.add(new DetalleServicio(controladorServicio.getListaServicios().get(1), 2));
+    listaServicio_Orden4.add(new DetalleServicio(controladorServicio.getListaServicios().get(2), 3));
+    orden1.setListaDetalleServicio(listaServicio_Orden4);
     }
 }
