@@ -7,6 +7,9 @@ import java.util.Scanner;
 
 // Clase VistaCliente
 public class VistaCliente extends VistaPersona {
+    // Atributos
+    ControladorCliente controladorCliente = (ControladorCliente) getControlador();
+
     // Constructor
     public VistaCliente(ControladorPersona controlador) { super(controlador); }
     
@@ -19,9 +22,8 @@ public class VistaCliente extends VistaPersona {
         String direccion = Vista.obtenerString(scanner, "Dirección del cliente: ");
         // Validación del tipo de cliente
         TipoCliente tipoCliente = Vista.obtenerTipoCliente(scanner);
-        ControladorCliente controladorCliente = (ControladorCliente) getControlador();
-        if (tipoCliente==tipoCliente.EMPRESARIAL){
-            String cod= Vista.obtenerString(scanner, "Código de la empresa: ");
+        if (tipoCliente==TipoCliente.EMPRESARIAL){
+            String cod= Vista.obtenerString(scanner, "Ingrese código de la empresa: ");
             System.out.println(controladorCliente.agregarClienteEmpresarial(id, nombre, telefono, direccion, tipoCliente, cod));
         }
         System.out.println(controladorCliente.agregarClientePersonal(id, nombre, telefono, direccion, tipoCliente));
