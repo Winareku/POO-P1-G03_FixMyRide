@@ -28,12 +28,7 @@ public class VistaReporteAtencionTecnico {
         ArrayList<OrdenServicio> listaOrdenServicios = controladorOrdenServicio.getLista();
 
         // Solicitudes con validación
-        int anio;
-        do {
-            anio = Vista.obtenerInt(scanner,"Escriba el año que desea consultar: ");
-            if (anio <= 0) System.out.println("Ingrese un año válido");
-        } while (anio <= 0);
-
+        int anio = Vista.obtenerInt(scanner,"Escriba el año que desea consultar: ");
         int mes = Vista.convertirMesNumero(scanner);
         
         Vista.cajaIzquierda(Vista.stringTabla(" Técnico", "Total"));
