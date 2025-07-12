@@ -4,7 +4,10 @@ package espol.fixmyride.vista;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import espol.fixmyride.controlador.ControladorEmpresa;
 import espol.fixmyride.controlador.ControladorPersona;
+import espol.fixmyride.modelo.Empresa;
 import espol.fixmyride.modelo.Persona;
 import espol.fixmyride.modelo.TipoCliente;
 import espol.fixmyride.modelo.TipoVehiculo;
@@ -135,18 +138,6 @@ public class Vista {
         return false;
     }
     
-    public static String numeroToMes(Scanner scanner, int mes) {
-        String[] nombresMeses = {
-            "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-            "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
-        };
-        while (true) {
-            int numeroMes = Vista.obtenerInt(scanner,"Ingrese el número del mes: ");
-            if (esMesValido(numeroMes)) return nombresMeses[numeroMes-1];
-            Vista.opcionNoValida();
-        }
-    }
-    
     public static String verificarPersonaPorID(Scanner scanner, ArrayList<Persona> listaPersona, String tipoPersona) {
         String idPersona;
         Persona persona;
@@ -154,6 +145,17 @@ public class Vista {
             idPersona = Vista.obtenerString(scanner,"Ingrese el ID del " + tipoPersona + ": ");
             persona = ControladorPersona.buscarPersonaPorId(idPersona, listaPersona);
             if (persona!=null) return idPersona;
+            Vista.opcionNoValida();
+        }
+    }
+
+    public static String verificarEmpresaPorCodigo(Scanner scanner, ArrayList<Empresa> listaEmpresa) {
+        String codigoEmpresa;
+        Empresa empresa;
+        while (true) {
+            codigoEmpresa = Vista.obtenerString(scanner,"Escriba el código de la Empresa que desea consultar: ");
+            empresa = ControladorEmpresa.obtenerEmpresaPorCodigo(codigoEmpresa, listaEmpresa);
+            if (empresa!=null) return codigoEmpresa;
             Vista.opcionNoValida();
         }
     }
@@ -237,34 +239,44 @@ public class Vista {
                         rellenar(s6, 10);
         return linea;
     }
+
+    public static int convertirMesNumero(Scanner scanner){
+        while (true) {
+            System.out.print("Escriba el mes que desea consultar: ");
+            String nombreMes = scanner.nextLine().toLowerCase();
+            switch (nombreMes) {
+                case "enero": return 1;
+                case "febrero": return 2;
+                case "marzo": return 3;
+                case "abril": return 4;
+                case "mayo": return 5;
+                case "junio": return 6;
+                case "julio": return 7;
+                case "agosto": return 8;
+                case "septiembre": return 9;
+                case "octubre": return 10;
+                case "noviembre": return 11;
+                case "diciembre": return 12;
+                default: Vista.opcionNoValida();
+            }
+        }
+    }
+
     public static String convertirNumeroMes(int numeroMes){
         switch(numeroMes){
-            case 1:
-                return "Enero";
-            case 2:
-                return "Febrero";
-            case 3:
-                return "Marzo";
-            case 4:
-                return "Abril";
-            case 5:
-                return "Mayo";
-            case 6:
-                return "Junio";
-            case 7:
-                return "Julio";
-            case 8:
-                return "Agosto";
-            case 9:
-                return "Septiembre";
-            case 10:
-                return "Octubre";
-            case 11:
-                return "Noviembre";
-            case 12:
-                return "Diciembre";
-            default:
-                return null;
+            case 1: return "Enero";
+            case 2: return "Febrero";
+            case 3: return "Marzo";
+            case 4: return "Abril";
+            case 5: return "Mayo";
+            case 6: return "Junio";
+            case 7: return "Julio";
+            case 8: return "Agosto";
+            case 9: return "Septiembre";
+            case 10: return "Octubre";
+            case 11: return "Noviembre";
+            case 12: return "Diciembre";
+            default: return null;
         }
     }
 }

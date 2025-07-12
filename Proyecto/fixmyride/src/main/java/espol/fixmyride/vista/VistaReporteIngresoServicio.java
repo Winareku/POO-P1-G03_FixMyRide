@@ -31,11 +31,7 @@ public class VistaReporteIngresoServicio {
             if (anio <= 0) System.out.println("Ingrese un año válido");
         } while (anio <= 0);
 
-        int mes;
-        do {
-            mes = Vista.obtenerInt(scanner,"Escriba el mes que desea consultar: ");
-            if (mes < 1 || mes > 12) System.out.println("Ingrese un mes válido");
-        } while (mes < 1 || mes > 12);
+        int mes = Vista.convertirMesNumero(scanner);
 
         Vista.cajaIzquierda(Vista.stringTabla(" Servicio", "Total"));
         ReporteIngresoServicio reporte = controlador.crearReporteIngresoServicio(anio, mes, listaOrdenServicios);

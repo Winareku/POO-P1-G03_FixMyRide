@@ -27,10 +27,10 @@ public class VistaFactura {
         Empresa empresa;
 
         // Solicitudes
-        String codigoEmpresa = Vista.obtenerString(scanner, "Escriba el código de la Empresa que desea consultar: ");
+        String codigoEmpresa = Vista.verificarEmpresaPorCodigo(scanner, controladorEmpresa.getLista());
         empresa = ControladorEmpresa.obtenerEmpresaPorCodigo(codigoEmpresa, controladorEmpresa.getLista());
         int anio = Vista.obtenerInt(scanner, "Escriba el año que desea consultar: ");
-        int mes = Vista.obtenerInt(scanner, "Escriba el mes que desea consultar: ");
+        int mes = Vista.convertirMesNumero(scanner);
         Factura factura = controlador.crearFactura(codigoEmpresa, anio, mes, empresa, listaOrdenServicios);
         Vista.separador();
         System.out.println("Empresa: "+empresa.getNombre()+"\nPeriodo de Facturación: "+factura.getPeriodo()+"\nDetalle de servicios: ");

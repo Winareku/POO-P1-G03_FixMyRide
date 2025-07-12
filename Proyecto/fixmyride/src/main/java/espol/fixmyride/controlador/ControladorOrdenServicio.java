@@ -52,4 +52,9 @@ public class ControladorOrdenServicio {
             System.out.println("Orden registrada. Total a pagar: $"+orden.getTotalOrden());
         }
     }
+
+    // Método para actualizar el total de la orden
+    public static void actualizarTotal(OrdenServicio orden){
+        for (DetalleServicio detalleServicio:orden.getListaDetalleServicio()){ orden.setTotalOrden(orden.getTotalOrden()+detalleServicio.getTotal()); }
+    }
 }
