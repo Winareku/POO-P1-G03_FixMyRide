@@ -10,16 +10,30 @@ import java.util.Scanner;
 public class VistaReporteIngresoServicio {
     // Atributo controlador
     private ControladorReporteIngresoServicio controlador;
+    private ControladorOrdenServicio controladorOrdenServicio;
+
     // Constructor
-    public VistaReporteIngresoServicio(ControladorReporteIngresoServicio controlador) { this.controlador = controlador; }
+    public VistaReporteIngresoServicio(ControladorReporteIngresoServicio controlador, ControladorOrdenServicio controladorOrdenServicio) {
+        this.controlador = controlador;
+        this.controladorOrdenServicio = controladorOrdenServicio;
+    }
+
     // Método principal
     public void metodo(Scanner scanner) {
-        // Mostrar lista
+        // Listas en los Controladores
         Vista.caja("REPORTE DE INGRESOS POR SERVICIOS");
-        // ArrayList<ReporteIngresoServicio> lista = controlador.getLista();
-        // for (ReporteIngresoServicio reporte: lista) { System.out.println(reporte); }
-        // Solicitar
-        Vista.caja("GENERAR REPORTE DE INGRESOS POR SERVICIOS");
-        // Completar
+        ArrayList<OrdenServicio> listaOrdenServicios = controladorOrdenServicio.getLista();
+
+        // Solicitudes con validación
+        int anio = Vista.obtenerInt(scanner,"Escriba el año que desea consultar: ");
+        int mes = Vista.convertirMesNumero(scanner);
+
+        Vista.cajaIzquierda(Vista.stringTabla(" Servicio", "Total"));
+        ReporteIngresoServicio reporte = controlador.crearReporteIngresoServicio(anio, mes, listaOrdenServicios);
+        boolean hayCoincidencias = reporte.getHayCoincidencias();
+        for (DetalleServicio servicio:reporte.getlistaServicios()){
+            System.out.println("  "+Vista.stringTabla(servicio.getServicio().getNombre(), "$"+servicio.getTotal()));
+        }
+        if(!hayCoincidencias) System.out.println("No se encontraron coincidencias.");
     }
 }

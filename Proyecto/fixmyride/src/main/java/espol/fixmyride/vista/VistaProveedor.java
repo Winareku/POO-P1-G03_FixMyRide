@@ -13,7 +13,7 @@ public class VistaProveedor extends VistaPersona {
     public VistaProveedor(ControladorPersona controlador) { super(controlador); }
     
     // Método para agregar un nuevo proveedor
-    public void agregarProveedor(Scanner scanner) {
+    public void agregarPersona(Scanner scanner) {
         Vista.caja("INGRESAR DATOS");
         String id = Vista.obtenerString(scanner, "Cédula o RUC del proveedor: ");
         String nombre = Vista.obtenerString(scanner, "Nombre del proveedor: ");

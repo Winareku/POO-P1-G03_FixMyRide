@@ -22,7 +22,7 @@ public class VistaRegistroFaltaInsumo {
     public void registrarFaltaInsumo(Scanner scanner) {
         // Mostrar registros
         Vista.caja("REGISTROS DE FALTA DE INSUMOS");
-        ArrayList<RegistroFaltaInsumo> listaRFI = controlador.getListaRFI();
+        ArrayList<RegistroFaltaInsumo> listaRFI = controlador.getLista();
         ArrayList<Persona> listaProveedor = controladorProveedor.getLista();
         for (RegistroFaltaInsumo RFI: listaRFI) { System.out.println(RFI); }
         
