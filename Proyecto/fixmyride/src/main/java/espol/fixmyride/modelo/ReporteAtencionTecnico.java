@@ -3,9 +3,9 @@ import java.util.ArrayList;
 
 public class ReporteAtencionTecnico {
     // Atributos
-    ArrayList<String> listaNombreTecnico;
-    ArrayList<Double> listaTotales;
-    boolean hayCoincidencias;
+    private ArrayList<String> listaNombreTecnico;
+    private ArrayList<Double> listaTotales;
+    private boolean hayCoincidencias;
 
     // Constructor
     public ReporteAtencionTecnico(ArrayList<String> listaNombreTecnicos, ArrayList<Double> listaTotales, boolean hayCoincidencias) {

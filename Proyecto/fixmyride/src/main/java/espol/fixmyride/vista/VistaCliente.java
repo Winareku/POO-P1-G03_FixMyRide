@@ -8,7 +8,7 @@ import java.util.Scanner;
 // Clase VistaCliente
 public class VistaCliente extends VistaPersona {
     // Atributos
-    ControladorCliente controladorCliente = (ControladorCliente) getControlador();
+    private ControladorCliente controladorCliente = (ControladorCliente) getControlador();
 
     // Constructor
     public VistaCliente(ControladorPersona controlador) { super(controlador); }

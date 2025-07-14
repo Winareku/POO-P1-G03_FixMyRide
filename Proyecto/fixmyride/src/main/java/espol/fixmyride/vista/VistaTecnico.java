@@ -7,7 +7,7 @@ import java.util.Scanner;
 // Clase VistaTecnico
 public class VistaTecnico extends VistaPersona {
     // Atributos
-    ControladorTecnico controladorTecnico = (ControladorTecnico) getControlador();
+    private ControladorTecnico controladorTecnico = (ControladorTecnico) getControlador();
 
     // Constructor
     public VistaTecnico(ControladorPersona controlador) { super(controlador); }

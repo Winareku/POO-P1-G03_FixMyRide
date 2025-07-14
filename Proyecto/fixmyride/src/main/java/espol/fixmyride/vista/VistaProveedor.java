@@ -7,7 +7,7 @@ import java.util.Scanner;
 // Clase VistaProveedor
 public class VistaProveedor extends VistaPersona {
     // Atributos
-    ControladorProveedor controladorProveedor = (ControladorProveedor) getControlador();
+    private ControladorProveedor controladorProveedor = (ControladorProveedor) getControlador();
 
     // Constructor
     public VistaProveedor(ControladorPersona controlador) { super(controlador); }

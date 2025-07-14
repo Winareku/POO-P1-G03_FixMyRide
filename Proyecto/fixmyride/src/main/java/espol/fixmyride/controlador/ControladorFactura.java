@@ -10,7 +10,7 @@ import java.util.ArrayList;
 // Clase ControladorFactura
 public class ControladorFactura {
     // Atributos
-    ControladorCliente controladorCliente;
+    private ControladorCliente controladorCliente;
 
     // Constructor
     public ControladorFactura (ControladorCliente controladorCliente){ this.controladorCliente = controladorCliente; }
