@@ -10,10 +10,10 @@ import java.util.Scanner;
 // Clase ControladorOrdenServicio
 public class ControladorOrdenServicio {
     // Atributos
-    public static int contadorOrden =0;
+    public static int contadorOrden = 0;
 
     // Lista en memoria para almacenar las órdenes
-    public static ArrayList<OrdenServicio> listaOrdenes;
+    public ArrayList<OrdenServicio> listaOrdenes;
     
     // Método para obtener la lista de órdenes
     public ArrayList<OrdenServicio> getLista() { return listaOrdenes; }

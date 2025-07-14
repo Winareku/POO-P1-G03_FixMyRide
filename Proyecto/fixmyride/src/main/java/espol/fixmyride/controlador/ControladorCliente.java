@@ -6,7 +6,7 @@ import espol.fixmyride.modelo.*;
 // Clase ControladorCliente
 public class ControladorCliente extends ControladorPersona {
     // Atributos
-    public ControladorEmpresa controladorEmpresa;
+    private ControladorEmpresa controladorEmpresa;
 
     // Constructor    
     public ControladorCliente(ControladorEmpresa controladorEmpresa) {
