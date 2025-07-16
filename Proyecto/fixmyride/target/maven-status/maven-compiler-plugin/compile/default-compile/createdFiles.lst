@@ -20,7 +20,6 @@ espol/fixmyride/modelo/TipoCliente.class
 espol/fixmyride/controlador/ControladorOrdenServicio.class
 espol/fixmyride/vista/VistaReporteIngresoServicio.class
 espol/fixmyride/vista/VistaOrdenServicio.class
-espol/fixmyride/vista/Vista$1.class
 espol/fixmyride/modelo/Persona.class
 espol/fixmyride/vista/VistaFactura.class
 espol/fixmyride/modelo/RegistroPrecio.class
