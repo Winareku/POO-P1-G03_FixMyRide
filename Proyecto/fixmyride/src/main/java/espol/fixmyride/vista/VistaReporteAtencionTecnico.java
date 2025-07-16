@@ -40,7 +40,7 @@ public class VistaReporteAtencionTecnico {
         boolean hayCoincidencias = reporte.getHayCoincidencias();
         
         // Iteración de ambas listas para imprimir los resultados
+        if(!hayCoincidencias) { System.out.println("No se encontraron coincidencias."); return; }
         for (int i=0;i<listaNombreTecnicos.size();i++) { System.out.println("  "+Vista.stringTabla(listaNombreTecnicos.get(i), "$"+listaTotales.get(i))); }
-        if(!hayCoincidencias) System.out.println("No se encontraron coincidencias.");
     }
 }

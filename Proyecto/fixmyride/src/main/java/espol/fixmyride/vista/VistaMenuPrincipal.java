@@ -9,7 +9,7 @@ public class VistaMenuPrincipal {
     private Scanner scanner;
 
     // Constructor
-    public VistaMenuPrincipal() { this.scanner = new Scanner(System.in); }
+    public VistaMenuPrincipal(Scanner scanner) { this.scanner = scanner; }
 
     // Método para mostrar el menú principal
     public int mostrarMenuPrincipal() {

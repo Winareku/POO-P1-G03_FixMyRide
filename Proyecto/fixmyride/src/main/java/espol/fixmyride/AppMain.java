@@ -29,7 +29,7 @@ public class AppMain {
         ControladorReporteAtencionTecnico controladorReporteAtencionTecnico = new ControladorReporteAtencionTecnico();
 
         // Inicializar vistas
-        VistaMenuPrincipal vistaMenuPrincipal = new VistaMenuPrincipal();
+        VistaMenuPrincipal vistaMenuPrincipal = new VistaMenuPrincipal(scanner);
         VistaCliente vistaCliente = new VistaCliente(controladorCliente);
         VistaProveedor vistaProveedor = new VistaProveedor(controladorProveedor);
         VistaTecnico vistaTecnico = new VistaTecnico(controladorTecnico);

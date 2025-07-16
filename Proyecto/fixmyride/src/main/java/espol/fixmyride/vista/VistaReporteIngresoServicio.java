@@ -31,9 +31,9 @@ public class VistaReporteIngresoServicio {
         Vista.cajaIzquierda(Vista.stringTabla(" Servicio", "Total"));
         ReporteIngresoServicio reporte = controlador.crearReporteIngresoServicio(anio, mes, listaOrdenServicios);
         boolean hayCoincidencias = reporte.getHayCoincidencias();
+        if(!hayCoincidencias) { System.out.println("No se encontraron coincidencias."); return; }
         for (DetalleServicio servicio:reporte.getlistaServicios()){
             System.out.println("  "+Vista.stringTabla(servicio.getServicio().getNombre(), "$"+servicio.getTotal()));
         }
-        if(!hayCoincidencias) System.out.println("No se encontraron coincidencias.");
     }
 }
