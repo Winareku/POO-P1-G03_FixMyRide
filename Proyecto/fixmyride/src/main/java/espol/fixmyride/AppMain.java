@@ -57,7 +57,7 @@ public class AppMain {
                     vistaMenuPrincipal.manejarSubmenuPersonas(vistaProveedor, scanner, "proveedores");
                     break;
                 case 3:
-                    vistaMenuPrincipal.manejarSubmenuPersonas(vistaTecnico, scanner, "técnicos");
+                    vistaMenuPrincipal.manejarSubmenuTecnico(vistaTecnico, scanner, "técnicos");
                     break;
                 case 4:
                     vistaMenuPrincipal.manejarSubmenuServicios(vistaServicio, scanner);

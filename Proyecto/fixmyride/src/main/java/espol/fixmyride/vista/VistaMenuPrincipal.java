@@ -49,6 +49,27 @@ public class VistaMenuPrincipal {
         } while (opcion != 2);
     }
 
+    public void manejarSubmenuTecnico(VistaTecnico vista, Scanner scanner, String clase) {
+        int opcion = 0;
+        do {
+            VistaTecnico.mostrarSubmenu(vista.getControlador().getLista(), clase);
+            opcion = Vista.obtenerInt(scanner);
+            switch (opcion) {
+                case 1:
+                    vista.agregarPersona(scanner);
+                    break;
+                case 2:
+                    vista.eliminarPersona(scanner);
+                    break;
+                case 3:
+                    Vista.regresandoMenuPrincipal();
+                    break;
+                default:
+                    Vista.opcionNoValida();
+            }
+        } while (opcion != 3);
+    }
+
     public void manejarSubmenuServicios(VistaServicio vista, Scanner scanner) {
         int opcion = 0;
         do {
