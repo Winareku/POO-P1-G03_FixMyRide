@@ -50,38 +50,17 @@ public class AppMain {
 
             // Switch para manejar la opción seleccionada
             switch (opcion) {
-                case 1:
-                    vistaMenuPrincipal.manejarSubmenuPersonas(vistaCliente, scanner, "clientes");
-                    break;
-                case 2:
-                    vistaMenuPrincipal.manejarSubmenuPersonas(vistaProveedor, scanner, "proveedores");
-                    break;
-                case 3:
-                    vistaMenuPrincipal.manejarSubmenuTecnico(vistaTecnico, scanner, "técnicos");
-                    break;
-                case 4:
-                    vistaMenuPrincipal.manejarSubmenuServicios(vistaServicio, scanner);
-                    break;
-                case 5:
-                    vistaMenuPrincipal.manejarOrdenes(vistaOrdenServicio, scanner);
-                    break;
-                case 6:
-                    vistaMenuPrincipal.manejarRFI(vistaRegistroFaltaInsumo, scanner);
-                    break;
-                case 7:
-                    vistaMenuPrincipal.manejarFactura(vistaFactura, scanner);
-                    break;
-                case 8:
-                    vistaMenuPrincipal.manejarRIS(vistaReporteIngresoServicio, scanner);
-                    break;
-                case 9:
-                    vistaMenuPrincipal.manejarRAT(vistaReporteAtencionTecnico, scanner);
-                    break;
-                case 10:
-                    System.out.println("Saliendo de la aplicación.....");
-                    break;
-                default:
-                    Vista.opcionNoValida();
+                case 1: vistaMenuPrincipal.manejarSubmenuPersonas(vistaCliente, scanner, "clientes"); break;
+                case 2: vistaMenuPrincipal.manejarSubmenuPersonas(vistaProveedor, scanner, "proveedores"); break;
+                case 3: vistaMenuPrincipal.manejarSubmenuTecnico(vistaTecnico, scanner, "técnicos"); break;
+                case 4: vistaMenuPrincipal.manejarSubmenuServicios(vistaServicio, scanner); break;
+                case 5: vistaMenuPrincipal.manejarOrdenes(vistaOrdenServicio, scanner); break;
+                case 6: vistaMenuPrincipal.manejarRFI(vistaRegistroFaltaInsumo, scanner); break;
+                case 7: vistaMenuPrincipal.manejarFactura(vistaFactura, scanner); break;
+                case 8: vistaMenuPrincipal.manejarRIS(vistaReporteIngresoServicio, scanner); break;
+                case 9: vistaMenuPrincipal.manejarRAT(vistaReporteAtencionTecnico, scanner); break;
+                case 10: System.out.println("Saliendo de la aplicación....."); break;
+                default: Vista.opcionNoValida();
             }
         } while (opcion != 10);
         scanner.close();
