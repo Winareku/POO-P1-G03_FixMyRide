@@ -29,27 +29,27 @@
             android:text="Nombre: Carlos Pérez"
             android:textStyle="bold"
             android:textSize="15sp"
-            android:marginTop="8dp"/>
+            android:layout_marginTop="8dp"/>
 
         <TextView
             android:id="@+id/tvDireccion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Dirección: Calle 123, Ciudad"
-            android:marginTop="2dp"/>
+            android:layout_marginTop="2dp"/>
 
         <TextView
             android:id="@+id/tvTelefono"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Teléfono: 555-1234"
-            android:marginTop="2dp"/>
+            android:layout_marginTop="2dp"/>
 
         <TextView
             android:id="@+id/tvTipoCliente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tipo de Cliente: Personal"
-            android:marginTop="2dp"/>
+            android:layout_marginTop="2dp"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

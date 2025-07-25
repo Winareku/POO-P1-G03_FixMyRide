@@ -15,7 +15,7 @@
         android:textSize="22sp"
         android:textStyle="bold"
         android:layout_gravity="center"
-        android:marginBottom="12dp"/>
+        android:layout_marginBottom="12dp"/>
 
     <Button
         android:id="@+id/btnAgregarCliente"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@drawable/rounded_green_button"
-        android:marginBottom="16dp"
+        android:layout_marginBottom="16dp"
         android:text="Agregar Cliente"
         android:textColor="#FFF" />
 
