@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FixMyRide">
         <activity
+            android:name=".ProveedoresActivity"
+            android:exported="false" />
+        <activity
             android:name=".ClientesActivity"
             android:exported="false" />
         <activity
