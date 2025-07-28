@@ -17,4 +17,6 @@ public class Empresa {
     public String getNombre(){return nombre;}
     public String getCodigo(){return codigo;}
     public ArrayList<OrdenServicio> getListaOrdenServicio() { return listaOrdenServicio; }
+    // Setters
+    public void setListaOrdenServicio(ArrayList<OrdenServicio> listaOrdenServicio) { this.listaOrdenServicio = listaOrdenServicio; }
 }

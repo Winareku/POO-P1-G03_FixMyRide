@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class ReporteIngresoServicio {
     // Atributos
-    ArrayList<DetalleServicio> listaServicios;
-    boolean hayCoincidencias;
+    private ArrayList<DetalleServicio> listaServicios;
+    private boolean hayCoincidencias;
 
     // Constructor
     public ReporteIngresoServicio(ArrayList<DetalleServicio> listaServicios, boolean hayCoincidencias){

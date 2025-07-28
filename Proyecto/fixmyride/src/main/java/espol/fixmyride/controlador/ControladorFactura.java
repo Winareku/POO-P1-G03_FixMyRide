@@ -10,7 +10,7 @@ import java.util.ArrayList;
 // Clase ControladorFactura
 public class ControladorFactura {
     // Atributos
-    ControladorCliente controladorCliente;
+    private ControladorCliente controladorCliente;
 
     // Constructor
     public ControladorFactura (ControladorCliente controladorCliente){ this.controladorCliente = controladorCliente; }
@@ -31,6 +31,8 @@ public class ControladorFactura {
                 hayCoincidencias = true;
             }
         }
-        return new Factura(periodo, empresa, empresa.getListaOrdenServicio(),hayCoincidencias);
+        Factura factura = new Factura(periodo, empresa, empresa.getListaOrdenServicio(),hayCoincidencias);
+        empresa.setListaOrdenServicio(new ArrayList<>()); // Limpiar la lista de órdenes de servicio de la empresa después de crear la factura
+        return factura;
     }
 }

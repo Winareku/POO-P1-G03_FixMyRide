@@ -36,6 +36,7 @@ public class VistaFactura {
         System.out.println("Empresa: "+empresa.getNombre()+"\nPeriodo de Facturación: "+factura.getPeriodo()+"\nDetalle de servicios: ");
         Vista.cajaIzquierda(Vista.stringTabla(" Placa","Fecha","Tipo","Servicio","Cantidad","Total"));
         int totalEmpresa = 0;
+        if(!factura.getHayCoincidencias()) { System.out.println("No se encontraron coincidencias."); return; }
         for (OrdenServicio orden:factura.getListaOrdenServicio()){
             String placa = orden.getPlacaVehiculo();
             String fecha = String.valueOf(orden.getFechaOrden());
@@ -48,7 +49,6 @@ public class VistaFactura {
                 totalEmpresa += servicio.getTotal();
             }
         }
-        if(factura.getHayCoincidencias()) System.out.println("\nTotal a pagar: $"+totalEmpresa);
-        if(!factura.getHayCoincidencias()) System.out.println("No se encontraron coincidencias.");
-    }    
+        System.out.println("\nTotal a pagar: $"+totalEmpresa);
+    }
 }
