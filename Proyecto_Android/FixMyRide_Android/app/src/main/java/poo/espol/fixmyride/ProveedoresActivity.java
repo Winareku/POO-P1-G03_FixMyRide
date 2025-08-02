@@ -10,11 +10,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ProveedoresActivity extends AppCompatActivity {
 
-    private List<Proveedor> proveedores = new ArrayList<>();
+    private List<Proveedor> proveedores;
     private ProveedorAdapter proveedorAdapter;
 
     @Override
@@ -22,16 +23,22 @@ public class ProveedoresActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_proveedores);
 
+        // Inicializa con 3 proveedores por defecto
+        proveedores = new ArrayList<>(Arrays.asList(
+                new Proveedor("0977777777", "Repuestos R.C.", "555-1234", "Suministro de repuestos para vehículos."),
+                new Proveedor("0988888888", "Herramientas y Equipos HOPE", "555-5678", "Proveedor de herramientas y equipos especializados para talleres mecánicos."),
+                new Proveedor("0999999999", "Lubricantes y Aceites JK", "555-9101", "Venta de lubricantes y aceites automotrices para mantenimiento.")
+        ));
+
         RecyclerView rvProveedores = findViewById(R.id.rvProveedores);
         rvProveedores.setLayoutManager(new LinearLayoutManager(this));
-
         proveedorAdapter = new ProveedorAdapter(proveedores);
         rvProveedores.setAdapter(proveedorAdapter);
 
-        Button btnAgregar = findViewById(R.id.btnAgregarProveedor);
-        btnAgregar.setOnClickListener(new View.OnClickListener() {
+        Button btnAgregarProveedor = findViewById(R.id.btnAgregarProveedor);
+        btnAgregarProveedor.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 mostrarDialogoAgregarProveedor();
             }
         });

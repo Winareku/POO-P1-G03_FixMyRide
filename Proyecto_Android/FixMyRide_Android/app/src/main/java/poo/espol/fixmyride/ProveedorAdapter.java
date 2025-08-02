@@ -26,10 +26,10 @@ public class ProveedorAdapter extends RecyclerView.Adapter<ProveedorAdapter.Prov
     @Override
     public void onBindViewHolder(@NonNull ProveedorViewHolder holder, int position) {
         Proveedor proveedor = proveedores.get(position);
-        holder.tvIdentificacion.setText("Identificación: " + proveedor.identificacion);
-        holder.tvNombre.setText("Nombre del Proveedor: " + proveedor.nombre);
-        holder.tvTelefono.setText("Teléfono: " + proveedor.telefono);
-        holder.tvDescripcion.setText("Descripción: " + proveedor.descripcion);
+        holder.tvIdentificacion.setText(proveedor.identificacion);
+        holder.tvNombre.setText(proveedor.nombre);
+        holder.tvTelefono.setText(proveedor.telefono);
+        holder.tvDescripcion.setText(proveedor.descripcion);
     }
 
     @Override

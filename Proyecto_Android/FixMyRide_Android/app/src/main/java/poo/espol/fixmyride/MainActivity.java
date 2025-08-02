@@ -13,11 +13,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button btnAdministrarClientes = findViewById(R.id.button1);
+        Button btnAdministrarProveedores = findViewById(R.id.button2);
 
         btnAdministrarClientes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ClientesActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnAdministrarProveedores.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ProveedoresActivity.class);
                 startActivity(intent);
             }
         });

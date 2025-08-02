@@ -17,7 +17,6 @@
             android:id="@+id/tvIdentificacion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Identificación: 1234567890"
             android:textColor="#32B33C"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -37,8 +36,7 @@
             <TextView
                 android:id="@+id/tvNombre"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Repuestos Automotrices S.A."/>
+                android:layout_height="wrap_content"/>
         </LinearLayout>
 
         <!-- Teléfono -->
@@ -55,8 +53,7 @@
             <TextView
                 android:id="@+id/tvTelefono"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="555-1234"/>
+                android:layout_height="wrap_content"/>
         </LinearLayout>
 
         <!-- Descripción -->
@@ -73,8 +70,7 @@
             <TextView
                 android:id="@+id/tvDescripcion"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Suministro de repuestos y accesorios para vehículos."/>
+                android:layout_height="wrap_content"/>
         </LinearLayout>
 
     </LinearLayout>

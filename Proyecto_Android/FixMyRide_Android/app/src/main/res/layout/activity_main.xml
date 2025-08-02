@@ -145,7 +145,6 @@
             android:text="Reporte de atenciones por técnico"
             android:textSize="14sp"
             android:textStyle="bold" />
-
     </GridLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

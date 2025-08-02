@@ -8,7 +8,7 @@ public class Servicio {
     private double precio;
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
-    private ArrayList<RegistroPrecio> historialPrecios;
+    //private ArrayList<RegistroPrecio> historialPrecios;
     private static int conteo = 1;
 
     public Servicio(String nombre, double precio) {
@@ -17,8 +17,8 @@ public class Servicio {
         this.precio = precio;
         this.fechaInicio = LocalDate.now();
         this.fechaFin = this.fechaInicio.plusMonths(1);
-        this.historialPrecios = new ArrayList<>();
-        historialPrecios.add(new RegistroPrecio(this, precio));
+        //this.historialPrecios = new ArrayList<>();
+        //historialPrecios.add(new RegistroPrecio(this, precio));
         conteo++;
     }
 
@@ -31,12 +31,12 @@ public class Servicio {
     public void setFechaInicio(LocalDate fechaInicio) { this.fechaInicio = fechaInicio; }
     public LocalDate getFechaFin() { return fechaFin; }
     public void setFechaFin(LocalDate fechaFin) { this.fechaFin = fechaFin; }
-    public ArrayList<RegistroPrecio> getHistorialPrecios() { return historialPrecios; }
+    //public ArrayList<RegistroPrecio> getHistorialPrecios() { return historialPrecios; }
 
     public static String generarCodigo(int conteo) { return String.format("%06d",conteo); }
 
     public void editarPrecio(double nuevoPrecio) {
         setPrecio(nuevoPrecio);;
-        historialPrecios.add(new RegistroPrecio(this, nuevoPrecio));
+        //historialPrecios.add(new RegistroPrecio(this, nuevoPrecio));
     }
 }
