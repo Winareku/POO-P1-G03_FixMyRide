@@ -27,6 +27,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".TecnicosActivity"/>
+
+        <activity android:name=".ServicioActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
