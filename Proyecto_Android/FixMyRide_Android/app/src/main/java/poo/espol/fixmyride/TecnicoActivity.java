@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
-public class TecnicosActivity extends AppCompatActivity {
+public class TecnicoActivity extends AppCompatActivity {
     private ArrayList<Tecnico> listaTecnicos;
     private TecnicoAdapter adapter;
 
@@ -39,13 +39,14 @@ public class TecnicosActivity extends AppCompatActivity {
                 .setTitle("Agregar Técnico")
                 .setView(dialogView)
                 .setPositiveButton("Agregar", (dialog, which) -> {
-                    String id = ((android.widget.EditText) dialogView.findViewById(R.id.etIdentificacion)).getText().toString();
-                    String nombre = ((android.widget.EditText) dialogView.findViewById(R.id.etNombre)).getText().toString();
-                    String telefono = ((android.widget.EditText) dialogView.findViewById(R.id.etTelefono)).getText().toString();
-                    String especialidad = ((android.widget.EditText) dialogView.findViewById(R.id.etEspecialidad)).getText().toString();
-                    if (!id.isEmpty() && !nombre.isEmpty() && !telefono.isEmpty() && !especialidad.isEmpty()) {
+                    String id = getTextFromView(dialogView, R.id.etIdentificacion);
+                    String nombre = getTextFromView(dialogView, R.id.etNombre);
+                    String telefono = getTextFromView(dialogView, R.id.etTelefono);
+                    String especialidad = getTextFromView(dialogView, R.id.etEspecialidad);
+
+                    if (validarCampos(id, nombre, telefono, especialidad)) {
                         listaTecnicos.add(new Tecnico(id, nombre, telefono, especialidad));
-                        adapter.notifyDataSetChanged();
+                        adapter.notifyItemInserted(listaTecnicos.size() - 1);
                     } else {
                         Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
                     }
@@ -54,13 +55,24 @@ public class TecnicosActivity extends AppCompatActivity {
         builder.show();
     }
 
+    private String getTextFromView(View parentView, int viewId) {
+        return ((android.widget.EditText) parentView.findViewById(viewId)).getText().toString();
+    }
+
+    private boolean validarCampos(String... campos) {
+        for (String campo : campos) {
+            if (campo.trim().isEmpty()) return false;
+        }
+        return true;
+    }
+
     private void confirmarEliminar(int position) {
         new AlertDialog.Builder(this)
                 .setTitle("Eliminar Técnico")
                 .setMessage("¿Está seguro que desea eliminar el registro?")
                 .setPositiveButton("Eliminar", (dialog, which) -> {
                     listaTecnicos.remove(position);
-                    adapter.notifyDataSetChanged();
+                    adapter.notifyItemRemoved(position);
                 })
                 .setNegativeButton("Cancelar", null)
                 .show();

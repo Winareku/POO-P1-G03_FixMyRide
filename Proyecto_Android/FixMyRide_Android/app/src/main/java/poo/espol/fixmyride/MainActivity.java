@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         btnAdministrarClientes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ClientesActivity.class);
+                Intent intent = new Intent(MainActivity.this, ClienteActivity.class);
                 startActivity(intent);
             }
         });
@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         btnAdministrarProveedores.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ProveedoresActivity.class);
+                Intent intent = new Intent(MainActivity.this, ProveedorActivity.class);
                 startActivity(intent);
             }
         });
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         btnAdministrarTecnicos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, TecnicosActivity.class);
+                Intent intent = new Intent(MainActivity.this, TecnicoActivity.class);
                 startActivity(intent);
             }
         });

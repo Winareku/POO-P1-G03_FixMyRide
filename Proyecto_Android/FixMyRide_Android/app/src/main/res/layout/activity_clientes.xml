@@ -1,31 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:background="#F5F6FA">
+    android:background="#F5F6FA"
+    android:padding="24dp">
 
     <TextView
-        android:id="@+id/tvTitulo"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Listado de Clientes"
+        android:text="Clientes"
         android:textSize="22sp"
         android:textStyle="bold"
-        android:layout_gravity="center"
-        android:layout_marginBottom="12dp"/>
+        android:gravity="center"
+        android:layout_marginBottom="24dp"/>
 
     <Button
         android:id="@+id/btnAgregarCliente"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@drawable/rounded_green_button"
-        android:layout_marginBottom="16dp"
         android:text="Agregar Cliente"
-        android:textColor="#FFF" />
+        android:backgroundTint="#32B33C"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:layout_marginBottom="16dp"
+        android:minHeight="54dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvClientes"

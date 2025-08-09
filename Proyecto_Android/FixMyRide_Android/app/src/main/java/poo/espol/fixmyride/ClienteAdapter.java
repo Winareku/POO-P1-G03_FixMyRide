@@ -1,7 +1,9 @@
 package poo.espol.fixmyride;
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,9 +12,15 @@ import java.util.List;
 public class ClienteAdapter extends RecyclerView.Adapter<ClienteAdapter.ClienteViewHolder> {
 
     private List<Cliente> clientes;
+    private OnClienteActionListener listener;
 
-    public ClienteAdapter(List<Cliente> clientes) {
+    public interface OnClienteActionListener {
+        void onEliminar(int position);
+    }
+
+    public ClienteAdapter(List<Cliente> clientes, OnClienteActionListener listener) {
         this.clientes = clientes;
+        this.listener = listener;
     }
 
     @NonNull
@@ -22,6 +30,7 @@ public class ClienteAdapter extends RecyclerView.Adapter<ClienteAdapter.ClienteV
         return new ClienteViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ClienteViewHolder holder, int position) {
         Cliente cliente = clientes.get(position);
@@ -30,6 +39,12 @@ public class ClienteAdapter extends RecyclerView.Adapter<ClienteAdapter.ClienteV
         holder.tvDireccion.setText("Dirección: " + cliente.getDireccion());
         holder.tvTelefono.setText("Teléfono: " + cliente.getTelefono());
         holder.tvTipoCliente.setText("Tipo de Cliente: " + cliente.getTipoCliente());
+
+        holder.btnEliminar.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onEliminar(holder.getAdapterPosition());
+            }
+        });
     }
 
     @Override
@@ -39,6 +54,7 @@ public class ClienteAdapter extends RecyclerView.Adapter<ClienteAdapter.ClienteV
 
     public static class ClienteViewHolder extends RecyclerView.ViewHolder {
         TextView tvIdentificacion, tvNombre, tvDireccion, tvTelefono, tvTipoCliente;
+        Button btnEliminar;
 
         public ClienteViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -47,6 +63,7 @@ public class ClienteAdapter extends RecyclerView.Adapter<ClienteAdapter.ClienteV
             tvDireccion = itemView.findViewById(R.id.tvDireccion);
             tvTelefono = itemView.findViewById(R.id.tvTelefono);
             tvTipoCliente = itemView.findViewById(R.id.tvTipoCliente);
+            btnEliminar = itemView.findViewById(R.id.btnEliminar);
         }
     }
 }

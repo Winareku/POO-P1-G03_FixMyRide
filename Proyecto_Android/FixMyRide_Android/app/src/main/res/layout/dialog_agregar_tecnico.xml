@@ -1,33 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="24dp">
+    android:fillViewport="true">
 
-    <EditText
-        android:id="@+id/etIdentificacion"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Identificación (Cédula)"
-        android:inputType="number"/>
+        android:orientation="vertical"
+        android:padding="24dp">
 
-    <EditText
-        android:id="@+id/etNombre"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Nombre"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Identificación"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp"/>
 
-    <EditText
-        android:id="@+id/etTelefono"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Teléfono"
-        android:inputType="phone"/>
+        <EditText
+            android:id="@+id/etIdentificacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Cédula"
+            android:inputType="number"
+            android:layout_marginBottom="16dp"
+            android:minHeight="48dp"/>
 
-    <EditText
-        android:id="@+id/etEspecialidad"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Especialidad"/>
-</LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nombre completo"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp"/>
+
+        <EditText
+            android:id="@+id/etNombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nombre del técnico"
+            android:inputType="textPersonName"
+            android:layout_marginBottom="16dp"
+            android:minHeight="48dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Teléfono"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp"/>
+
+        <EditText
+            android:id="@+id/etTelefono"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Número de contacto"
+            android:inputType="phone"
+            android:layout_marginBottom="16dp"
+            android:minHeight="48dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Especialidad"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp"/>
+
+        <EditText
+            android:id="@+id/etEspecialidad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Área de especialización"
+            android:layout_marginBottom="8dp"
+            android:minHeight="48dp"/>
+    </LinearLayout>
+</ScrollView>

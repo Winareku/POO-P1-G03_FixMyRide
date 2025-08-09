@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ProveedoresActivity extends AppCompatActivity {
+public class ProveedorActivity extends AppCompatActivity implements ProveedorAdapter.OnProveedorActionListener {
 
     private List<Proveedor> proveedores;
     private ProveedorAdapter proveedorAdapter;
@@ -32,16 +33,11 @@ public class ProveedoresActivity extends AppCompatActivity {
 
         RecyclerView rvProveedores = findViewById(R.id.rvProveedores);
         rvProveedores.setLayoutManager(new LinearLayoutManager(this));
-        proveedorAdapter = new ProveedorAdapter(proveedores);
+        proveedorAdapter = new ProveedorAdapter(proveedores, this);
         rvProveedores.setAdapter(proveedorAdapter);
 
         Button btnAgregarProveedor = findViewById(R.id.btnAgregarProveedor);
-        btnAgregarProveedor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mostrarDialogoAgregarProveedor();
-            }
-        });
+        btnAgregarProveedor.setOnClickListener(v -> mostrarDialogoAgregarProveedor());
     }
 
     private void mostrarDialogoAgregarProveedor() {
@@ -56,16 +52,33 @@ public class ProveedoresActivity extends AppCompatActivity {
 
         builder.setTitle("Agregar Proveedor");
         builder.setPositiveButton("Agregar", (dialog, which) -> {
-            String identificacion = etIdentificacion.getText().toString();
-            String nombre = etNombreProveedor.getText().toString();
-            String telefono = etTelefonoProveedor.getText().toString();
-            String descripcion = etDescripcionProveedor.getText().toString();
+            String identificacion = etIdentificacion.getText().toString().trim();
+            String nombre = etNombreProveedor.getText().toString().trim();
+            String telefono = etTelefonoProveedor.getText().toString().trim();
+            String descripcion = etDescripcionProveedor.getText().toString().trim();
 
-            Proveedor proveedor = new Proveedor(identificacion, nombre, telefono, descripcion);
-            proveedores.add(proveedor);
-            proveedorAdapter.notifyDataSetChanged();
+            if (identificacion.isEmpty() || nombre.isEmpty() || telefono.isEmpty() || descripcion.isEmpty()) {
+                Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
+            } else {
+                Proveedor proveedor = new Proveedor(identificacion, nombre, telefono, descripcion);
+                proveedores.add(proveedor);
+                proveedorAdapter.notifyItemInserted(proveedores.size() - 1);
+            }
         });
         builder.setNegativeButton("Cancelar", null);
         builder.show();
+    }
+
+    @Override
+    public void onEliminar(int position) {
+        new AlertDialog.Builder(this)
+                .setTitle("Eliminar Proveedor")
+                .setMessage("¿Está seguro que desea eliminar el registro?")
+                .setPositiveButton("Eliminar", (dialog, which) -> {
+                    proveedores.remove(position);
+                    proveedorAdapter.notifyItemRemoved(position);
+                })
+                .setNegativeButton("Cancelar", null)
+                .show();
     }
 }

@@ -3,6 +3,7 @@ package poo.espol.fixmyride;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,9 +12,15 @@ import java.util.List;
 public class ProveedorAdapter extends RecyclerView.Adapter<ProveedorAdapter.ProveedorViewHolder> {
 
     private List<Proveedor> proveedores;
+    private OnProveedorActionListener listener;
 
-    public ProveedorAdapter(List<Proveedor> proveedores) {
+    public interface OnProveedorActionListener {
+        void onEliminar(int position);
+    }
+
+    public ProveedorAdapter(List<Proveedor> proveedores, OnProveedorActionListener listener) {
         this.proveedores = proveedores;
+        this.listener = listener;
     }
 
     @NonNull
@@ -26,10 +33,16 @@ public class ProveedorAdapter extends RecyclerView.Adapter<ProveedorAdapter.Prov
     @Override
     public void onBindViewHolder(@NonNull ProveedorViewHolder holder, int position) {
         Proveedor proveedor = proveedores.get(position);
-        holder.tvIdentificacion.setText(proveedor.identificacion);
-        holder.tvNombre.setText(proveedor.nombre);
-        holder.tvTelefono.setText(proveedor.telefono);
-        holder.tvDescripcion.setText(proveedor.descripcion);
+        holder.tvIdentificacion.setText("Identificación: " + proveedor.identificacion);
+        holder.tvNombre.setText("Nombre: " + proveedor.nombre);
+        holder.tvTelefono.setText("Teléfono: " + proveedor.telefono);
+        holder.tvDescripcion.setText("Descripción: " + proveedor.descripcion);
+
+        holder.btnEliminar.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onEliminar(holder.getAdapterPosition());
+            }
+        });
     }
 
     @Override
@@ -37,19 +50,17 @@ public class ProveedorAdapter extends RecyclerView.Adapter<ProveedorAdapter.Prov
         return proveedores.size();
     }
 
-    public void setProveedores(List<Proveedor> proveedores) {
-        this.proveedores = proveedores;
-        notifyDataSetChanged();
-    }
-
     static class ProveedorViewHolder extends RecyclerView.ViewHolder {
         TextView tvIdentificacion, tvNombre, tvTelefono, tvDescripcion;
+        Button btnEliminar;
+
         public ProveedorViewHolder(@NonNull View itemView) {
             super(itemView);
             tvIdentificacion = itemView.findViewById(R.id.tvIdentificacion);
             tvNombre = itemView.findViewById(R.id.tvNombre);
             tvTelefono = itemView.findViewById(R.id.tvTelefono);
             tvDescripcion = itemView.findViewById(R.id.tvDescripcion);
+            btnEliminar = itemView.findViewById(R.id.btnEliminar);
         }
     }
 }

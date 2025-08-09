@@ -1,5 +1,6 @@
 package poo.espol.fixmyride;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ClientesActivity extends AppCompatActivity {
+public class ClienteActivity extends AppCompatActivity implements ClienteAdapter.OnClienteActionListener {
 
     private List<Cliente> clientes;
     private ClienteAdapter clienteAdapter;
@@ -34,18 +36,14 @@ public class ClientesActivity extends AppCompatActivity {
 
         RecyclerView rvClientes = findViewById(R.id.rvClientes);
         rvClientes.setLayoutManager(new LinearLayoutManager(this));
-        clienteAdapter = new ClienteAdapter(clientes);
+        clienteAdapter = new ClienteAdapter(clientes, this);
         rvClientes.setAdapter(clienteAdapter);
 
         Button btnAgregarCliente = findViewById(R.id.btnAgregarCliente);
-        btnAgregarCliente.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mostrarDialogoAgregarCliente();
-            }
-        });
+        btnAgregarCliente.setOnClickListener(v -> mostrarDialogoAgregarCliente());
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private void mostrarDialogoAgregarCliente() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_agregar_cliente, null);
@@ -59,10 +57,10 @@ public class ClientesActivity extends AppCompatActivity {
 
         builder.setTitle("Agregar Cliente");
         builder.setPositiveButton("Agregar", (dialog, which) -> {
-            String identificacion = etIdentificacion.getText().toString();
-            String nombre = etNombre.getText().toString();
-            String direccion = etDireccion.getText().toString();
-            String telefono = etTelefono.getText().toString();
+            String identificacion = etIdentificacion.getText().toString().trim();
+            String nombre = etNombre.getText().toString().trim();
+            String direccion = etDireccion.getText().toString().trim();
+            String telefono = etTelefono.getText().toString().trim();
 
             int selectedTipoId = rgTipoCliente.getCheckedRadioButtonId();
             String tipo = "";
@@ -71,11 +69,28 @@ public class ClientesActivity extends AppCompatActivity {
                 tipo = radioButton.getText().toString();
             }
 
-            Cliente cliente = new Cliente(identificacion, nombre, direccion, telefono, tipo);
-            clientes.add(cliente);
-            clienteAdapter.notifyDataSetChanged();
+            if (identificacion.isEmpty() || nombre.isEmpty() || direccion.isEmpty() || telefono.isEmpty() || tipo.isEmpty()) {
+                Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
+            } else {
+                Cliente cliente = new Cliente(identificacion, nombre, direccion, telefono, tipo);
+                clientes.add(cliente);
+                clienteAdapter.notifyItemInserted(clientes.size() - 1);
+            }
         });
         builder.setNegativeButton("Cancelar", null);
         builder.show();
+    }
+
+    @Override
+    public void onEliminar(int position) {
+        new AlertDialog.Builder(this)
+                .setTitle("Eliminar Cliente")
+                .setMessage("¿Está seguro que desea eliminar el registro?")
+                .setPositiveButton("Eliminar", (dialog, which) -> {
+                    clientes.remove(position);
+                    clienteAdapter.notifyItemRemoved(position);
+                })
+                .setNegativeButton("Cancelar", null)
+                .show();
     }
 }

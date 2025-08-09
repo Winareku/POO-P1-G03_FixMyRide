@@ -12,10 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FixMyRide">
         <activity
-            android:name=".ProveedoresActivity"
+            android:name=".ProveedorActivity"
             android:exported="false" />
         <activity
-            android:name=".ClientesActivity"
+            android:name=".ClienteActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
@@ -26,7 +26,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TecnicosActivity"/>
+        <activity android:name=".TecnicoActivity"/>
 
         <activity android:name=".ServicioActivity"
             android:exported="false" />

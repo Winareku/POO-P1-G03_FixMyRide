@@ -33,12 +33,12 @@ public class TecnicoAdapter extends RecyclerView.Adapter<TecnicoAdapter.TecnicoV
     public void onBindViewHolder(@NonNull TecnicoViewHolder holder, int position) {
         Tecnico tecnico = tecnicos.get(position);
         holder.tvIdentificacion.setText("Identificación: " + tecnico.getIdentificacion());
-        holder.tvNombre.setText("Nombre del Técnico: " + tecnico.getNombre());
+        holder.tvNombre.setText("Nombre: " + tecnico.getNombre());
         holder.tvTelefono.setText("Teléfono: " + tecnico.getTelefono());
         holder.tvEspecialidad.setText("Especialidad: " + tecnico.getEspecialidad());
 
         holder.btnEliminar.setOnClickListener(v -> {
-            if (listener != null) listener.onEliminar(position);
+            if (listener != null) listener.onEliminar(holder.getAdapterPosition());
         });
     }
 
