@@ -20,6 +20,8 @@ import java.util.List;
 import poo.espol.fixmyride.model.Cliente;
 import poo.espol.fixmyride.adapter.ClienteAdapter;
 import poo.espol.fixmyride.R;
+import poo.espol.fixmyride.extra.Tools;
+import poo.espol.fixmyride.model.TipoCliente;
 
 public class ClienteActivity extends AppCompatActivity implements ClienteAdapter.OnClienteActionListener {
 
@@ -33,9 +35,9 @@ public class ClienteActivity extends AppCompatActivity implements ClienteAdapter
 
         // Inicializa con 3 clientes por defecto
         clientes = new ArrayList<>(Arrays.asList(
-                new Cliente("0911111111", "Paul Garcia", "Sauces", "0944444444", "Personal"),
-                new Cliente("0922222222", "Empresa S.A..", "Urdesa", "0955555555", "Empresarial"),
-                new Cliente("0933333333", "Daniela Molina", "Via la Costa", "0966666666", "Personal")
+                new Cliente("0911111111", "Paul Garcia", "Sauces", "0944444444", TipoCliente.PERSONAL),
+                new Cliente("0922222222", "Empresa S.A..", "Urdesa", "0955555555", TipoCliente.EMPRESARIAL),
+                new Cliente("0933333333", "Daniela Molina", "Via la Costa", "0966666666", TipoCliente.PERSONAL)
         ));
 
         RecyclerView rvClientes = findViewById(R.id.rvClientes);
@@ -76,7 +78,7 @@ public class ClienteActivity extends AppCompatActivity implements ClienteAdapter
             if (identificacion.isEmpty() || nombre.isEmpty() || direccion.isEmpty() || telefono.isEmpty() || tipo.isEmpty()) {
                 Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
             } else {
-                Cliente cliente = new Cliente(identificacion, nombre, direccion, telefono, tipo);
+                Cliente cliente = new Cliente(identificacion, nombre, direccion, telefono, Tools.obtenerTipoCliente(tipo));
                 clientes.add(cliente);
                 clienteAdapter.notifyItemInserted(clientes.size() - 1);
             }

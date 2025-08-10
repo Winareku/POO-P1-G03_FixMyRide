@@ -204,6 +204,21 @@ public class Tools {
         return tipoVehiculo;
     }
 
+    public static TipoCliente obtenerTipoCliente(String entrada){
+        TipoCliente tipoCliente = null;
+        switch (entrada) {
+            case "Personal":
+                tipoCliente = TipoCliente.PERSONAL;
+                break;
+            case "Empresarial":
+                tipoCliente = TipoCliente.EMPRESARIAL;
+                break;
+            default:
+                opcionNoValida();
+        }
+        return tipoCliente;
+    }
+
     public static String rellenar(String texto, int ancho) {
         while (texto.length() < ancho) { texto += " "; }
         return texto;
