@@ -1,4 +1,4 @@
-package poo.espol.fixmyride;
+package poo.espol.fixmyride.model;
 
 public class Proveedor {
     public String identificacion;

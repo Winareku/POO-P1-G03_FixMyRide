@@ -1,4 +1,4 @@
-package poo.espol.fixmyride;
+package poo.espol.fixmyride.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +8,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
+
+import poo.espol.fixmyride.R;
+import poo.espol.fixmyride.model.Tecnico;
 
 public class TecnicoAdapter extends RecyclerView.Adapter<TecnicoAdapter.TecnicoViewHolder> {
     private ArrayList<Tecnico> tecnicos;

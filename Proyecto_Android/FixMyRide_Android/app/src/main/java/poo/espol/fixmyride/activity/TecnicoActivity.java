@@ -1,4 +1,4 @@
-package poo.espol.fixmyride;
+package poo.espol.fixmyride.activity;
 
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +9,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
+
+import poo.espol.fixmyride.R;
+import poo.espol.fixmyride.model.Tecnico;
+import poo.espol.fixmyride.adapter.TecnicoAdapter;
 
 public class TecnicoActivity extends AppCompatActivity {
     private ArrayList<Tecnico> listaTecnicos;

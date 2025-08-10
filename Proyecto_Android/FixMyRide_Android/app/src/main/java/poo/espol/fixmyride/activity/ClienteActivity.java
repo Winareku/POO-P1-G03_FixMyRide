@@ -1,4 +1,4 @@
-package poo.espol.fixmyride;
+package poo.espol.fixmyride.activity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -16,6 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import poo.espol.fixmyride.model.Cliente;
+import poo.espol.fixmyride.adapter.ClienteAdapter;
+import poo.espol.fixmyride.R;
 
 public class ClienteActivity extends AppCompatActivity implements ClienteAdapter.OnClienteActionListener {
 

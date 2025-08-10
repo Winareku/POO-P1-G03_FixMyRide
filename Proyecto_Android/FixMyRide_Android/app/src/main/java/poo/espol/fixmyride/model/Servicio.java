@@ -1,6 +1,5 @@
-package poo.espol.fixmyride;
+package poo.espol.fixmyride.model;
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class Servicio {
     private String codigo;

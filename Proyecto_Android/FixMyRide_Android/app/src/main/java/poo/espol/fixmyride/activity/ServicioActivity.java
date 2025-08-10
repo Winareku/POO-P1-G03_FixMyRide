@@ -1,4 +1,4 @@
-package poo.espol.fixmyride;
+package poo.espol.fixmyride.activity;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.widget.Button;
@@ -8,6 +8,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+
+import poo.espol.fixmyride.R;
+import poo.espol.fixmyride.model.Servicio;
+import poo.espol.fixmyride.adapter.ServicioAdapter;
 
 public class ServicioActivity extends AppCompatActivity {
 

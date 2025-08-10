@@ -1,4 +1,4 @@
-package poo.espol.fixmyride;
+package poo.espol.fixmyride.activity;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import poo.espol.fixmyride.model.Proveedor;
+import poo.espol.fixmyride.adapter.ProveedorAdapter;
+import poo.espol.fixmyride.R;
 
 public class ProveedorActivity extends AppCompatActivity implements ProveedorAdapter.OnProveedorActionListener {
 
