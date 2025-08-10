@@ -1,0 +1,22 @@
+package poo.espol.fixmyride.model;
+
+import java.util.ArrayList;
+
+public class ReporteIngresoServicio {
+    // Atributos
+    private ArrayList<DetalleServicio> listaServicios;
+    private boolean hayCoincidencias;
+
+    // Constructor
+    public ReporteIngresoServicio(ArrayList<DetalleServicio> listaServicios, boolean hayCoincidencias){
+        this.listaServicios=listaServicios;
+        this.hayCoincidencias = hayCoincidencias;
+    }
+
+    // Getters y Setters
+    public ArrayList<DetalleServicio> getlistaServicios(){ return listaServicios; }
+    public boolean getHayCoincidencias(){ return hayCoincidencias; }
+
+    @Override
+    public String toString(){ return (""); }
+}

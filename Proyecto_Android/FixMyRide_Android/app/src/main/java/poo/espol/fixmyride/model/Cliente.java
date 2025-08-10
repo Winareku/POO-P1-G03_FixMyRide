@@ -1,57 +1,24 @@
 package poo.espol.fixmyride.model;
 
-public class Cliente {
-    private String identificacion;
-    private String nombre;
+public class Cliente extends Persona {
+    // Atributos
     private String direccion;
-    private String telefono;
-    private String tipoCliente;
+    private TipoCliente tipoCliente; // "Personal" o "Empresarial"
+    private Empresa empresa;
 
-    public Cliente(String identificacion, String nombre, String direccion, String telefono, String tipoCliente) {
-        this.identificacion = identificacion;
-        this.nombre = nombre;
+    // Constructor
+    public Cliente(String id, String nombre, String telefono, String direccion, TipoCliente tipoCliente) {
+        super(id, nombre, telefono);
         this.direccion = direccion;
-        this.telefono = telefono;
         this.tipoCliente = tipoCliente;
     }
 
-    public String getIdentificacion() {
-        return identificacion;
-    }
-
-    public void setIdentificacion(String identificacion) {
-        this.identificacion = identificacion;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public String getTipoCliente() {
-        return tipoCliente;
-    }
-
-    public void setTipoCliente(String tipoCliente) {
-        this.tipoCliente = tipoCliente;
-    }
+    // Getters y Setters
+    public String getDireccion() { return direccion; }
+    public Empresa getEmpresa(){ return empresa; }
+    public TipoCliente getTipoCliente() { return tipoCliente; }
+    public void setTipoCliente(TipoCliente tipoCliente) { this.tipoCliente = tipoCliente; }
+    public void setEmpresa(Empresa empresa) { this.empresa = empresa; }
+    @Override
+    public String toString() { return (super.toString() + ", " + direccion + ", " + tipoCliente +(empresa!=null?(", "+empresa.getNombre()):"")); }
 }

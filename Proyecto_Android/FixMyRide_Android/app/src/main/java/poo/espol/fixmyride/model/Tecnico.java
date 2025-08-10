@@ -1,31 +1,18 @@
 package poo.espol.fixmyride.model;
 
-public class Tecnico {
-    private String identificacion;
-    private String nombre;
-    private String telefono;
+public class Tecnico extends Persona {
+    // Atributos
     private String especialidad;
 
-    public Tecnico(String identificacion, String nombre, String telefono, String especialidad) {
-        this.identificacion = identificacion;
-        this.nombre = nombre;
-        this.telefono = telefono;
+    // Constructor
+    public Tecnico(String id, String nombre, String telefono, String especialidad) {
+        super(id, nombre, telefono);
         this.especialidad = especialidad;
     }
-
-    public String getIdentificacion() {
-        return identificacion;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public String getEspecialidad() {
-        return especialidad;
-    }
+    
+    // Getters y Setters
+    public String getEspecialidad() { return especialidad; }
+    public void setEspecialidad(String especialidad) { this.especialidad = especialidad; }
+    @Override
+    public String toString() { return (super.toString() + ", " + especialidad); }
 }

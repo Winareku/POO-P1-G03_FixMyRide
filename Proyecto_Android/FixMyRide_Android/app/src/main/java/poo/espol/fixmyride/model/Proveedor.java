@@ -1,15 +1,19 @@
 package poo.espol.fixmyride.model;
 
-public class Proveedor {
-    public String identificacion;
-    public String nombre;
-    public String telefono;
-    public String descripcion;
+public class Proveedor extends Persona {
+    // Atributos
+    private String descripcion;
 
-    public Proveedor(String identificacion, String nombre, String telefono, String descripcion) {
-        this.identificacion = identificacion;
-        this.nombre = nombre;
-        this.telefono = telefono;
+    // Constructor
+    public Proveedor(String id, String nombre, String telefono, String descripcion) {
+        super(id, nombre, telefono);
         this.descripcion = descripcion;
     }
+    
+    // Getters y Setters
+    public String getDescripcion() { return descripcion; }
+    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
+    @Override
+    public String toString() { return (super.toString() + ", " + descripcion); }
+
 }
