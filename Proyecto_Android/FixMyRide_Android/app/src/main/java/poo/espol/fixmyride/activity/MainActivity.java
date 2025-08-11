@@ -17,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
         Button btnAdministrarClientes = findViewById(R.id.button1);
         Button btnAdministrarProveedores = findViewById(R.id.button2);
         Button btnAdministrarTecnicos = findViewById(R.id.button3);
+        Button btnAdministrarServicios= findViewById(R.id.button4);
+        Button btnOrdenes= findViewById(R.id.button5);
 
         btnAdministrarClientes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,6 +40,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, TecnicoActivity.class);
+                startActivity(intent);
+            }
+        });
+        btnAdministrarServicios.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ServicioActivity.class);
+                startActivity(intent);
+            }
+        });
+        btnOrdenes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, OrdenActivity.class);
                 startActivity(intent);
             }
         });
