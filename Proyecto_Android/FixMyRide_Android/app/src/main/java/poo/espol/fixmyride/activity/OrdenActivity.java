@@ -26,34 +26,33 @@ public class OrdenActivity extends AppCompatActivity {
 
         recyclerOrdenes = findViewById(R.id.recyclerOrdenes);
         recyclerOrdenes.setLayoutManager(new LinearLayoutManager(this));
-
-        listaOrdenes = getOrdenesDeEjemplo();
+        listaOrdenes= new ArrayList<>();
+        this.cargarOrdenes();
         adapter = new OrdenServicioAdapter(listaOrdenes);
         recyclerOrdenes.setAdapter(adapter);
 
         findViewById(R.id.btnCrearOrden).setOnClickListener(v -> {
-            startActivity(new Intent(this, com.example.fixmyride.CrearOrdenActivity.class));
+            startActivity(new Intent(this, CrearOrdenActivity.class));
         });
     }
 
-    private ArrayList<OrdenServicio> getOrdenesDeEjemplo() {
-        ArrayList<OrdenServicio> lista = new ArrayList<>();
-        OrdenServicio o1 = new OrdenServicio("Juan Pérez", "T1", LocalDate.of(2025,7,15), TipoVehiculo.AUTOMOVIL, "ABC-1234");
-        o1.setTotalOrden(150.00);
-        lista.add(o1);
+    private void cargarOrdenes() {
+        if(listaOrdenes.isEmpty()){
+            OrdenServicio o1 = new OrdenServicio("Juan Pérez", "T1", LocalDate.of(2025,7,15), TipoVehiculo.AUTOMOVIL, "ABC-1234");
+            o1.setTotalOrden(150.00);
+            listaOrdenes.add(o1);
 
-        OrdenServicio o2 = new OrdenServicio("María Gómez", "T2", LocalDate.of(2025,7,10), TipoVehiculo.BUS, "XYZ-9876");
-        o2.setTotalOrden(230.50);
-        lista.add(o2);
+            OrdenServicio o2 = new OrdenServicio("María Gómez", "T2", LocalDate.of(2025,7,10), TipoVehiculo.BUS, "XYZ-9876");
+            o2.setTotalOrden(230.50);
+            listaOrdenes.add(o2);
 
-        OrdenServicio o3 = new OrdenServicio("Pedro López", "T3", LocalDate.of(2025,6,20), TipoVehiculo.MOTOCICLETA, "JKL-4567");
-        o3.setTotalOrden(85.75);
-        lista.add(o3);
+            OrdenServicio o3 = new OrdenServicio("Pedro López", "T3", LocalDate.of(2025,6,20), TipoVehiculo.MOTOCICLETA, "JKL-4567");
+            o3.setTotalOrden(85.75);
+            listaOrdenes.add(o3);
 
-        OrdenServicio o4 = new OrdenServicio("Ana Torres", "T4", LocalDate.of(2025,5,10), TipoVehiculo.AUTOMOVIL, "MNO-2222");
-        o4.setTotalOrden(300.00);
-        lista.add(o4);
-
-        return lista;
+            OrdenServicio o4 = new OrdenServicio("Ana Torres", "T4", LocalDate.of(2025,5,10), TipoVehiculo.AUTOMOVIL, "MNO-2222");
+            o4.setTotalOrden(300.00);
+            listaOrdenes.add(o4);
+        }
     }
 }
