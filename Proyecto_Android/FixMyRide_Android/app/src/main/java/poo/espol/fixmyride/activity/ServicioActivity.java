@@ -17,13 +17,20 @@ public class ServicioActivity extends AppCompatActivity {
 
     private RecyclerView recyclerServicios;
     private ServicioAdapter adapter;
-    private ArrayList<Servicio> listaServicios;
+    public static ArrayList<Servicio> listaServicios;
     private Button btnAgregar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_servicios);
+
+        listaServicios.add(new Servicio("Alineación y balanceo", 42.00));
+        listaServicios.add(new Servicio("Cambio de aceite", 32.50));
+        listaServicios.add(new Servicio("Reparación de motor", 250.00));
+        listaServicios.add(new Servicio("Revisión de frenos", 48.00));
+        listaServicios.add(new Servicio("Lavado y detallado", 25.00));
+        listaServicios.add(new Servicio("Diagnóstico electrónico", 60.00));
 
         recyclerServicios = findViewById(R.id.recyclerServicios);
         btnAgregar = findViewById(R.id.btnAgregarServicio);
