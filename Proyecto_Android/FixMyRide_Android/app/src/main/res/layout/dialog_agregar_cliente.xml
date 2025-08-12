@@ -19,7 +19,7 @@
             android:layout_marginBottom="4dp"/>
 
         <EditText
-            android:id="@+id/etIdentificacion"
+            android:id="@+id/etId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Cédula/RUC"
@@ -36,7 +36,7 @@
             android:layout_marginBottom="4dp"/>
 
         <EditText
-            android:id="@+id/etNombreCliente"
+            android:id="@+id/etNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nombre del cliente"
@@ -53,7 +53,7 @@
             android:layout_marginBottom="4dp"/>
 
         <EditText
-            android:id="@+id/etDireccionCliente"
+            android:id="@+id/etDireccion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Dirección completa"
@@ -70,7 +70,7 @@
             android:layout_marginBottom="4dp"/>
 
         <EditText
-            android:id="@+id/etTelefonoCliente"
+            android:id="@+id/etTelefono"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Número de contacto"
