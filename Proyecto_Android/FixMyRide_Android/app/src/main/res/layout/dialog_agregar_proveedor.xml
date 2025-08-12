@@ -19,7 +19,7 @@
             android:layout_marginBottom="4dp"/>
 
         <EditText
-            android:id="@+id/etIdentificacion"
+            android:id="@+id/etId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Cédula/RUC"
@@ -36,7 +36,7 @@
             android:layout_marginBottom="4dp"/>
 
         <EditText
-            android:id="@+id/etNombreProveedor"
+            android:id="@+id/etNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nombre completo o razón social"
@@ -53,7 +53,7 @@
             android:layout_marginBottom="4dp"/>
 
         <EditText
-            android:id="@+id/etTelefonoProveedor"
+            android:id="@+id/etTelefono"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Número de contacto"
@@ -70,12 +70,12 @@
             android:layout_marginBottom="4dp"/>
 
         <EditText
-            android:id="@+id/etDescripcionProveedor"
+            android:id="@+id/etDescripcion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Productos o servicios que ofrece"
             android:inputType="textMultiLine"
-            android:minLines="3"
+            android:minLines="2"
             android:gravity="top"
             android:minHeight="100dp"/>
     </LinearLayout>

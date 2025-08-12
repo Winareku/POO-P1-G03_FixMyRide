@@ -1,6 +1,4 @@
 package poo.espol.fixmyride.activity;
-
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,18 +13,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-
 import poo.espol.fixmyride.model.Cliente;
 import poo.espol.fixmyride.adapter.ClienteAdapter;
 import poo.espol.fixmyride.R;
 import poo.espol.fixmyride.extra.Tools;
+import poo.espol.fixmyride.model.Proveedor;
 import poo.espol.fixmyride.model.TipoCliente;
 
-public class ClienteActivity extends AppCompatActivity implements ClienteAdapter.OnClienteActionListener {
-
-    private List<Cliente> clientes;
-    private ClienteAdapter clienteAdapter;
+public class ClienteActivity extends AppCompatActivity implements ClienteAdapter.OnClienteEliminarListener {
+    private ArrayList<Cliente> lista;
+    private ClienteAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,31 +30,30 @@ public class ClienteActivity extends AppCompatActivity implements ClienteAdapter
         setContentView(R.layout.activity_clientes);
 
         // Inicializa con 3 clientes por defecto
-        clientes = new ArrayList<>(Arrays.asList(
+        lista = new ArrayList<>(Arrays.asList(
                 new Cliente("0911111111", "Paul Garcia", "Sauces", "0944444444", TipoCliente.PERSONAL),
                 new Cliente("0922222222", "Empresa S.A..", "Urdesa", "0955555555", TipoCliente.EMPRESARIAL),
                 new Cliente("0933333333", "Daniela Molina", "Via la Costa", "0966666666", TipoCliente.PERSONAL)
         ));
 
-        RecyclerView rvClientes = findViewById(R.id.rvClientes);
-        rvClientes.setLayoutManager(new LinearLayoutManager(this));
-        clienteAdapter = new ClienteAdapter(clientes, this);
-        rvClientes.setAdapter(clienteAdapter);
+        RecyclerView recyclerView = findViewById(R.id.rvClientes);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new ClienteAdapter(lista, this);
+        recyclerView.setAdapter(adapter);
 
-        Button btnAgregarCliente = findViewById(R.id.btnAgregarCliente);
-        btnAgregarCliente.setOnClickListener(v -> mostrarDialogoAgregarCliente());
+        Button btnAgregar = findViewById(R.id.btnAgregarCliente);
+        btnAgregar.setOnClickListener(v -> mostrarDialogoAgregar());
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    private void mostrarDialogoAgregarCliente() {
+    private void mostrarDialogoAgregar() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_agregar_cliente, null);
         builder.setView(dialogView);
 
-        EditText etIdentificacion = dialogView.findViewById(R.id.etIdentificacion);
-        EditText etNombre = dialogView.findViewById(R.id.etNombreCliente);
-        EditText etDireccion = dialogView.findViewById(R.id.etDireccionCliente);
-        EditText etTelefono = dialogView.findViewById(R.id.etTelefonoCliente);
+        EditText etIdentificacion = dialogView.findViewById(R.id.etId);
+        EditText etNombre = dialogView.findViewById(R.id.etNombre);
+        EditText etDireccion = dialogView.findViewById(R.id.etDireccion);
+        EditText etTelefono = dialogView.findViewById(R.id.etTelefono);
         RadioGroup rgTipoCliente = dialogView.findViewById(R.id.rgTipoCliente);
 
         builder.setTitle("Agregar Cliente");
@@ -79,22 +74,58 @@ public class ClienteActivity extends AppCompatActivity implements ClienteAdapter
                 Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
             } else {
                 Cliente cliente = new Cliente(identificacion, nombre, direccion, telefono, Tools.obtenerTipoCliente(tipo));
-                clientes.add(cliente);
-                clienteAdapter.notifyItemInserted(clientes.size() - 1);
+                lista.add(cliente);
+                adapter.notifyItemInserted(lista.size() - 1);
             }
         });
         builder.setNegativeButton("Cancelar", null);
         builder.show();
     }
+/*
+    private void mostrarDialogoAgregar() {
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_agregar_proveedor, null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this)
+                .setTitle("Agregar Proveedor")
+                .setView(dialogView)
+                .setPositiveButton("Agregar", (dialog, which) -> {
+                    String id = getTextFromView(dialogView, R.id.etId);
+                    String nombre = getTextFromView(dialogView, R.id.etNombre);
+                    String direccion = getTextFromView(dialogView, R.id.etDireccion);
+                    String telefono = getTextFromView(dialogView, R.id.etTelefono);
+                    String rgTipoCliente = getTextFromView(dialogView, R.id.rgTipoCliente);
+                    int selectedTipoId = rgTipoCliente.getCheckedRadioButtonId();
+                    String tipo = "";
+                    if (selectedTipoId != -1) {
+                        RadioButton radioButton = dialogView.findViewById(selectedTipoId);
+                        tipo = radioButton.getText().toString();
+                    }
 
+                    if (validarCampos(id, nombre, direccion, telefono, rgTipoCliente)) {
+                        lista.add(new Cliente(id, nombre, telefono, descripcion));
+                        adapter.notifyItemInserted(lista.size() - 1);
+                    } else {Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();}
+                })
+                .setNegativeButton("Cancelar", null);
+        builder.show();
+    }
+
+    private String getTextFromView(View parentView, int viewId) {
+        return ((android.widget.EditText) parentView.findViewById(viewId)).getText().toString();
+    }
+
+    private boolean validarCampos(String... campos) {
+        for (String campo : campos) {if (campo.trim().isEmpty()) return false;}
+        return true;
+    }
+    */
     @Override
     public void onEliminar(int position) {
         new AlertDialog.Builder(this)
                 .setTitle("Eliminar Cliente")
                 .setMessage("¿Está seguro que desea eliminar el registro?")
                 .setPositiveButton("Eliminar", (dialog, which) -> {
-                    clientes.remove(position);
-                    clienteAdapter.notifyItemRemoved(position);
+                    lista.remove(position);
+                    adapter.notifyItemRemoved(position);
                 })
                 .setNegativeButton("Cancelar", null)
                 .show();

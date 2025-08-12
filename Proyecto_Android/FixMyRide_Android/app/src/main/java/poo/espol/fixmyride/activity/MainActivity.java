@@ -11,14 +11,19 @@ import poo.espol.fixmyride.R;
 public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         Button btnAdministrarClientes = findViewById(R.id.button1);
         Button btnAdministrarProveedores = findViewById(R.id.button2);
         Button btnAdministrarTecnicos = findViewById(R.id.button3);
+<<<<<<< Updated upstream
         Button btnAdministrarServicios= findViewById(R.id.button4);
         Button btnOrdenes= findViewById(R.id.button5);
+=======
+        Button btnAdministrarServicios = findViewById(R.id.button4);
+>>>>>>> Stashed changes
 
         btnAdministrarClientes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,13 +48,19 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+<<<<<<< Updated upstream
         btnAdministrarServicios.setOnClickListener(new View.OnClickListener() {
+=======
+
+        btnAdministrarServicios.setOnClickListener(new View.OnClickListener(){
+>>>>>>> Stashed changes
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ServicioActivity.class);
                 startActivity(intent);
             }
         });
+<<<<<<< Updated upstream
         btnOrdenes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,5 +68,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+=======
+>>>>>>> Stashed changes
     }
 }

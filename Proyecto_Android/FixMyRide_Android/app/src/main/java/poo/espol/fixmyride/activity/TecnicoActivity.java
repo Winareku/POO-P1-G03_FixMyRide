@@ -1,5 +1,4 @@
 package poo.espol.fixmyride.activity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,13 +8,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import poo.espol.fixmyride.R;
 import poo.espol.fixmyride.model.Tecnico;
 import poo.espol.fixmyride.adapter.TecnicoAdapter;
 
-public class TecnicoActivity extends AppCompatActivity {
-    private ArrayList<Tecnico> listaTecnicos;
+public class TecnicoActivity extends AppCompatActivity implements TecnicoAdapter.OnTecnicoEliminarListener{
+    private ArrayList<Tecnico> lista;
     private TecnicoAdapter adapter;
 
     @Override
@@ -23,37 +23,37 @@ public class TecnicoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tecnicos);
 
-        listaTecnicos = new ArrayList<>();
-        listaTecnicos.add(new Tecnico("1000000001", "Juan Pérez", "555-1234", "Mecánica General"));
-        listaTecnicos.add(new Tecnico("1000000002", "Ana Gómez", "555-5678", "Electricidad Automotriz"));
-        listaTecnicos.add(new Tecnico("1000000003", "Luis Sánchez", "555-8765", "Diagnóstico de Computadoras de Autos"));
+        // Inicializa con 3 tecnicos por defecto
+        lista = new ArrayList<>(Arrays.asList(
+                new Tecnico("1000000001", "Juan Pérez", "555-1234", "Mecánica General"),
+                new Tecnico("1000000002", "Ana Gómez", "555-5678", "Electricidad Automotriz"),
+                new Tecnico("1000000003", "Luis Sánchez", "555-8765", "Diagnóstico de Computadoras de Autos")
+        ));
 
         RecyclerView recyclerView = findViewById(R.id.rvTecnicos);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new TecnicoAdapter(listaTecnicos, position -> confirmarEliminar(position));
+        adapter = new TecnicoAdapter(lista, this);
         recyclerView.setAdapter(adapter);
 
         Button btnAgregar = findViewById(R.id.btnAgregarTecnico);
-        btnAgregar.setOnClickListener(v -> mostrarDialogAgregar());
+        btnAgregar.setOnClickListener(v -> mostrarDialogoAgregar());
     }
 
-    private void mostrarDialogAgregar() {
+    private void mostrarDialogoAgregar() {
         View dialogView = getLayoutInflater().inflate(R.layout.dialog_agregar_tecnico, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(this)
                 .setTitle("Agregar Técnico")
                 .setView(dialogView)
                 .setPositiveButton("Agregar", (dialog, which) -> {
-                    String id = getTextFromView(dialogView, R.id.etIdentificacion);
+                    String id = getTextFromView(dialogView, R.id.etId);
                     String nombre = getTextFromView(dialogView, R.id.etNombre);
                     String telefono = getTextFromView(dialogView, R.id.etTelefono);
                     String especialidad = getTextFromView(dialogView, R.id.etEspecialidad);
 
                     if (validarCampos(id, nombre, telefono, especialidad)) {
-                        listaTecnicos.add(new Tecnico(id, nombre, telefono, especialidad));
-                        adapter.notifyItemInserted(listaTecnicos.size() - 1);
-                    } else {
-                        Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
-                    }
+                        lista.add(new Tecnico(id, nombre, telefono, especialidad));
+                        adapter.notifyItemInserted(lista.size() - 1);
+                    } else {Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();}
                 })
                 .setNegativeButton("Cancelar", null);
         builder.show();
@@ -64,18 +64,17 @@ public class TecnicoActivity extends AppCompatActivity {
     }
 
     private boolean validarCampos(String... campos) {
-        for (String campo : campos) {
-            if (campo.trim().isEmpty()) return false;
-        }
+        for (String campo : campos) {if (campo.trim().isEmpty()) return false;}
         return true;
     }
 
-    private void confirmarEliminar(int position) {
+    @Override
+    public void onEliminar(int position) {
         new AlertDialog.Builder(this)
                 .setTitle("Eliminar Técnico")
                 .setMessage("¿Está seguro que desea eliminar el registro?")
                 .setPositiveButton("Eliminar", (dialog, which) -> {
-                    listaTecnicos.remove(position);
+                    lista.remove(position);
                     adapter.notifyItemRemoved(position);
                 })
                 .setNegativeButton("Cancelar", null)
