@@ -1,5 +1,4 @@
 package poo.espol.fixmyride.adapter;
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,58 +7,51 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
-
 import poo.espol.fixmyride.R;
 import poo.espol.fixmyride.model.Servicio;
 
 public class ServicioAdapter extends RecyclerView.Adapter<ServicioAdapter.ServicioViewHolder> {
+    private ArrayList<Servicio> list;
+    private OnEliminarClickListener eliminarListener;
+    public interface OnEliminarClickListener {void onEliminar(int position);}
 
-    private Context context;
-    private ArrayList<Servicio> listaServicios;
-    private OnEditarClickListener listener;
-
-    public interface OnEditarClickListener {
-        void onEditarClick(int position);
-    }
-
-    public ServicioAdapter(Context context, ArrayList<Servicio> listaServicios, OnEditarClickListener listener) {
-        this.context = context;
-        this.listaServicios = listaServicios;
-        this.listener = listener;
-    }
-
-    @NonNull
-    @Override
-    public ServicioViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View vista = LayoutInflater.from(context).inflate(R.layout.item_servicio, parent, false);
-        return new ServicioViewHolder(vista);
+    public ServicioAdapter(ArrayList<Servicio> list, OnEliminarClickListener eliminarListener) {
+        this.list = list;
+        this.eliminarListener = eliminarListener;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ServicioViewHolder holder, int position) {
-        Servicio servicio = listaServicios.get(position);
-        holder.tvCodigo.setText("Código: S" + servicio.getCodigo());
-        holder.tvNombre.setText("Nombre del Servicio: " + servicio.getNombre());
-        holder.tvPrecio.setText(String.format("Precio: $%.2f", servicio.getPrecio()));
-
-        holder.btnEditar.setOnClickListener(v -> listener.onEditarClick(position));
+    public ServicioViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_servicio, parent, false);
+        return new ServicioViewHolder(view);
     }
 
     @Override
-    public int getItemCount() {
-        return listaServicios.size();
+    public void onBindViewHolder(ServicioViewHolder holder, int position) {
+        Servicio servicio = list.get(position);
+        holder.tvCodigo.setText("Código: " + servicio.getCodigo());
+        holder.tvNombre.setText("Nombre: " + servicio.getNombre());
+        holder.tvPrecio.setText("Precio: $" + servicio.getPrecio());
+        holder.btnEliminar.setOnClickListener(v -> {
+            if (eliminarListener != null) {eliminarListener.onEliminar(holder.getAdapterPosition());}
+        });
     }
+
+
+    @Override
+    public int getItemCount() {return list.size();}
 
     public static class ServicioViewHolder extends RecyclerView.ViewHolder {
         TextView tvCodigo, tvNombre, tvPrecio;
-        Button btnEditar;
+        Button btnEditar, btnEliminar;
 
-        public ServicioViewHolder(@NonNull View itemView) {
+        public ServicioViewHolder(View itemView) {
             super(itemView);
             tvCodigo = itemView.findViewById(R.id.tvCodigo);
             tvNombre = itemView.findViewById(R.id.tvNombre);
             tvPrecio = itemView.findViewById(R.id.tvPrecio);
             btnEditar = itemView.findViewById(R.id.btnEditar);
+            btnEliminar = itemView.findViewById(R.id.btnEliminar);
         }
     }
 }

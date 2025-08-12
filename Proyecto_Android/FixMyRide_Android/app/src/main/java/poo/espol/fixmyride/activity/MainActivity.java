@@ -11,6 +11,7 @@ import poo.espol.fixmyride.R;
 public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -18,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         Button btnAdministrarProveedores = findViewById(R.id.button2);
         Button btnAdministrarTecnicos = findViewById(R.id.button3);
         Button btnAdministrarServicios= findViewById(R.id.button4);
-        Button btnOrdenes= findViewById(R.id.button5);
+        Button btnOrdenServicio = findViewById(R.id.button5);
 
         btnAdministrarClientes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        btnOrdenes.setOnClickListener(new View.OnClickListener() {
+        btnOrdenServicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, OrdenActivity.class);

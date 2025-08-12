@@ -32,7 +32,7 @@ public class CrearOrdenActivity extends AppCompatActivity {
     private ArrayList<DetalleServicio> listaDetalles;
     private DetalleServicioAdapter adapter;
 
-    private ArrayList<Servicio> serviciosDisponibles= ServicioActivity.listaServicios;
+    private ArrayList<Servicio> serviciosDisponibles = ServicioActivity.getList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

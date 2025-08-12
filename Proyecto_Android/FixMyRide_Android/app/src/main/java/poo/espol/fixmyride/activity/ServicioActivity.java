@@ -1,100 +1,82 @@
 package poo.espol.fixmyride.activity;
-import android.app.Dialog;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import poo.espol.fixmyride.R;
 import poo.espol.fixmyride.model.Servicio;
 import poo.espol.fixmyride.adapter.ServicioAdapter;
 
-public class ServicioActivity extends AppCompatActivity {
-
-    private RecyclerView recyclerServicios;
+public class ServicioActivity extends AppCompatActivity implements ServicioAdapter.OnEliminarClickListener {
+    private static ArrayList<Servicio> list;
     private ServicioAdapter adapter;
-    public static ArrayList<Servicio> listaServicios;
-    private Button btnAgregar;
+
+    public static ArrayList<Servicio> getList(){return list;}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_servicios);
 
-        recyclerServicios = findViewById(R.id.recyclerServicios);
-        btnAgregar = findViewById(R.id.btnAgregarServicio);
+        // Inicializa con 6 servicios por defecto
+        list = new ArrayList<>(Arrays.asList(
+                new Servicio("Cambio de aceite",32.5), new Servicio("Revisión de frenos",48.0),
+                new Servicio("Alineación y balanceo",42.0), new Servicio("Reparación de motor",250.0),
+                new Servicio("Diagnóstico electrónico",60.0), new Servicio("Lavado y detallado",25.0)
+        ));
 
-        listaServicios = new ArrayList<>();
-        this.cargarServicios();
-        adapter = new ServicioAdapter(this, listaServicios, this::editarServicio);
+        RecyclerView recyclerView = findViewById(R.id.rvServicios);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new ServicioAdapter(list, this);
+        recyclerView.setAdapter(adapter);
 
-        recyclerServicios.setLayoutManager(new LinearLayoutManager(this));
-        recyclerServicios.setAdapter(adapter);
-
+        Button btnAgregar = findViewById(R.id.btnAgregarServicio);
         btnAgregar.setOnClickListener(v -> mostrarDialogoAgregar());
     }
 
     private void mostrarDialogoAgregar() {
-        Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.dialog_agregar_servicio);
-
-        EditText etNombre = dialog.findViewById(R.id.etNombreServicio);
-        EditText etPrecio = dialog.findViewById(R.id.etPrecioServicio);
-        Button btnGuardar = dialog.findViewById(R.id.btnGuardar);
-        Button btnCancelar = dialog.findViewById(R.id.btnCancelar);
-
-        btnGuardar.setOnClickListener(v -> {
-            String nombre = etNombre.getText().toString().trim();
-            double precio = Double.parseDouble(etPrecio.getText().toString());
-
-            Servicio nuevo = new Servicio(nombre, precio);
-            listaServicios.add(nuevo);
-            adapter.notifyItemInserted(listaServicios.size() - 1);
-            dialog.dismiss();
-        });
-
-        btnCancelar.setOnClickListener(v -> dialog.dismiss());
-
-        dialog.show();
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_agregar_servicio, null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this)
+                .setTitle("Agregar Servicio")
+                .setView(dialogView)
+                .setPositiveButton("Agregar", (dialog, which) -> {
+                    String nombre = getTextFromView(dialogView, R.id.etNombre);
+                    String precio = getTextFromView(dialogView, R.id.etPrecio);
+                    if (validarCampos(nombre, precio)) {
+                        list.add(new Servicio(nombre, Float.parseFloat(precio)));
+                        adapter.notifyItemInserted(list.size() - 1);
+                    } else {Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();}
+                })
+                .setNegativeButton("Cancelar", null);
+        builder.show();
     }
 
-    private void editarServicio(int position) {
-        Servicio servicio = listaServicios.get(position);
+    private String getTextFromView(View parentView, int viewId) {return ((android.widget.EditText) parentView.findViewById(viewId)).getText().toString();}
 
-        Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.dialog_agregar_servicio);
-
-        EditText etNombre = dialog.findViewById(R.id.etNombreServicio);
-        EditText etPrecio = dialog.findViewById(R.id.etPrecioServicio);
-        Button btnGuardar = dialog.findViewById(R.id.btnGuardar);
-        Button btnCancelar = dialog.findViewById(R.id.btnCancelar);
-
-        etNombre.setText(servicio.getNombre());
-        etNombre.setEnabled(false); // nombre no editable
-        etPrecio.setText(String.valueOf(servicio.getPrecio()));
-
-        btnGuardar.setOnClickListener(v -> {
-            double precio = Double.parseDouble(etPrecio.getText().toString());
-            servicio.editarPrecio(precio);
-            adapter.notifyItemChanged(position);
-            dialog.dismiss();
-        });
-
-        btnCancelar.setOnClickListener(v -> dialog.dismiss());
-
-        dialog.show();
-    }
-    private void cargarServicios(){
-        listaServicios.add(new Servicio("Alineación y balanceo", 42.00));
-        listaServicios.add(new Servicio("Cambio de aceite", 32.50));
-        listaServicios.add(new Servicio("Reparación de motor", 250.00));
-        listaServicios.add(new Servicio("Revisión de frenos", 48.00));
-        listaServicios.add(new Servicio("Lavado y detallado", 25.00));
-        listaServicios.add(new Servicio("Diagnóstico electrónico", 60.00));
+    private boolean validarCampos(String... campos) {
+        for (String campo : campos) {if (campo.trim().isEmpty()) return false;}
+        return true;
     }
 
+    @Override
+    public void onEliminar(int position){
+        new AlertDialog.Builder(this)
+                .setTitle("Eliminar Servicio")
+                .setMessage("¿Está seguro que desea eliminar el registro?")
+                .setPositiveButton("Eliminar", (dialog, which) -> {
+                    list.remove(position);
+                    adapter.notifyItemRemoved(position);
+                })
+                .setNegativeButton("Cancelar", null)
+                .show();
+    }
 }
