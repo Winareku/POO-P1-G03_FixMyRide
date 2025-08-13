@@ -1,23 +1,21 @@
 package poo.espol.fixmyride.activity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
-import java.util.Arrays;
-
+import poo.espol.fixmyride.extra.DataRepository;
 import poo.espol.fixmyride.model.Proveedor;
 import poo.espol.fixmyride.adapter.ProveedorAdapter;
 import poo.espol.fixmyride.R;
-import poo.espol.fixmyride.model.Tecnico;
 
 public class ProveedorActivity extends AppCompatActivity implements ProveedorAdapter.OnProveedorEliminarListener {
+
+    // Variables
     private ArrayList<Proveedor> lista;
     private ProveedorAdapter adapter;
 
@@ -27,11 +25,7 @@ public class ProveedorActivity extends AppCompatActivity implements ProveedorAda
         setContentView(R.layout.activity_proveedores);
 
         // Inicializa con 3 proveedores por defecto
-        lista = new ArrayList<>(Arrays.asList(
-                new Proveedor("0977777777", "Repuestos R.C.", "555-1234", "Suministro de repuestos para vehículos."),
-                new Proveedor("0988888888", "Herramientas y Equipos HOPE", "555-5678", "Proveedor de herramientas y equipos especializados para talleres mecánicos."),
-                new Proveedor("0999999999", "Lubricantes y Aceites JK", "555-9101", "Venta de lubricantes y aceites automotrices para mantenimiento.")
-        ));
+        lista = DataRepository.getProveedores();
 
         RecyclerView recyclerView = findViewById(R.id.rvProveedores);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

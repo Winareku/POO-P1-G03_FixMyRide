@@ -12,16 +12,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
-import java.util.Arrays;
 import poo.espol.fixmyride.model.Cliente;
 import poo.espol.fixmyride.adapter.ClienteAdapter;
 import poo.espol.fixmyride.R;
-import poo.espol.fixmyride.extra.Tools;
-import poo.espol.fixmyride.model.Proveedor;
 import poo.espol.fixmyride.model.TipoCliente;
+import poo.espol.fixmyride.extra.*;
 
 public class ClienteActivity extends AppCompatActivity implements ClienteAdapter.OnClienteEliminarListener {
-    private ArrayList<Cliente> lista;
+
+    // Variables
+    private ArrayList<Cliente> list;
     private ClienteAdapter adapter;
 
     @Override
@@ -30,15 +30,11 @@ public class ClienteActivity extends AppCompatActivity implements ClienteAdapter
         setContentView(R.layout.activity_clientes);
 
         // Inicializa con 3 clientes por defecto
-        lista = new ArrayList<>(Arrays.asList(
-                new Cliente("0911111111", "Paul Garcia", "Sauces", "0944444444", TipoCliente.PERSONAL),
-                new Cliente("0922222222", "Empresa S.A..", "Urdesa", "0955555555", TipoCliente.EMPRESARIAL),
-                new Cliente("0933333333", "Daniela Molina", "Via la Costa", "0966666666", TipoCliente.PERSONAL)
-        ));
+        list = DataRepository.getClientes();
 
         RecyclerView recyclerView = findViewById(R.id.rvClientes);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new ClienteAdapter(lista, this);
+        adapter = new ClienteAdapter(list, this);
         recyclerView.setAdapter(adapter);
 
         Button btnAgregar = findViewById(R.id.btnAgregarCliente);
@@ -74,8 +70,8 @@ public class ClienteActivity extends AppCompatActivity implements ClienteAdapter
                 Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
             } else {
                 Cliente cliente = new Cliente(identificacion, nombre, direccion, telefono, Tools.obtenerTipoCliente(tipo));
-                lista.add(cliente);
-                adapter.notifyItemInserted(lista.size() - 1);
+                list.add(cliente);
+                adapter.notifyItemInserted(list.size() - 1);
             }
         });
         builder.setNegativeButton("Cancelar", null);
@@ -88,7 +84,7 @@ public class ClienteActivity extends AppCompatActivity implements ClienteAdapter
                 .setTitle("Eliminar Cliente")
                 .setMessage("¿Está seguro que desea eliminar el registro?")
                 .setPositiveButton("Eliminar", (dialog, which) -> {
-                    lista.remove(position);
+                    list.remove(position);
                     adapter.notifyItemRemoved(position);
                 })
                 .setNegativeButton("Cancelar", null)

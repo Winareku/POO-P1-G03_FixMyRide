@@ -8,13 +8,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
-import java.util.Arrays;
-
 import poo.espol.fixmyride.R;
+import poo.espol.fixmyride.extra.DataRepository;
 import poo.espol.fixmyride.model.Tecnico;
 import poo.espol.fixmyride.adapter.TecnicoAdapter;
 
 public class TecnicoActivity extends AppCompatActivity implements TecnicoAdapter.OnTecnicoEliminarListener{
+
+    // Variables
     private ArrayList<Tecnico> lista;
     private TecnicoAdapter adapter;
 
@@ -24,11 +25,7 @@ public class TecnicoActivity extends AppCompatActivity implements TecnicoAdapter
         setContentView(R.layout.activity_tecnicos);
 
         // Inicializa con 3 tecnicos por defecto
-        lista = new ArrayList<>(Arrays.asList(
-                new Tecnico("1000000001", "Juan Pérez", "555-1234", "Mecánica General"),
-                new Tecnico("1000000002", "Ana Gómez", "555-5678", "Electricidad Automotriz"),
-                new Tecnico("1000000003", "Luis Sánchez", "555-8765", "Diagnóstico de Computadoras de Autos")
-        ));
+        lista = DataRepository.getTecnicos();
 
         RecyclerView recyclerView = findViewById(R.id.rvTecnicos);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

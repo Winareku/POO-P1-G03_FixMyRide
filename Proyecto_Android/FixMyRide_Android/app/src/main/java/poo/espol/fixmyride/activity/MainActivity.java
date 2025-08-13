@@ -1,5 +1,4 @@
 package poo.espol.fixmyride.activity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -7,6 +6,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import poo.espol.fixmyride.R;
+import poo.espol.fixmyride.extra.DataRepository;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -14,13 +14,16 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        DataRepository.cargarDatos();
 
+        // Variables
         Button btnAdministrarClientes = findViewById(R.id.button1);
         Button btnAdministrarProveedores = findViewById(R.id.button2);
         Button btnAdministrarTecnicos = findViewById(R.id.button3);
         Button btnAdministrarServicios= findViewById(R.id.button4);
-        Button btnOrdenServicio = findViewById(R.id.button5);
+        Button btnAdministrarOrdenServicio = findViewById(R.id.button5);
 
+        // Métodos
         btnAdministrarClientes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        btnOrdenServicio.setOnClickListener(new View.OnClickListener() {
+        btnAdministrarOrdenServicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, OrdenActivity.class);

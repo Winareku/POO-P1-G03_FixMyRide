@@ -39,9 +39,7 @@ public class ClienteAdapter extends RecyclerView.Adapter<ClienteAdapter.ClienteV
     }
 
     @Override
-    public int getItemCount() {
-        return list.size();
-    }
+    public int getItemCount() {return list.size();}
 
     public static class ClienteViewHolder extends RecyclerView.ViewHolder {
         TextView tvId, tvNombre, tvDireccion, tvTelefono, tvTipoCliente;
