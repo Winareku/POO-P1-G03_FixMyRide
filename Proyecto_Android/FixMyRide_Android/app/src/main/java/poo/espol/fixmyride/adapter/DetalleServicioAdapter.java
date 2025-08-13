@@ -45,7 +45,6 @@ public class DetalleServicioAdapter extends RecyclerView.Adapter<DetalleServicio
             super(itemView);
             tvNombre = itemView.findViewById(R.id.tvNombreServicio);
             tvCantidad = itemView.findViewById(R.id.tvCantidad);
-            tvSubtotal = itemView.findViewById(R.id.tvSubtotal);
         }
     }
 }

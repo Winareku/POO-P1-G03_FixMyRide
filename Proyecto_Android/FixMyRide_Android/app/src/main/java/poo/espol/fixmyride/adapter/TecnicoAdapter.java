@@ -4,30 +4,32 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.recyclerview.widget.RecyclerView;
-import java.util.ArrayList;
 import poo.espol.fixmyride.R;
 import poo.espol.fixmyride.model.Tecnico;
+import java.util.ArrayList;
 
-public class TecnicoAdapter extends RecyclerView.Adapter<TecnicoAdapter.TecnicoViewHolder> {
+public class TecnicoAdapter extends RecyclerView.Adapter<TecnicoAdapter.ViewHolder> {
+
+    // Variables
     private ArrayList<Tecnico> list;
-    private OnTecnicoEliminarListener eliminarListener;
-    public interface OnTecnicoEliminarListener {void onEliminar(int position);}
+    private OnEliminarListener eliminarListener;
+    public interface OnEliminarListener {void onEliminar(int position);}
 
-    public TecnicoAdapter(ArrayList<Tecnico> list, OnTecnicoEliminarListener eliminarListener) {
+    // Constructor
+    public TecnicoAdapter(ArrayList<Tecnico> list, OnEliminarListener eliminarListener) {
         this.list = list;
         this.eliminarListener = eliminarListener;
     }
 
     @Override
-    public TecnicoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_tecnico, parent, false);
-        return new TecnicoViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(TecnicoViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         Tecnico tecnico = list.get(position);
         holder.tvId.setText("Identificación: " + tecnico.getId());
         holder.tvNombre.setText("Nombre: " + tecnico.getNombre());
@@ -37,17 +39,11 @@ public class TecnicoAdapter extends RecyclerView.Adapter<TecnicoAdapter.TecnicoV
             if (eliminarListener != null) eliminarListener.onEliminar(holder.getAdapterPosition());});
     }
 
-
-    @Override
-    public int getItemCount() {
-        return list.size();
-    }
-
-    public static class TecnicoViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvId, tvNombre, tvTelefono, tvEspecialidad;
         Button btnEliminar;
 
-        public TecnicoViewHolder(View itemView) {
+        public ViewHolder(View itemView) {
             super(itemView);
             tvId = itemView.findViewById(R.id.tvIdentificacion);
             tvNombre = itemView.findViewById(R.id.tvNombre);
@@ -56,4 +52,7 @@ public class TecnicoAdapter extends RecyclerView.Adapter<TecnicoAdapter.TecnicoV
             btnEliminar = itemView.findViewById(R.id.btnEliminar);
         }
     }
+
+    @Override
+    public int getItemCount() {return list.size();}
 }

@@ -21,6 +21,7 @@ public class OrdenServicio {
         this.tipoVehiculo = tipoVehiculo;
         this.placaVehiculo = placa;
         this.listaDetalleServicio = new ArrayList<>();
+        this.totalOrden = 0.0;
     }
     
     // Getters y Setters

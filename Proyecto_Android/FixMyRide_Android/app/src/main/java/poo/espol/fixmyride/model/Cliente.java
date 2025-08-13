@@ -20,5 +20,6 @@ public class Cliente extends Persona {
     public void setTipoCliente(TipoCliente tipoCliente) { this.tipoCliente = tipoCliente; }
     public void setEmpresa(Empresa empresa) { this.empresa = empresa; }
     @Override
-    public String toString() { return (super.toString() + ", " + direccion + ", " + tipoCliente +(empresa!=null?(", "+empresa.getNombre()):"")); }
+    public String toString() { return getNombre(); }
+    // public String toString() { return (super.toString() + ", " + direccion + ", " + tipoCliente +(empresa!=null?(", "+empresa.getNombre()):"")); }
 }

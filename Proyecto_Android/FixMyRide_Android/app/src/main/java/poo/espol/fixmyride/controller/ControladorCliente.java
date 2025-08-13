@@ -1,6 +1,8 @@
 package poo.espol.fixmyride.controller;
 
 // Importaciones
+import java.util.ArrayList;
+
 import poo.espol.fixmyride.model.*;
 
 // Clase ControladorCliente
@@ -34,5 +36,11 @@ public class ControladorCliente extends ControladorPersona {
             return "Cliente agregado exitosamente";
         }
         return "El cliente ya existe";
+    }
+
+    // Método estático para buscar un cliente por ID en una lista
+    public static Cliente buscarClientePorId(String id, ArrayList<Cliente> lista) {
+        for (Cliente cliente : lista) { if (cliente.getId().equals(id)) return cliente; }
+        return null;
     }
 }

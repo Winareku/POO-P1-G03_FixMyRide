@@ -14,5 +14,6 @@ public class Tecnico extends Persona {
     public String getEspecialidad() { return especialidad; }
     public void setEspecialidad(String especialidad) { this.especialidad = especialidad; }
     @Override
-    public String toString() { return (super.toString() + ", " + especialidad); }
+    public String toString() { return getNombre(); }
+    // public String toString() { return (super.toString() + ", " + especialidad); }
 }

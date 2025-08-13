@@ -7,16 +7,16 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import java.util.ArrayList;
-import poo.espol.fixmyride.extra.DataRepository;
+import poo.espol.fixmyride.extra.*;
 import poo.espol.fixmyride.model.Proveedor;
 import poo.espol.fixmyride.adapter.ProveedorAdapter;
 import poo.espol.fixmyride.R;
+import java.util.ArrayList;
 
-public class ProveedorActivity extends AppCompatActivity implements ProveedorAdapter.OnProveedorEliminarListener {
+public class ProveedorActivity extends AppCompatActivity implements ProveedorAdapter.OnEliminarListener {
 
     // Variables
-    private ArrayList<Proveedor> lista;
+    private ArrayList<Proveedor> list;
     private ProveedorAdapter adapter;
 
     @Override
@@ -25,11 +25,11 @@ public class ProveedorActivity extends AppCompatActivity implements ProveedorAda
         setContentView(R.layout.activity_proveedores);
 
         // Inicializa con 3 proveedores por defecto
-        lista = DataRepository.getProveedores();
+        list = DataRepository.getProveedores();
 
         RecyclerView recyclerView = findViewById(R.id.rvProveedores);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new ProveedorAdapter(lista, this);
+        adapter = new ProveedorAdapter(list, this);
         recyclerView.setAdapter(adapter);
 
         Button btnAgregar = findViewById(R.id.btnAgregarProveedor);
@@ -46,10 +46,13 @@ public class ProveedorActivity extends AppCompatActivity implements ProveedorAda
                     String nombre = getTextFromView(dialogView, R.id.etNombre);
                     String telefono = getTextFromView(dialogView, R.id.etTelefono);
                     String descripcion = getTextFromView(dialogView, R.id.etDescripcion);
+
                     if (validarCampos(id, nombre, telefono, descripcion)) {
-                        lista.add(new Proveedor(id, nombre, telefono, descripcion));
-                        adapter.notifyItemInserted(lista.size() - 1);
-                    } else {Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();}
+                        list.add(new Proveedor(id, nombre, telefono, descripcion));
+                        adapter.notifyItemInserted(list.size() - 1);
+                    } else {
+                        Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
+                    }
                 })
                 .setNegativeButton("Cancelar", null);
         builder.show();
@@ -70,7 +73,7 @@ public class ProveedorActivity extends AppCompatActivity implements ProveedorAda
                 .setTitle("Eliminar Proveedor")
                 .setMessage("¿Está seguro que desea eliminar el registro?")
                 .setPositiveButton("Eliminar", (dialog, which) -> {
-                    lista.remove(position);
+                    list.remove(position);
                     adapter.notifyItemRemoved(position);
                 })
                 .setNegativeButton("Cancelar", null)

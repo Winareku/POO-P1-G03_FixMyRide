@@ -38,4 +38,7 @@ public class Servicio {
         setPrecio(nuevoPrecio);;
         //historialPrecios.add(new RegistroPrecio(this, nuevoPrecio));
     }
+
+    @Override
+    public String toString() { return getNombre();}
 }

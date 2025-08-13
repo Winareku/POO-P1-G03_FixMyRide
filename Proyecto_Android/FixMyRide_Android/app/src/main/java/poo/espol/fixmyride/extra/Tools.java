@@ -54,62 +54,6 @@ public class Tools {
     public static void regresandoMenuPrincipal() { System.out.println("Regresando al menú principal..."); }
     public static void opcionNoValida() { System.out.println("Opción no válida. Por favor, intente nuevamente."); }
 
-    // Métodos para encerrar en cajas (solo es estético)
-    public static void separador() { System.out.println("=".repeat(ANCHO_CAJA)+"\n"); }
-
-    public static void caja(String texto){
-        final int anchoInterno = ANCHO_CAJA - 2;
-        texto = texto.toUpperCase();
-        int espaciosTotales = anchoInterno - texto.length();
-        int espaciosIzquierda = espaciosTotales / 2;
-        int espaciosDerecha = espaciosTotales - espaciosIzquierda;
-        String lineaSuperior = "╔" + "═".repeat(anchoInterno) + "╗";
-        String lineaContenido = "║" + " ".repeat(espaciosIzquierda) + texto + " ".repeat(espaciosDerecha) + "║";
-        String lineaInferior = "╚" + "═".repeat(anchoInterno) + "╝";
-        System.out.println();
-        System.out.println(lineaSuperior);
-        System.out.println(lineaContenido);
-        System.out.println(lineaInferior);
-    }
-
-    public static void cajaIzquierda(String texto) {
-        final int anchoInterno = ANCHO_CAJA - 2;
-        texto = texto.toUpperCase();
-        int espaciosDerecha = anchoInterno - texto.length();
-        String lineaSuperior = "╔" + "═".repeat(anchoInterno) + "╗";
-        String lineaContenido = "║" + texto + " ".repeat(espaciosDerecha) + "║";
-        String lineaInferior = "╚" + "═".repeat(anchoInterno) + "╝";
-        System.out.println();
-        System.out.println(lineaSuperior);
-        System.out.println(lineaContenido);
-        System.out.println(lineaInferior);
-    }
-
-
-    public static void abrirCaja(String texto){
-        final int anchoInterno = ANCHO_CAJA - 2;
-        int espaciosTotales = anchoInterno - texto.length();
-        int espaciosIzquierda = espaciosTotales / 2;
-        int espaciosDerecha = espaciosTotales - espaciosIzquierda;
-        String lineaSuperior = "╔" + "═".repeat(anchoInterno) + "╗";
-        String lineaContenido = "║" + " ".repeat(espaciosIzquierda) + texto + " ".repeat(espaciosDerecha) + "║";
-        System.out.println(lineaSuperior);
-        System.out.println(lineaContenido);
-    }
-
-    public static void cerrarCaja() {
-        final int anchoInterno = ANCHO_CAJA - 2;
-        String lineaInferior = "╚" + "═".repeat(anchoInterno) + "╝";
-        System.out.println(lineaInferior);
-    }
-
-    public static void lateralCaja(String texto) {
-        final int anchoInterno = ANCHO_CAJA - 2;
-        int espaciosDerecha = anchoInterno - texto.length();
-        String lineaContenido = "║" + texto + " ".repeat(espaciosDerecha) + "║";
-        System.out.println(lineaContenido);
-    }
-
     // Métodos para validaciones y solicitudes
     public static boolean fechaInvalida(String texto) {
         try {
@@ -132,6 +76,17 @@ public class Tools {
     }
 
     public static String verificarPersonaPorID(Scanner scanner, ArrayList<Persona> listaPersona, String tipoPersona) {
+        String idPersona;
+        Persona persona;
+        while (true) {
+            idPersona = obtenerString(scanner,"Ingrese el ID del " + tipoPersona + ": ");
+            persona = ControladorPersona.buscarPersonaPorId(idPersona, listaPersona);
+            if (persona!=null) return idPersona;
+            opcionNoValida();
+        }
+    }
+
+    public static String obtenerNombrePorID(Scanner scanner, ArrayList<Persona> listaPersona, String tipoPersona) {
         String idPersona;
         Persona persona;
         while (true) {

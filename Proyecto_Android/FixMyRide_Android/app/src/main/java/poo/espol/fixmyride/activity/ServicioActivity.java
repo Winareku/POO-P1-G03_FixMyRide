@@ -13,10 +13,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import poo.espol.fixmyride.R;
+import poo.espol.fixmyride.extra.DataRepository;
 import poo.espol.fixmyride.model.Servicio;
 import poo.espol.fixmyride.adapter.ServicioAdapter;
 
-public class ServicioActivity extends AppCompatActivity implements ServicioAdapter.OnEliminarClickListener {
+public class ServicioActivity extends AppCompatActivity implements ServicioAdapter.OnEliminarListener {
+
+    // Variables
     private static ArrayList<Servicio> list;
     private ServicioAdapter adapter;
 
@@ -28,11 +31,7 @@ public class ServicioActivity extends AppCompatActivity implements ServicioAdapt
         setContentView(R.layout.activity_servicios);
 
         // Inicializa con 6 servicios por defecto
-        list = new ArrayList<>(Arrays.asList(
-                new Servicio("Cambio de aceite",32.5), new Servicio("Revisión de frenos",48.0),
-                new Servicio("Alineación y balanceo",42.0), new Servicio("Reparación de motor",250.0),
-                new Servicio("Diagnóstico electrónico",60.0), new Servicio("Lavado y detallado",25.0)
-        ));
+        list = DataRepository.getServicios();
 
         RecyclerView recyclerView = findViewById(R.id.rvServicios);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

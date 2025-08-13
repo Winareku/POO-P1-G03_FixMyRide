@@ -4,30 +4,33 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import androidx.annotation.NonNull;
+
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import poo.espol.fixmyride.R;
 import poo.espol.fixmyride.model.Servicio;
 
-public class ServicioAdapter extends RecyclerView.Adapter<ServicioAdapter.ServicioViewHolder> {
-    private ArrayList<Servicio> list;
-    private OnEliminarClickListener eliminarListener;
-    public interface OnEliminarClickListener {void onEliminar(int position);}
+public class ServicioAdapter extends RecyclerView.Adapter<ServicioAdapter.ViewHolder> {
 
-    public ServicioAdapter(ArrayList<Servicio> list, OnEliminarClickListener eliminarListener) {
+    // Variables
+    private ArrayList<Servicio> list;
+    private OnEliminarListener eliminarListener;
+    public interface OnEliminarListener {void onEliminar(int position);}
+
+    // Constructor
+    public ServicioAdapter(ArrayList<Servicio> list, OnEliminarListener eliminarListener) {
         this.list = list;
         this.eliminarListener = eliminarListener;
     }
 
     @Override
-    public ServicioViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_servicio, parent, false);
-        return new ServicioViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ServicioViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         Servicio servicio = list.get(position);
         holder.tvCodigo.setText("Código: " + servicio.getCodigo());
         holder.tvNombre.setText("Nombre: " + servicio.getNombre());
@@ -37,15 +40,11 @@ public class ServicioAdapter extends RecyclerView.Adapter<ServicioAdapter.Servic
         });
     }
 
-
-    @Override
-    public int getItemCount() {return list.size();}
-
-    public static class ServicioViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvCodigo, tvNombre, tvPrecio;
         Button btnEditar, btnEliminar;
 
-        public ServicioViewHolder(View itemView) {
+        public ViewHolder(View itemView) {
             super(itemView);
             tvCodigo = itemView.findViewById(R.id.tvCodigo);
             tvNombre = itemView.findViewById(R.id.tvNombre);
@@ -54,6 +53,9 @@ public class ServicioAdapter extends RecyclerView.Adapter<ServicioAdapter.Servic
             btnEliminar = itemView.findViewById(R.id.btnEliminar);
         }
     }
+
+    @Override
+    public int getItemCount() {return list.size();}
 }
 
 

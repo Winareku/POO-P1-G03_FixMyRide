@@ -7,16 +7,16 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import java.util.ArrayList;
 import poo.espol.fixmyride.R;
-import poo.espol.fixmyride.extra.DataRepository;
+import poo.espol.fixmyride.extra.*;
 import poo.espol.fixmyride.model.Tecnico;
 import poo.espol.fixmyride.adapter.TecnicoAdapter;
+import java.util.ArrayList;
 
-public class TecnicoActivity extends AppCompatActivity implements TecnicoAdapter.OnTecnicoEliminarListener{
+public class TecnicoActivity extends AppCompatActivity implements TecnicoAdapter.OnEliminarListener {
 
     // Variables
-    private ArrayList<Tecnico> lista;
+    private ArrayList<Tecnico> list;
     private TecnicoAdapter adapter;
 
     @Override
@@ -25,11 +25,11 @@ public class TecnicoActivity extends AppCompatActivity implements TecnicoAdapter
         setContentView(R.layout.activity_tecnicos);
 
         // Inicializa con 3 tecnicos por defecto
-        lista = DataRepository.getTecnicos();
+        list = DataRepository.getTecnicos();
 
         RecyclerView recyclerView = findViewById(R.id.rvTecnicos);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new TecnicoAdapter(lista, this);
+        adapter = new TecnicoAdapter(list, this);
         recyclerView.setAdapter(adapter);
 
         Button btnAgregar = findViewById(R.id.btnAgregarTecnico);
@@ -48,9 +48,11 @@ public class TecnicoActivity extends AppCompatActivity implements TecnicoAdapter
                     String especialidad = getTextFromView(dialogView, R.id.etEspecialidad);
 
                     if (validarCampos(id, nombre, telefono, especialidad)) {
-                        lista.add(new Tecnico(id, nombre, telefono, especialidad));
-                        adapter.notifyItemInserted(lista.size() - 1);
-                    } else {Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();}
+                        list.add(new Tecnico(id, nombre, telefono, especialidad));
+                        adapter.notifyItemInserted(list.size() - 1);
+                    } else {
+                        Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
+                    }
                 })
                 .setNegativeButton("Cancelar", null);
         builder.show();
@@ -71,7 +73,7 @@ public class TecnicoActivity extends AppCompatActivity implements TecnicoAdapter
                 .setTitle("Eliminar Técnico")
                 .setMessage("¿Está seguro que desea eliminar el registro?")
                 .setPositiveButton("Eliminar", (dialog, which) -> {
-                    lista.remove(position);
+                    list.remove(position);
                     adapter.notifyItemRemoved(position);
                 })
                 .setNegativeButton("Cancelar", null)
