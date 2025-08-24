@@ -32,6 +32,9 @@
             android:exported="false" />
         <activity android:name=".activity.OrdenActivity"
             android:exported="false" />
+
+        <activity android:name=".activity.GenerarFacturaActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

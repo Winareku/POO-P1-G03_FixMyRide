@@ -1,6 +1,7 @@
 package poo.espol.fixmyride.model;
+import java.io.Serializable;
 
-public class Cliente extends Persona {
+public class Cliente extends Persona implements Serializable {
     // Atributos
     private String direccion;
     private TipoCliente tipoCliente; // "Personal" o "Empresarial"

@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         Button btnAdministrarTecnicos = findViewById(R.id.button3);
         Button btnAdministrarServicios= findViewById(R.id.button4);
         Button btnAdministrarOrdenServicio = findViewById(R.id.button5);
+        Button btnGenerarFactura= findViewById(R.id.button6);
 
 
         // Métodos
@@ -59,6 +60,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, OrdenActivity.class);
+                startActivity(intent);
+            }
+        });
+        btnGenerarFactura.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, GenerarFacturaActivity.class);
                 startActivity(intent);
             }
         });

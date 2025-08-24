@@ -14,6 +14,7 @@ import poo.espol.fixmyride.adapter.ClienteAdapter;
 import poo.espol.fixmyride.R;
 import poo.espol.fixmyride.extra.*;
 import java.util.ArrayList;
+import poo.espol.fixmyride.storage.*;
 
 public class ClienteActivity extends AppCompatActivity implements ClienteAdapter.OnEliminarListener {
 
@@ -21,13 +22,24 @@ public class ClienteActivity extends AppCompatActivity implements ClienteAdapter
     private ArrayList<Cliente> list;
     private ClienteAdapter adapter;
 
+    // Nombre del archivo
+    private static final String FILE_NAME = "clientes.ser";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clientes);
 
-        // Inicializa con 3 clientes por defecto
-        list = DataRepository.getClientes();
+        //Intenta cargar la lista (De-Serializa)
+        list= UtilSerializable.cargarLista(FILE_NAME);
+
+        if (list == null){
+            // Inicializa con 3 clientes por defecto si la lista está vacia.
+            list = DataRepository.getClientes();
+            //Luego serializa
+            UtilSerializable.guardarLista(list,FILE_NAME);
+        }
+
 
         RecyclerView recyclerView = findViewById(R.id.rvClientes);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -60,7 +72,13 @@ public class ClienteActivity extends AppCompatActivity implements ClienteAdapter
 
                     if (validarCampos(identificacion, nombre, direccion, telefono) && !tipo.isEmpty()) {
                         Cliente cliente = new Cliente(identificacion, nombre, direccion, telefono, Tools.obtenerTipoCliente(tipo));
+
+
                         list.add(cliente);
+
+                        //Luego de que la lista fuera modificada se vuelve a serializar
+                        UtilSerializable.guardarLista(list,FILE_NAME);
+
                         adapter.notifyItemInserted(list.size() - 1);
                     } else {
                         Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
@@ -85,7 +103,11 @@ public class ClienteActivity extends AppCompatActivity implements ClienteAdapter
                 .setTitle("Eliminar Cliente")
                 .setMessage("¿Está seguro que desea eliminar el registro?")
                 .setPositiveButton("Eliminar", (dialog, which) -> {
+
                     list.remove(position);
+
+                    //Luego de que la lista fuera modificada se vuelve a serializar
+                    UtilSerializable.guardarLista(list,FILE_NAME);
                     adapter.notifyItemRemoved(position);
                 })
                 .setNegativeButton("Cancelar", null)
