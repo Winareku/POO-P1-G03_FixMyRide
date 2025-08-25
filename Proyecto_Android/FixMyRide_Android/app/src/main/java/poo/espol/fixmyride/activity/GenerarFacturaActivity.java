@@ -25,9 +25,11 @@ import poo.espol.fixmyride.R;
 import poo.espol.fixmyride.adapter.DetalleServicioAdapter;
 import poo.espol.fixmyride.adapter.GenerarFacturaAdapter;
 import poo.espol.fixmyride.extra.DataRepository;
+import poo.espol.fixmyride.model.Cliente;
 import poo.espol.fixmyride.model.Empresa;
 import poo.espol.fixmyride.model.Factura;
 import poo.espol.fixmyride.model.OrdenServicio;
+import poo.espol.fixmyride.model.TipoCliente;
 
 public class GenerarFacturaActivity extends AppCompatActivity implements GenerarFacturaAdapter.OnDetalleClickListener {
 
@@ -35,23 +37,14 @@ public class GenerarFacturaActivity extends AppCompatActivity implements Generar
     private ArrayList<Factura> listaFacturas;
     private RecyclerView rvFacturas;
     private GenerarFacturaAdapter adapter;
-    
-    private static final String FILE_NAME = "servicios.ser";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_listado_facturas); // Layout para mostrar el listado
+        setContentView(R.layout.activity_listado_facturas);
 
-        //Intenta cargar la lista (De-Serializa)
-        list= UtilSerializable.cargarLista(FILE_NAME);
-
-        if (list == null){
-            // Inicializa con 3 facturas por defecto si la lista está vacia.
-            list = DataRepository.getFacturas();
-            //Luego serializa
-            UtilSerializable.guardarLista(list,FILE_NAME);
-        }
+        // Inicializar la lista de facturas (simulamos datos por defecto)
+        listaFacturas = DataRepository.getFacturas();
 
         rvFacturas = findViewById(R.id.rvFacturas);
         rvFacturas.setLayoutManager(new LinearLayoutManager(this));
@@ -63,7 +56,6 @@ public class GenerarFacturaActivity extends AppCompatActivity implements Generar
     }
 
     private void mostrarDialogoGenerarFactura() {
-        // Se infla el layout para generar factura dentro de un dialogo
         View dialogView = getLayoutInflater().inflate(R.layout.activity_generar_factura, null);
 
         Spinner spinnerEmpresa = dialogView.findViewById(R.id.spinnerEmpresa);
@@ -71,12 +63,12 @@ public class GenerarFacturaActivity extends AppCompatActivity implements Generar
         Spinner spinnerMes = dialogView.findViewById(R.id.spinnerMes);
         Button btnGenerar = dialogView.findViewById(R.id.btnGenerar);
 
-        // Ocultar la sección de detalles de servicio inicialmente
         LinearLayout llDetalleServicios = dialogView.findViewById(R.id.llDetalleServicios);
 
-        // Spinner de empresas
+        // Spinner de empresas: se obtiene la lista de empresas
+        ArrayList<Empresa> listaEmpresas = DataRepository.getEmpresas();
         ArrayAdapter<Empresa> empresaAdapter = new ArrayAdapter<>(
-                this, android.R.layout.simple_spinner_item, DataRepository.getEmpresas());
+                this, android.R.layout.simple_spinner_item, listaEmpresas);
         empresaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerEmpresa.setAdapter(empresaAdapter);
 
@@ -95,7 +87,6 @@ public class GenerarFacturaActivity extends AppCompatActivity implements Generar
         AlertDialog dialog = builder.create();
         dialog.show();
 
-        // Botón Generar dentro del diálogo
         btnGenerar.setOnClickListener(v -> {
             Empresa empresaSeleccionada = (Empresa) spinnerEmpresa.getSelectedItem();
             String anioStr = etAnio.getText().toString().trim();
@@ -109,26 +100,28 @@ public class GenerarFacturaActivity extends AppCompatActivity implements Generar
             int anio = Integer.parseInt(anioStr);
             Month mesEnum = Month.valueOf(mesStr.toUpperCase(Locale.getDefault()));
 
-            // Obtener órdenes de servicio para la empresa y periodo
+            // Obtener las órdenes de servicio para la empresa y periodo
             ArrayList<OrdenServicio> ordenesDelPeriodo = new ArrayList<>();
-            double totalAPagar = 50.0; // Costo fijo por prioridad
             boolean hayCoincidencias = false;
-            
+
+            // Iterar sobre las órdenes de servicio
             for (OrdenServicio orden : DataRepository.getOrdenServicios()) {
-                LocalDate fechaOrden = orden.getFechaOrden();
-                if (fechaOrden.getYear() == anio && fechaOrden.getMonth() == mesEnum) {
-                    // Simular la busqueda de la empresa dentro de la orden
-                    // Asumimos que la orden tiene una referencia al cliente y el cliente a la empresa
-                    // Para este ejemplo, simplificamos la lógica a una coincidencia de código
-                    if (orden.getIdCliente().equals("id_empresa_ejemplo")) { // Reemplazar con la lógica real de busqueda
-                         ordenesDelPeriodo.add(orden);
-                         totalAPagar += orden.getTotalOrden();
-                         hayCoincidencias = true;
+                // Buscar el cliente de la orden y verificar si es empresarial
+                Cliente clienteOrden = buscarClientePorId(orden.getIdCliente());
+                
+                if (clienteOrden != null && clienteOrden.getTipoCliente() == TipoCliente.EMPRESARIAL && clienteOrden.getEmpresa() != null) {
+                    // Verificar si la empresa del cliente coincide con la empresa seleccionada
+                    if (clienteOrden.getEmpresa().equals(empresaSeleccionada)) {
+                        // Verificar si la fecha de la orden coincide con el año y mes seleccionados
+                        LocalDate fechaOrden = orden.getFechaOrden();
+                        if (fechaOrden.getYear() == anio && fechaOrden.getMonth() == mesEnum) {
+                            ordenesDelPeriodo.add(orden);
+                            hayCoincidencias = true;
+                        }
                     }
                 }
             }
             
-            // Si no hay órdenes, se muestra un mensaje de error y se sigue mostrando el formulario
             if (!hayCoincidencias) {
                 Toast.makeText(this, "No se encontraron servicios para el periodo seleccionado", Toast.LENGTH_SHORT).show();
                 llDetalleServicios.setVisibility(View.GONE);
@@ -138,29 +131,31 @@ public class GenerarFacturaActivity extends AppCompatActivity implements Generar
             // Crear y agregar la factura a la lista
             String periodo = mesStr + " " + anio;
             Factura nuevaFactura = new Factura(periodo, empresaSeleccionada, ordenesDelPeriodo, hayCoincidencias);
-            listaFacturas.add(0, nuevaFactura); // Agregar al inicio para que aparezca primero en la lista
-            
-            //Luego de que la lista fuera modificada se vuelve a serializar
-            UtilSerializable.guardarLista(listaFacturas,FILE_NAME);
-            
+            listaFacturas.add(0, nuevaFactura);
             adapter.notifyItemInserted(0);
             
-            // Ocultar el formulario y mostrar el listado de facturas
             dialog.dismiss();
             Toast.makeText(this, "Factura generada exitosamente", Toast.LENGTH_SHORT).show();
         });
     }
 
+    private Cliente buscarClientePorId(String idCliente) {
+        for (Cliente cliente : DataRepository.getClientes()) {
+            if (cliente.getId().equals(idCliente)) {
+                return cliente;
+            }
+        }
+        return null;
+    }
+
     @Override
     public void onDetalleClick(Factura factura) {
-        // Se infla el layout para mostrar los detalles de la factura
         View dialogView = getLayoutInflater().inflate(R.layout.dialog_detalle_factura, null);
         RecyclerView rvDetalleServicios = dialogView.findViewById(R.id.rvDetalleServicios);
         TextView tvTotalPagar = dialogView.findViewById(R.id.tvTotalPagar);
 
         rvDetalleServicios.setLayoutManager(new LinearLayoutManager(this));
         
-        // Simular la union de todos los detalles de servicio en una sola lista
         ArrayList<DetalleServicio> detallesConsolidados = new ArrayList<>();
         double totalFactura = 0.0;
         for (OrdenServicio orden : factura.getListaOrdenServicio()) {
@@ -168,7 +163,7 @@ public class GenerarFacturaActivity extends AppCompatActivity implements Generar
             totalFactura += orden.getTotalOrden();
         }
         
-        totalFactura += 50.0; // Agregar el costo fijo
+        totalFactura += 50.0;
 
         DetalleServicioAdapter detalleAdapter = new DetalleServicioAdapter(detallesConsolidados);
         rvDetalleServicios.setAdapter(detalleAdapter);

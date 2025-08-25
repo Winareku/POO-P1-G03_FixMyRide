@@ -13,6 +13,7 @@ public class DataRepository {
     private static ArrayList<Servicio> listaServicio = new ArrayList<>();
     private static ArrayList<OrdenServicio> listaOrdenServicio = new ArrayList<>();
     private static ArrayList<Factura> listaFacturas = new ArrayList<>();
+    private static ArrayList<Empresa> listaEmpresas = new ArrayList<>();
 
     // Getters
     public static ArrayList<Cliente> getClientes() {return listaCliente;}
@@ -21,6 +22,7 @@ public class DataRepository {
     public static ArrayList<Servicio> getServicios() {return listaServicio;}
     public static ArrayList<OrdenServicio> getOrdenServicios() {return listaOrdenServicio;}
     public static ArrayList<Factura> getFacturas() {return listaOrdenServicio;}
+    public static ArrayList<Empresa> getEmpresas() {return listaOrdenServicio;}
 
     // Métodos para Agregar
     public static void addCliente(Cliente cliente) {listaCliente.add(cliente);}
@@ -28,6 +30,8 @@ public class DataRepository {
     public static void addProveedor(Proveedor proveedor) {listaProveedor.add(proveedor);}
     public static void addServicio(Servicio servicio) {listaServicio.add(servicio);}
     public static void addOrdenServicio(OrdenServicio ordenServicio) {listaOrdenServicio.add(ordenServicio);}
+    public static void addFactura(Factura factura) {listaFacturas.add(factura);}
+    public static void addEmpresa(Empresa empresa) {listaEmpresas.add(empresa);}
 
     // Carga de Datos
     public static void cargarDatos() {
@@ -69,5 +73,10 @@ public class DataRepository {
         addOrdenServicio(o3);
         addOrdenServicio(o4);
         
+        //Empresas
+        Empresa e1 = new Empresa("Master Motors","00001");
+        Empresa e2 = new Empresa("Ruta Segura","00002");
+        addEmpresa(e1);
+        addEmpresa(e2);
     }
 }
