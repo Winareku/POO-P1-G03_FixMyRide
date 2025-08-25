@@ -35,14 +35,23 @@ public class GenerarFacturaActivity extends AppCompatActivity implements Generar
     private ArrayList<Factura> listaFacturas;
     private RecyclerView rvFacturas;
     private GenerarFacturaAdapter adapter;
+    
+    private static final String FILE_NAME = "servicios.ser";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listado_facturas); // Layout para mostrar el listado
 
-        // Inicializar la lista de facturas (simulamos datos por defecto)
-        listaFacturas = DataRepository.getFacturas();
+        //Intenta cargar la lista (De-Serializa)
+        list= UtilSerializable.cargarLista(FILE_NAME);
+
+        if (list == null){
+            // Inicializa con 3 facturas por defecto si la lista está vacia.
+            list = DataRepository.getFacturas();
+            //Luego serializa
+            UtilSerializable.guardarLista(list,FILE_NAME);
+        }
 
         rvFacturas = findViewById(R.id.rvFacturas);
         rvFacturas.setLayoutManager(new LinearLayoutManager(this));
@@ -86,7 +95,7 @@ public class GenerarFacturaActivity extends AppCompatActivity implements Generar
         AlertDialog dialog = builder.create();
         dialog.show();
 
-        // Lógica del botón Generar dentro del diálogo
+        // Botón Generar dentro del diálogo
         btnGenerar.setOnClickListener(v -> {
             Empresa empresaSeleccionada = (Empresa) spinnerEmpresa.getSelectedItem();
             String anioStr = etAnio.getText().toString().trim();
@@ -130,6 +139,10 @@ public class GenerarFacturaActivity extends AppCompatActivity implements Generar
             String periodo = mesStr + " " + anio;
             Factura nuevaFactura = new Factura(periodo, empresaSeleccionada, ordenesDelPeriodo, hayCoincidencias);
             listaFacturas.add(0, nuevaFactura); // Agregar al inicio para que aparezca primero en la lista
+            
+            //Luego de que la lista fuera modificada se vuelve a serializar
+            UtilSerializable.guardarLista(listaFacturas,FILE_NAME);
+            
             adapter.notifyItemInserted(0);
             
             // Ocultar el formulario y mostrar el listado de facturas
@@ -147,7 +160,7 @@ public class GenerarFacturaActivity extends AppCompatActivity implements Generar
 
         rvDetalleServicios.setLayoutManager(new LinearLayoutManager(this));
         
-        // Simular la consolidación de todos los detalles de servicio en una sola lista
+        // Simular la union de todos los detalles de servicio en una sola lista
         ArrayList<DetalleServicio> detallesConsolidados = new ArrayList<>();
         double totalFactura = 0.0;
         for (OrdenServicio orden : factura.getListaOrdenServicio()) {

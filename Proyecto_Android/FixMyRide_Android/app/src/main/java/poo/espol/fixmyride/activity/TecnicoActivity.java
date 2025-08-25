@@ -18,14 +18,23 @@ public class TecnicoActivity extends AppCompatActivity implements TecnicoAdapter
     // Variables
     private ArrayList<Tecnico> list;
     private TecnicoAdapter adapter;
+    // Nombre del archivo
+    private static final String FILE_NAME = "tecnicos.ser";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tecnicos);
 
-        // Inicializa con 3 tecnicos por defecto
-        list = DataRepository.getTecnicos();
+        //Intenta cargar la lista (De-Serializa)
+        list= UtilSerializable.cargarLista(FILE_NAME);
+
+        if (list == null){
+            // Inicializa con 6 servicios por defecto si la lista está vacia.
+            list = DataRepository.getServicios();
+            //Luego serializa
+            UtilSerializable.guardarLista(list,FILE_NAME);
+        }
 
         RecyclerView recyclerView = findViewById(R.id.rvTecnicos);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -49,6 +58,9 @@ public class TecnicoActivity extends AppCompatActivity implements TecnicoAdapter
 
                     if (validarCampos(id, nombre, telefono, especialidad)) {
                         list.add(new Tecnico(id, nombre, telefono, especialidad));
+                        //Luego de que la lista fuera modificada se vuelve a serializar
+                        UtilSerializable.guardarLista(list,FILE_NAME);
+                        
                         adapter.notifyItemInserted(list.size() - 1);
                     } else {
                         Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
@@ -74,6 +86,10 @@ public class TecnicoActivity extends AppCompatActivity implements TecnicoAdapter
                 .setMessage("¿Está seguro que desea eliminar el registro?")
                 .setPositiveButton("Eliminar", (dialog, which) -> {
                     list.remove(position);
+                    
+                    //Luego de que la lista fuera modificada se vuelve a serializar
+                    UtilSerializable.guardarLista(list,FILE_NAME);
+                    
                     adapter.notifyItemRemoved(position);
                 })
                 .setNegativeButton("Cancelar", null)

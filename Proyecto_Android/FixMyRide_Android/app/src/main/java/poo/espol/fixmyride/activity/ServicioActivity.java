@@ -22,6 +22,9 @@ public class ServicioActivity extends AppCompatActivity implements ServicioAdapt
     // Variables
     private static ArrayList<Servicio> list;
     private ServicioAdapter adapter;
+    
+    // Nombre del archivo
+    private static final String FILE_NAME = "servicios.ser";
 
     public static ArrayList<Servicio> getList(){return list;}
 
@@ -30,8 +33,15 @@ public class ServicioActivity extends AppCompatActivity implements ServicioAdapt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_servicios);
 
-        // Inicializa con 6 servicios por defecto
-        list = DataRepository.getServicios();
+        //Intenta cargar la lista (De-Serializa)
+        list= UtilSerializable.cargarLista(FILE_NAME);
+
+        if (list == null){
+            // Inicializa con 6 servicios por defecto si la lista está vacia.
+            list = DataRepository.getServicios();
+            //Luego serializa
+            UtilSerializable.guardarLista(list,FILE_NAME);
+        }
 
         RecyclerView recyclerView = findViewById(R.id.rvServicios);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -52,6 +62,10 @@ public class ServicioActivity extends AppCompatActivity implements ServicioAdapt
                     String precio = getTextFromView(dialogView, R.id.etPrecio);
                     if (validarCampos(nombre, precio)) {
                         list.add(new Servicio(nombre, Float.parseFloat(precio)));
+                        
+                        //Luego de que la lista fuera modificada se vuelve a serializar
+                        UtilSerializable.guardarLista(list,FILE_NAME);
+                        
                         adapter.notifyItemInserted(list.size() - 1);
                     } else {Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();}
                 })
@@ -73,6 +87,10 @@ public class ServicioActivity extends AppCompatActivity implements ServicioAdapt
                 .setMessage("¿Está seguro que desea eliminar el registro?")
                 .setPositiveButton("Eliminar", (dialog, which) -> {
                     list.remove(position);
+                    
+                    //Luego de que la lista fuera modificada se vuelve a serializar
+                    UtilSerializable.guardarLista(list,FILE_NAME);
+                    
                     adapter.notifyItemRemoved(position);
                 })
                 .setNegativeButton("Cancelar", null)

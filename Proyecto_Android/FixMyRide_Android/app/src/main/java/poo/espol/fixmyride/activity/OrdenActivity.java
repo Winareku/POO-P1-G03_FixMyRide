@@ -30,20 +30,31 @@ import poo.espol.fixmyride.model.OrdenServicio;
 import poo.espol.fixmyride.model.Servicio;
 import poo.espol.fixmyride.model.Tecnico;
 import poo.espol.fixmyride.model.TipoVehiculo;
+import poo.espol.fixmyride.storage.UtilSerializable
 
 public class OrdenActivity extends AppCompatActivity {
 
     // Variables
     private ArrayList<OrdenServicio> list;
     private OrdenServicioAdapter adapter;
+    
+    // Nombre del archivo
+    private static final String FILE_NAME = "ordenes.ser";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orden_servicio);
 
-        // Inicializa con 3 órdenes por defecto
-        list = DataRepository.getOrdenServicios();
+        //Intenta cargar la lista (De-Serializa)
+        list= UtilSerializable.cargarLista(FILE_NAME);
+
+        if (list == null){
+            // Inicializa con 3 ordenes por defecto si la lista está vacia.
+            list = DataRepository.getOrdenServicios();
+            //Luego serializa
+            UtilSerializable.guardarLista(list,FILE_NAME);
+        }
 
         RecyclerView recyclerView = findViewById(R.id.rvOrdenes);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -171,6 +182,10 @@ public class OrdenActivity extends AppCompatActivity {
                             nuevaOrden.setTotalOrden(total[0]);
 
                             list.add(nuevaOrden);
+                            
+                            //Luego de que la lista fuera modificada se vuelve a serializar
+                            UtilSerializable.guardarLista(list,FILE_NAME);
+                            
                             adapter.notifyItemInserted(list.size() - 1);
                         } catch (Exception e) {
                             Toast.makeText(this, "Formato de fecha inválido (dd/MM/yyyy)", Toast.LENGTH_SHORT).show();

@@ -12,6 +12,7 @@ public class DataRepository {
     private static ArrayList<Proveedor> listaProveedor = new ArrayList<>();
     private static ArrayList<Servicio> listaServicio = new ArrayList<>();
     private static ArrayList<OrdenServicio> listaOrdenServicio = new ArrayList<>();
+    private static ArrayList<Factura> listaFacturas = new ArrayList<>();
 
     // Getters
     public static ArrayList<Cliente> getClientes() {return listaCliente;}
@@ -19,6 +20,7 @@ public class DataRepository {
     public static ArrayList<Proveedor> getProveedores() {return listaProveedor;}
     public static ArrayList<Servicio> getServicios() {return listaServicio;}
     public static ArrayList<OrdenServicio> getOrdenServicios() {return listaOrdenServicio;}
+    public static ArrayList<Factura> getFacturas() {return listaOrdenServicio;}
 
     // Métodos para Agregar
     public static void addCliente(Cliente cliente) {listaCliente.add(cliente);}
@@ -66,5 +68,6 @@ public class DataRepository {
         addOrdenServicio(o2);
         addOrdenServicio(o3);
         addOrdenServicio(o4);
+        
     }
 }
